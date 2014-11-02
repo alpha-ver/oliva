@@ -1,0 +1,35 @@
+%table{:role => 'grid', :summary => "Tasks for #{current_user.email}"}
+  %caption 
+    Listing tasks for
+    = current_user.email
+
+  %tr
+    %th{:width=>"200"} Name
+    %th Fi
+    %th Ev
+    %th Interval
+    %th Active
+    %th C
+    %th U
+
+    %th
+    %th
+    %th
+
+  - @tasks.each do |task|
+    %tr{:class=> (task.active ? "active" : "") }
+      %td= task.name
+      %td= task.fi
+      %td= task.ev
+      %td= task.interval
+      %td= task.active
+      %td= task.created_at
+      %td= task.updated_at
+
+      %td= link_to 'Show', task
+      %td= link_to 'Edit', edit_task_path(task)
+      %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Task', new_task_path

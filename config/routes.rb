@@ -1,13 +1,24 @@
 Rails.application.routes.draw do
+
+  resources :tasks
+  devise_for :users
+  
+  root 'static_page#main'
+  post 'beta' => 'feed_back#beta'
+
+
+
+
+  # get 'static_page/about'
+  # get 'static_page/help'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
+  #
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

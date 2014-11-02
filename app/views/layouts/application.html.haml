@@ -1,11 +1,48 @@
 !!!
 %html
   %head
-    %title Oliva
+    %title 0liva.ru - Сервис мониторинга обьявлений Avito
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = csrf_meta_tags
   %body
-    = yield
+
+    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+      %ul.title-area
+        %li.name
+          %h1
+            %a.oliva{:href => "#"} Oliva
+        / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+        %li.toggle-topbar.menu-icon
+          %a{:href => "#"}
+            %span Menu
+      %section.top-bar-section
+        / Right Nav Section
+        %ul.right
+          %li.active
+            %a{:href => "#"} Right Button Active
+          %li.has-dropdown
+            %a{:href => "#"} Right Button Dropdown
+            %ul.dropdown
+              %li
+                %a{:href => "#"} First link in dropdown
+              %li.active
+                %a{:href => "#"} Active link in dropdown
+        / Left Nav Section
+        %ul.left
+          %li
+            %a{:href => "#"} Left Nav Button
+          %li.divider  
+
+
+    .row
+      .large-12.columns
+        %p.notice= notice
+        %p.alert= alert
+
+    .row
+      .large-12.columns
+
+        = yield

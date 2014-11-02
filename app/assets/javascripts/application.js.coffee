@@ -3,7 +3,6 @@
 #= require turbolinks
 #= require_tree .
 #= require foundation
-$(document).foundation();
-#
-#---> YaY!
-#
+#= require main
+
+$(document).foundation()

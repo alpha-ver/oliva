@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @task.name
+%p
+  %b Fi:
+  = @task.fi
+%p
+  %b Ev:
+  = @task.ev
+%p
+  %b Interval:
+  = @task.interval
+%p
+  %b Active:
+  = @task.active
+%p
+  %b User:
+  = @task.user_id
+
+= link_to 'Edit', edit_task_path(@task)
+\|
+= link_to 'Back', tasks_path

@@ -1,0 +1,38 @@
+= form_for @task do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .large-12.columns
+      = f.label :name
+      = f.text_field :name, :placeholder => "Имя задачи"
+
+
+  .row
+    .large-6.columns
+      %select
+    .large-6.columns
+      %select
+
+
+  %hr
+
+  .row
+    .large-6.columns
+      = f.label :interval
+      = f.number_field :interval
+    .large-6.columns
+      .switch
+        = f.check_box :active
+        = f.label :active
+  .row
+    .large-4.columns
+      = f.button 'Save'
+    .large-4.columns
+      = f.button 'Save'
+    .large-4.columns
+      = f.button 'Save'

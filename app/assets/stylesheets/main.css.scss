@@ -1,0 +1,31 @@
+// Place all the styles related to the StaticPage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.beta{
+  background-image: url('logo-bg.svg');
+  background-size: 75%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.main{
+  height: 100%;
+}
+
+.form-work{
+  margin-top: 100px;
+  opacity: 0.9px;
+}
+
+.oliva{
+  background-image: url('logo-sm.svg');
+  background-repeat: no-repeat;
+  padding-left: 50px !important;
+}
+
+.active{
+  background-color:#43AC6A;
+}

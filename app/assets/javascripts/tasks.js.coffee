@@ -45,7 +45,7 @@ DataParam=(e) ->
 
 $ -> 
   $(document).ready ->
-
+    $('body').addClass('loading')
     # get top categories
     $.ajax
       type: "POST"
@@ -53,6 +53,7 @@ $ ->
       data: 
         path: 'locations/top/children'
       success: (xhr) ->
+        $('body').removeClass('loading')
         if xhr['status']
           html = "<option></option>"
           $.each xhr['result'], (i,e)-> 
@@ -72,7 +73,8 @@ $ ->
       data = $('#avito_main_regions option:selected').data()
       # func (err, ok, warning,)
       c "#{id} - #{Object.keys(data).join(", ")}", "success"
-      $.each data, (k,v) -> 
+      $('body').addClass('loading')
+      a = -> $.each data, (k,v) -> 
         $.ajax
           type: "POST"
           url: '/api/avito'
@@ -89,11 +91,11 @@ $ ->
                   html  += "<option val=\"#{e['id']}\" #{dp}>#{e['names'][1]}</option>"
                 else
                   html  += "<option val=\"#{e['id']}\" #{dp}>#{e['name']}</option>"
-                 
               html += "</select>"
               $('#avito_sub_regions').append(html)
               c "id:#{id}, name:#{k}, count:#{count}", "success", 2
-
+      a().done -> 
+        $('body').removeClass('loading')
 
     $(document).on 'change', '#avito_sub_regions select', ->
       ids  = $(this).attr('id').split('_')

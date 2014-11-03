@@ -1,11 +1,21 @@
 class AvitoApi
 
   def initialize()
-
   end
 
-  #private
+  def get(path='/items', params=false)
+    
+    begin
+      res  = open(gen_link(path, params)).read
+      hash = JSON.parse(res)
 
+      r true, hash
+    rescue Exception => e
+      r false, e
+    end
+  end
+
+  private
     def gen_link(path='/items',params=false,v=1)
       prefix_path = '/api/2'
 
@@ -30,6 +40,10 @@ class AvitoApi
 
     def md5(str)
       Digest::MD5.hexdigest(str)
+    end
+
+    def r status, message
+      {:status => status, :result => message}
     end
 
 end

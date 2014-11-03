@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   root 'static_page#main'
   post 'beta' => 'feed_back#beta'
 
-
-
+  post  'api/avito' => 'api#avito'
+  get   'api/avito' => 'api#avito'
 
   # get 'static_page/about'
   # get 'static_page/help'

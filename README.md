@@ -10,4 +10,5 @@ const = https://www.avito.ru/api/2
 
 ##Categories
 
-https://www.avito.ru/api/2/categories?checksum=c6cba237e85e8f08842f2798f8fd82aa&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr
+/categories?checksum=c6cba237e85e8f08842f2798f8fd82aa&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr
+

@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   post  'api/avito' => 'api#avito'
   get   'api/avito' => 'api#avito'
 
+  post  'api/test' => 'api#test'
+  get   'api/test' => 'api#test'
+
+
   # get 'static_page/about'
   # get 'static_page/help'
 

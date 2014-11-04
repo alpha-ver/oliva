@@ -45,8 +45,7 @@ DataParam=(e) ->
     
   
 
-$ -> 
-
+$ ->
   ###########################
   ## JS start loading page ##
   ###########################
@@ -60,10 +59,10 @@ $ ->
         path: 'locations/top/children'
       success: (xhr) ->
         if xhr['status']
-          html = "<option val=\"0\"></option>"
+          html = "<option value=\"0\"></option>"
           $.each xhr['result'], (i,e)-> 
             dp = DataParam(e)
-            html +=  "<option val=\"#{e['id']}\" #{dp}>
+            html +=  "<option value=\"#{e['id']}\" #{dp}>
                         #{e['names'][1]}
                       </option>"
 
@@ -81,12 +80,12 @@ $ ->
         $('body').removeClass('loading')
         if xhr['status']
           data_cat = xhr['result']
-          html = "<option val=\"0\"></option>"
+          html = "<option value=\"0\"></option>"
           $.each xhr['result'], (i,e)-> 
             #bugaga in => of  []+""
             unless 'parentId' of e
               dp = DataParam(e)
-              html +=  "<option val=\"#{e['id']}\" #{dp}>
+              html +=  "<option value=\"#{e['id']}\" #{dp}>
                           #{e['name']}
                         </option>"
 
@@ -99,7 +98,7 @@ $ ->
     ############################
     $("#avito_main_regions").change ->
       $('#avito_sub_regions').html("")
-      id = $('#avito_main_regions option:selected').attr('val')
+      id = $('#avito_main_regions option:selected').val()
       if id == "0"
         #??
       else
@@ -116,15 +115,17 @@ $ ->
               path: "locations/#{id}/#{k}"
             success: (xhr) ->
               if xhr['status']
-                html = "<label>#{v}</label><select id=\"#{id}_#{k}\" name=\"#{k}[#{id}]\"><option val=\"0\"></option>"
+                if k == 'children'
+                  k = 'location'
+                html = "<label>#{v}</label><select id=\"#{}_#{k}\" name=\"p[#{k}Id]\"><option value=\"0\"></option>"
                 count = 0
                 $.each xhr['result'], (i,e) -> 
                   count += 1
                   dp = DataParam(e)
-                  if k == 'children'
-                    html  += "<option val=\"#{e['id']}\" #{dp}>#{e['names'][1]}</option>"
+                  if k == 'location'
+                    html  += "<option value=\"#{e['id']}\" #{dp}>#{e['names'][1]}</option>"
                   else
-                    html  += "<option val=\"#{e['id']}\" #{dp}>#{e['name']}</option>"
+                    html  += "<option value=\"#{e['id']}\" #{dp}>#{e['name']}</option>"
                 html += "</select>"
                 $('#avito_sub_regions').append(html)
                 if --cox == 0 
@@ -133,7 +134,7 @@ $ ->
 
     $(document).on 'change', '#avito_sub_regions select', ->
       ids  = $(this).attr('id').split('_')
-      id   = $(this).find('option:selected').attr('val')
+      id   = $(this).find('option:selected').val()
       data = $(this).find('option:selected').data()
       $.each data, (k,v) ->
         c "🌍 parent:#{ids.join()}, id:#{id}, name:#{Object.keys(data).join(", ")}", "event"
@@ -144,18 +145,18 @@ $ ->
     ##############################
     $("#avito_main_cs").change ->
       $('#avito_sub_cs').html("")
-      id  = $('#avito_main_cs option:selected').attr('val')
+      id  = $('#avito_main_cs option:selected').val()
       c "🌳 category:#{id}", "event"
       if id == "0"
         $('#avito_sub_cs').prop('disabled', true)
 
       else
         
-        html = "<option val=\"0\"></option>"
+        html = "<option value=\"0\"></option>"
         $.each data_cat, (i,e)->
           if e['parentId'] == id
             dp    = DataParam(e)
-            html +=  "<option val=\"#{e['id']}\" #{dp}>
+            html +=  "<option value=\"#{e['id']}\" #{dp}>
                         #{e['name']}
                       </option>"
 
@@ -168,7 +169,7 @@ $ ->
     ## add params fo cat           ##
     #################################
     $("#avito_sub_cs").change ->
-      id = $('#avito_sub_cs option:selected').attr('val')
+      id = $('#avito_sub_cs option:selected').val()
       $('#avito_search_params').html("")
       if id == "0"
         #
@@ -187,24 +188,28 @@ $ ->
                 if o['type'] != 'select'
                   console.log o
 
-                html += "<label>#{o['title']}</label><select name=\"params[#{o['id']}]\"><option val=\"0\"></option>"
+                html += "<label>#{o['title']}</label><select name=\"p[params][#{o['id']}]\"><option value=\"\"></option>"
                 $.each o['values'], (ii,oo) -> 
-                  html += "<option val=\"#{oo['id']}\">#{oo['title']}</option>"
+                  html += "<option value=\"#{oo['id']}\">#{oo['title']}</option>"
 
                 html += "</select>"
 
               $('#avito_search_params').html(html)
               $('body').removeClass('loading')
 
-
-
-
-
-
-
-
-
-
+    ###########################
+    ## JS start loading page ##
+    ###########################
+    $('#bnt-test-task').click (e)->
+      $('body').addClass('loading')
+      $.ajax
+        type: "POST"
+        url: '/api/test'
+        data: $('form#new_task').serialize()
+        success: (xhr) ->
+          $('body').removeClass('loading')
+          #
+      return false
 
 
 

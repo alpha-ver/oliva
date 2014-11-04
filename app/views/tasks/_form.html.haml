@@ -6,53 +6,61 @@
         - @task.errors.full_messages.each do |msg|
           %li= msg
 
-  .row
-    .large-12.columns
-      = f.label :name
-      = f.text_field :name, :placeholder => "Имя задачи"
+  %fieldset
+    %legend Параметры Поиска
+    .row
+      .large-12.columns
+        = f.label :name
+        = f.text_field :name, :placeholder => "Имя задачи"
+    .row
+      .large-6.columns
+        %label 
+          Выберите регион
+        %select#avito_main_regions
+
+        /ajax add selects
+        #avito_sub_regions
+
+      .large-6.columns
+        %label
+          Категория
+        %select#avito_main_cs
+
+        %label
+          Подкатегория
+        %select#avito_sub_cs{:disabled => "", :name => 'p[categoryId]'}
+    .row#avito_search_params
+  
+  /ajax add params
+  %fieldset
+    %legend Действие на новые сообщения
 
 
 
+    
+  %fieldset
+    %legend 
 
-  .row
-    .large-6.columns
-      %label 
-        Выберите регион
-      %select#avito_main_regions
-
-      #avito_sub_regions
-
-
-
-
-
-
-    .large-6.columns
-      %label
-        Категория
-      %select#avito_main_cs
-
-      %label
-        Подкатегория
-      %select#avito_sub_cs{:disabled => ""}
+    .row
+      .large-3.columns
+        = f.label :interval
+        = f.number_field :interval, {:min => 10, :max => 1440, :value=> 30}
+      .large-6.columns
+        %label
+          Включить задачу
+        .switch
+          = f.check_box :active
+          = f.label :active
 
   %hr
-  .row#avito_search_params
-  %hr
 
-
-  .row
-    .large-6.columns
-      = f.label :interval
-      = f.number_field :interval
-    .large-6.columns
-      .switch
-        = f.check_box :active
-        = f.label :active
-  .row
-    .large-4.columns
-      = f.button 'Save'
-    .large-4.columns
-      = f.button 'Save'
-    .large-4.columns
-      = f.button 'Save'
+  %ul.button-group.radius.stack
+    %li
+      = link_to tasks_path, :class => 'button secondary ' do  
+        Назад 
+    %li
+      = link_to "#", :class=>"button alert", :id => 'bnt-test-task' do 
+        Проверка
+    %li
+      =f.button :class=>"button success disabled", :value => 'save' do 
+        Сохранить

@@ -5,4 +5,11 @@ class ApiController < ApplicationController
     render :json => json
   end
 
+  def test
+    render :json => params
+  end
+
+
+
+
 end

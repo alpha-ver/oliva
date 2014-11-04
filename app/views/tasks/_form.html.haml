@@ -21,19 +21,25 @@
       %select#avito_main_regions
 
       #avito_sub_regions
-        
+
 
 
 
 
 
     .large-6.columns
-      %label#avito_sub_cs
-        Субкатегория
-      %select
+      %label
+        Категория
+      %select#avito_main_cs
 
+      %label
+        Подкатегория
+      %select#avito_sub_cs{:disabled => ""}
 
   %hr
+  .row#avito_search_params
+  %hr
+
 
   .row
     .large-6.columns

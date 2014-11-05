@@ -6,6 +6,9 @@ class CreateTasklogs < ActiveRecord::Migration
       t.integer :module_id
 
       ############
+      add_index :tasklogs, [:i, :task_id, :module_id], :unique => true 
+      add_index :tasklogs, :task_id
+
       t.timestamps
     end
   end

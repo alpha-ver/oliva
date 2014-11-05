@@ -20,12 +20,15 @@ class TasksController < ApplicationController
   def edit
   end
 
-  def create
-    @task      = Task.new(task_params)
-    @task.user = current_user
-    @task.save
+  def crea_te
+    render :json => params
+  end
 
-    respond_with(@task)
+  def create
+    swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
+    @task = Task.new(task_params.delete_if(&swoop))
+    @task.user   = current_user
+    render :json => {:status=>@task.save, :result=>@task}  
   end
 
   def update
@@ -38,12 +41,18 @@ class TasksController < ApplicationController
     respond_with(@task)
   end
 
+
+  #_-_-_-
+  #_-_-_-
   private
     def set_task
       @task = Task.find(params[:id])
     end
 
     def task_params
-      params.require(:task).permit(:name, :fi, :ev, :interval, :active)
+      params.require(:task).permit(:name, :interval, :active).tap do |while_listed|
+        while_listed[:p] = params[:task][:p]
+        while_listed[:e] = params[:task][:e]
+      end
     end
 end

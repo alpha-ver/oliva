@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :tasks
+  resources :tasks, :except => [:edit, :update]
   devise_for :users
   
   root 'static_page#main'

@@ -18,8 +18,9 @@ ActiveRecord::Schema.define(version: 20141101212448) do
 
   create_table "tasks", force: true do |t|
     t.string   "name"
-    t.json     "fi"
-    t.json     "ev"
+    t.string   "stat"
+    t.json     "p"
+    t.json     "e"
     t.integer  "interval"
     t.boolean  "active"
     t.integer  "user_id"

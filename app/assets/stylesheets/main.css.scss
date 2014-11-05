@@ -32,8 +32,6 @@
 
 
 // loader animate
-
-
 #loader-wraper{
   position: fixed;
   display: none;
@@ -64,3 +62,10 @@ body.loading #loader-wraper{
   display: inherit;
 }
 
+//notification 
+
+#agnid{
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}

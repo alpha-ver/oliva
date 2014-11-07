@@ -27,7 +27,8 @@ class TasksController < ApplicationController
   def create
     swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
     @task = Task.new(task_params.delete_if(&swoop))
-    @task.user   = current_user
+    
+    @task.user = current_user
     render :json => {:status=>@task.save, :result=>@task}  
   end
 

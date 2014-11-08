@@ -24,7 +24,7 @@ params%5B184-from%5D=6251&params%5B184-to%5D=6316&params%5B185%5D=860&params%5B1
 
 sortByPrice=true
 
-
+https://www.avito.ru/api/2/items?categoryId=9&checksum=13a449c7bb7ceba17b6e96e7089ee5b1&includeRefs=true&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&params%5B210%5D=3431
 
 
 

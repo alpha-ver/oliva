@@ -4,11 +4,11 @@
   %b Name:
   = @task.name
 %p
-  %b Fi:
-  = @task.fi
+  %b P:
+  = @task.p
 %p
-  %b Ev:
-  = @task.ev
+  %b E:
+  = @task.e
 %p
   %b Interval:
   = @task.interval
@@ -19,6 +19,6 @@
   %b User:
   = @task.user_id
 
-= link_to 'Edit', edit_task_path(@task)
-\|
+//= link_to 'Edit', edit_task_path(@task)
+//\|
 = link_to 'Back', tasks_path

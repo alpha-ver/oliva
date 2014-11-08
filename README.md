@@ -40,3 +40,27 @@ priceMin=55005   -
 privateOnly=true - 
 companyOnly=true -
 withImagesOnly=true
+
+
+
+
+
+
+    .row{"data-equalizer" => ""}
+      .large-12.columns.panel{"data-equalizer-watch" => ""}
+        
+        .row
+          .large-3.columns
+            %a{:class=>"th radius", :href=>"http://avito.ru/id", :target => "_blank"}
+              %img{:src => "http://70.img.avito.st/100x75/124660170.jpg"}
+          .large-9.columns
+            Экскаваторные работы драглайн, земельные работы
+            %br
+            %b
+              2000000 руб.
+
+  
+
+      .large-12.columns.panel{"data-equalizer-watch" => ""} ...
+      .large-12.columns.panel{"data-equalizer-watch" => ""} ...
+      .large-12.columns.panel{"data-equalizer-watch" => ""} ...

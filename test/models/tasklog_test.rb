@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FeedBackTest < ActiveSupport::TestCase
+class TasklogTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

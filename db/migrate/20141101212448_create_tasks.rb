@@ -4,16 +4,18 @@ class CreateTasks < ActiveRecord::Migration
       t.string  :name
       t.string  :stat
 
+      ###################
+      t.integer :count, :default => 0
       t.integer :interval
-      t.boolean :active
+      t.boolean :active, :default => false
       t.integer :counter
       ##################
       t.json    :p
       t.json    :e
       ##################
-      t.integer :user_id
-
-
+      t.integer :user_id #<= μαγεία fo potato ;) 
+      ##################
+      t.datetime   :next_at, :default => "now()"
       t.timestamps
     end
 

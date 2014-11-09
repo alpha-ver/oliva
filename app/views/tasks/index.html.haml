@@ -1,35 +1,30 @@
-%table{:role => 'grid', :summary => "Tasks for #{current_user.email}"}
-  %caption 
-    Listing tasks for
+%table{:role => 'grid', :summary => "Задачи для #{current_user.email}", :width=>"100%"}
+  %caption
+    Задачи для 
     = current_user.email
 
   %tr
-    %th{:width=>"200"} Name
-    %th Fi
-    %th Ev
-    %th Interval
-    %th Active
-    %th C
-    %th U
+    %th Название
+    %th Интервал
+    %th Активность
+    %th Обновлен
 
     %th
-    //%th
     %th
 
   - @tasks.each do |task|
-    %tr{:class=> (task.active ? "active" : "") }
-      %td= task.name
-      %td= task.p
-      %td= task.e
+    %tr
+      %td
+        =link_to task do
+          = task.name
+    
       %td= task.interval
-      %td= task.active
-      %td= task.created_at
+      %td= task.active ? "Вкл" : "Выкл"
       %td= task.updated_at
 
-      %td= link_to 'Show', task
-      //%td= link_to 'Edit', edit_task_path(task)
-      %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      //%td= link_to 'Детально', task
+      %td= link_to 'Править', edit_task_path(task)
+      %td= link_to 'Удалить', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
-
-= link_to 'New Task', new_task_path
+= link_to new_task_path, :class => "button expand" do
+  Новая задача

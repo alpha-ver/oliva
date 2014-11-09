@@ -50,6 +50,9 @@ $ ->
   ## JS start loading page ##
   ###########################
   $(document).ready ->
+    $(this).foundation('reflow')
+
+
     if $('#avito-dash').html() == "ok"
       $('body').addClass('loading')
       # get top categories
@@ -304,6 +307,7 @@ $ ->
 
 
       return false
+
 
 
 

@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20141105202022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "tasklogs", id: false, force: true do |t|
     t.integer "i"
@@ -29,14 +28,14 @@ ActiveRecord::Schema.define(version: 20141105202022) do
   create_table "tasks", force: true do |t|
     t.string   "name"
     t.string   "stat"
-    t.integer  "count"
+    t.integer  "count",      default: 0
     t.integer  "interval"
     t.boolean  "active",     default: false
     t.integer  "counter"
     t.json     "p"
     t.json     "e"
     t.integer  "user_id"
-    t.datetime "next_at",    default: '2014-11-08 10:42:11'
+    t.datetime "next_at",    default: '2014-11-08 21:57:12'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

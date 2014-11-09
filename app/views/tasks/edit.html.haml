@@ -1,7 +1,49 @@
-%h1 Editing task
+%h1 Редактирование задачи
 
-= render 'form'
+= form_for @task do |f|
 
-= link_to 'Show', @task
-\|
-= link_to 'Back', tasks_path
+  =f.hidden_field :p, :value => "{}"
+  =f.hidden_field :e, :value => "{}" 
+
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |msg|
+          %li= msg
+    
+  %fieldset
+    %legend Переодичность
+    
+    .row
+      .large-12.columns
+        = f.label :name
+        = f.text_field :name, :placeholder => "Имя задачи"
+
+    .row
+      .large-6.columns
+        = f.label :interval do 
+          Интервал
+          %span{:id=>"avito_interval"}
+          Мин.
+
+        .range-slider{ :data => { :slider => "",  
+                                  :options=> "start: 10; end: 120; display_selector: #avito_interval;" } }
+          %span.range-slider-handle{:role => "slider", :tabindex => "0"}
+          %span.range-slider-active-segment
+          = f.hidden_field :interval
+
+      .large-6.columns
+        %label
+          Включить задачу
+        .switch
+          = f.check_box :active, {:checked => ""}
+          = f.label :active
+
+  %ul.button-group.radius.stack
+    %li
+      = link_to tasks_path, :class => 'button secondary ' do  
+        Назад 
+    %li
+      =f.button :class=>"button success" do 
+        Сохранить

@@ -1,24 +1,31 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b Название:
   = @task.name
 %p
-  %b P:
-  = @task.p
-%p
-  %b E:
-  = @task.e
-%p
-  %b Interval:
+  %b Интервал в минутах:
   = @task.interval
 %p
-  %b Active:
-  = @task.active
-%p
-  %b User:
-  = @task.user_id
+  %b Активность:
+  = @task.active ? "Да" : "Нет"
 
-//= link_to 'Edit', edit_task_path(@task)
-//\|
-= link_to 'Back', tasks_path
+%p
+  %b Колличество обьявлений на авито:
+  = @task.count
+
+%p
+  %b Обработанно:
+  = @task.tasklogs.count
+
+%p 
+  %b Время следующего запуска:
+  = @task.next_at
+
+%p 
+  %b Задача созданна
+  = @task.created_at
+
+%p 
+  %b Задача Обновленна
+  = @task.updated_at

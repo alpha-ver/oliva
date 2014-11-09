@@ -1,6 +1,18 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = { host: '0liva.ru', port: 80 }
+  
+  config.action_mailer.delivery_method  = :smtp
+  config.action_mailer.smtp_settings    = {
+    :address              => "smtp.yandex.ru",
+    :port                 => 465,
+    :enable_ssl           => false,
+    :user_name            => "r0b0t@0liva.ru",
+    :password             => "sznX8Db9HLpcZgrvBtXe",
+    :authentication       => "plain",
+    :enable_starttls_auto => true,
+    :ssl                  => true
+  }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

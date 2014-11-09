@@ -20,10 +20,9 @@
   opacity: 0.9px;
 }
 
-.oliva{
-  background-image: url('logo-sm.svg');
-  background-repeat: no-repeat;
-  padding-left: 50px !important;
+.navf{
+  position: fixed;
+
 }
 
 .active{
@@ -62,8 +61,14 @@ body.loading #loader-wraper{
   display: inherit;
 }
 
-//notification 
+.buggg{
+  position: absolute;
+  bottom: 0px;
+  width: 100% !important;
+  border-top: 1px solid #F00;
+}
 
+//notification 
 #agnid{
   position: fixed;
   bottom: 0px;

@@ -49,6 +49,9 @@ GEM
       devise (>= 3.2.0)
     erubis (2.7.0)
     execjs (2.2.2)
+    foundation-icons-sass-rails (3.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     foundation-rails (5.4.5.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -90,6 +93,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.4)
       sprockets-rails (~> 2.0)
+    rails_layout (1.0.23)
     railties (4.1.4)
       actionpack (= 4.1.4)
       activesupport (= 4.1.4)
@@ -140,6 +144,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   devise_invitable
+  foundation-icons-sass-rails
   foundation-rails
   haml
   haml-rails
@@ -147,6 +152,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.1.4)
+  rails_layout
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring

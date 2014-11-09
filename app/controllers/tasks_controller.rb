@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  respond_to :html
+  respond_to    :html
   before_action :authenticate_user!
 
   def index
@@ -20,20 +20,17 @@ class TasksController < ApplicationController
   def edit
   end
 
-  def crea_te
-    render :json => params
-  end
 
   def create
     swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
     @task = Task.new(task_params.delete_if(&swoop))
-    
+
     @task.user = current_user
     render :json => {:status=>@task.save, :result=>@task}  
   end
 
   def update
-    @task.update(task_params)
+    @task.update(task_params_strong)
     respond_with(@task)
   end
 
@@ -43,8 +40,7 @@ class TasksController < ApplicationController
   end
 
 
-  #_-_-_-
-  #_-_-_-
+  ###-_-_-_###
   private
     def set_task
       @task = Task.find(params[:id])
@@ -56,4 +52,10 @@ class TasksController < ApplicationController
         while_listed[:e] = params[:task][:e]
       end
     end
+
+    def task_params_strong
+      params.require(:task).permit(:name, :interval, :active)
+    end
+
+
 end

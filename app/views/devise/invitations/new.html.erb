@@ -1,12 +1,18 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<div class="authform">
 
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  <%= devise_error_messages! %>
+  <h3>Отправить инвайт</h3>
 
-<% resource.class.invite_key_fields.each do |field| -%>
-  <p><%= f.label field %><br />
-  <%= f.text_field field %></p>
-<% end -%>
+  <p>Пока не ограниченно</p>
 
-  <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
-<% end %>
+  <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+    <%= devise_error_messages! %>
+
+  <% resource.class.invite_key_fields.each do |field| -%>
+    <p><%= f.label field %><br />
+    <%= f.text_field field %></p>
+  <% end -%>
+
+    <p><%= f.submit t("submit_button"), :class => 'button right' %></p>
+  <% end %>
+
+</div>

@@ -3,8 +3,4 @@
 #= require_tree .
 #= require foundation
 
-#= require main
-
-
-
 $(document).foundation()

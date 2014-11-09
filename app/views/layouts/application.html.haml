@@ -2,40 +2,35 @@
 %html
   %head
 
-    %title 0liva.ru - Сервис мониторинга обьявлений Avito
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %title Oliva – Сервис мониторинга обьявлений Avito
+    = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag "vendor/modernizr"
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = csrf_meta_tags
   %body
 
-    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
-      %ul.title-area
-        %li.name
-          %h1
-            %a.oliva{:href => "#"} Oliva
-        / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-        %li.toggle-topbar.menu-icon
-          %a{:href => "#"}
-            %span Menu
-      %section.top-bar-section
-        / Right Nav Section
-        %ul.right
-          %li.active
-            %a{:href => "#"} Right Button Active
-          %li.has-dropdown
-            %a{:href => "#"} Right Button Dropdown
-            %ul.dropdown
-              %li
-                %a{:href => "#"} First link in dropdown
-              %li.active
-                %a{:href => "#"} Active link in dropdown
-        / Left Nav Section
-        %ul.left
-          %li
-            %a{:href => "#"} Left Nav Button
-          %li.divider  
+    %nav.navf.icon-bar.vertical.five-up
+      %a.item{:href => "/"}
+        %img{:src => "/assets/logo-sm.svg"}/
+        %label Oliva
+
+      -if user_signed_in?
+        =link_to tasks_path, :class=>"item" do
+          %label Задачи
+
+        =link_to new_user_invitation_path, :class=>"item" do
+          %label Пригласить
+
+        =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+          %label Выход
+      -else
+        =link_to  new_user_session_path, :class => "item" do
+          %label Вход
+
+      =link_to "mailto:dev@0liva.ru", :class => "item buggg" do
+        %label Bug!!!
+
 
 
     .row

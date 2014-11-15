@@ -1,7 +1,6 @@
 !!!
 %html
   %head
-
     %title Oliva – Сервис мониторинга обьявлений Avito
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag "vendor/modernizr"
@@ -10,58 +9,85 @@
     = csrf_meta_tags
   %body
 
-    %nav.navf.icon-bar.vertical.five-up
-      %a.item{:href => "/"}
-        %img{:src => "/assets/logo-sm.svg"}/
-        %label Oliva
+    .off-canvas-wrap{"data-offcanvas" => ""}
+      .inner-wrap
+        .container
 
-      -if user_signed_in?
-        =link_to tasks_path, :class=>"item" do
-          %label Задачи
+          %nav.tab-bar.nav-small
+            %a.left-off-canvas-toggle.menu-icon
+              %span  
+            .middle.tab-bar-section
+              Oliva mobile
 
-        =link_to new_user_invitation_path, :class=>"item" do
-          %label Пригласить
+          %nav.sidebar.icon-bar.vertical
+            //navf.five-up
+            %a.item{:href => "/"}
+              %img{:src => "/assets/logo-sm.svg"}/
+              %label Oliva
 
-        =link_to destroy_user_session_path, :class=>"item", :method => :delete do
-          %label Выход
-      -else
-        =link_to  new_user_session_path, :class => "item" do
-          %label Вход
+            -if user_signed_in?
+              =link_to tasks_path, :class=>"item" do
+                %label Задачи
 
-      =link_to "mailto:dev@0liva.ru", :class => "item buggg" do
-        %label Bug!!!
+              =link_to new_user_invitation_path, :class=>"item" do
+                %label Пригласить
 
+              =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+                %label Выход
+            -else
+              =link_to  new_user_session_path, :class => "item" do
+                %label Вход
 
+            =link_to "mailto:dev@0liva.ru", :class => "item buggg" do
+              %label Bug!!!
 
-    .row
-      .large-12.columns
-        %p.notice= notice
-        %p.alert= alert
+          %aside.left-off-canvas-menu
+            %ul.off-canvas-list
+              %li
+                %label Oliva 
 
-    .row
-      .large-12.columns
-
-        = yield
-
-    //fixed
-    #agnid
-    #loader-wraper
-      .loader
-        %svg#loader-1{  :height => "40px", 
-                        :style => "enable-background:new 0 0 50 50;", 
-                        :version => "1.1", 
-                        :viewbox => "0 0 50 50", 
-                        :width => "40px", 
-                        :x => "0px", 
-                        "xml:space" => "preserve", 
-                        :xmlns => "http://www.w3.org/2000/svg", 
-                        "xmlns:xlink" => "http://www.w3.org/1999/xlink", 
-                        :y => "0px"}
-
-          %path{:d => "M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z", :fill => "#007095"}
-            %animatetransform{:attributename => "transform", :attributetype => "xml", :dur => "0.6s", :from => "0 25 25", :repeatcount => "indefinite", :to => "360 25 25", :type => "rotate"}
+              -if user_signed_in?  
+                %li
+                  =link_to tasks_path, :class=>"item" do
+                    Задачи
+                %li
+                  =link_to new_user_invitation_path, :class=>"item" do
+                    Пригласить
+                %li
+                  =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+                    Выход
+              -else
+                =link_to  new_user_session_path, :class => "item" do
+                  Вход
 
 
+          .row
+            .large-12.columns
+              %p.notice= notice
+              %p.alert= alert
+
+          .row
+            .large-12.columns
+
+              = yield
+
+          //fixed
+          #agnid
+          #loader-wraper
+            .loader
+              %svg#loader-1{  :height => "40px", 
+                              :style => "enable-background:new 0 0 50 50;", 
+                              :version => "1.1", 
+                              :viewbox => "0 0 50 50", 
+                              :width => "40px", 
+                              :x => "0px", 
+                              "xml:space" => "preserve", 
+                              :xmlns => "http://www.w3.org/2000/svg", 
+                              "xmlns:xlink" => "http://www.w3.org/1999/xlink", 
+                              :y => "0px"}
+
+                %path{:d => "M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z", :fill => "#007095"}
+                  %animatetransform{:attributename => "transform", :attributetype => "xml", :dur => "0.6s", :from => "0 25 25", :repeatcount => "indefinite", :to => "360 25 25", :type => "rotate"}
 
 
 

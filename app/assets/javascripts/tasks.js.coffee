@@ -175,6 +175,7 @@ $ ->
     ## JS events for subcagerories ##
     ## add params fo cat           ##
     #################################
+    params = null;
     $("#avito_sub_cs").change ->
       id = $('#avito_sub_cs option:selected').val()
       $('#avito_search_params').html("")
@@ -191,11 +192,12 @@ $ ->
           success: (xhr) ->      
             if xhr['status']
               html = ""
+              params = xhr['result']
               $.each xhr['result'], (i,o) ->
                 if o['type'] != 'select'
                   console.log o
 
-                html += "<label>#{o['title']}</label><select name=\"task[p][params][#{o['id']}]\"><option value=\"\"></option>"
+                html  += "<label>#{o['title']}</label><select data-id=\"#{o['id']}\" class=\"params\" name=\"task[p][params][#{o['id']}]\"><option value=\"\"></option>"
                 $.each o['values'], (ii,oo) -> 
                   html += "<option value=\"#{oo['id']}\">#{oo['title']}</option>"
 
@@ -203,6 +205,21 @@ $ ->
 
               $('#avito_search_params').html(html)
               $('body').removeClass('loading')
+
+    ###########################
+    ## JS events for params  ##
+    ## add params fo cat     ##
+    ###########################
+    $(document).on 'change', 'select.params', (e) ->
+      data = $(this).data()
+      id = $(this).find('option:selected').val()
+      c "🌳 id:#{data['id']} ,sid:#{id}", "event", 3
+      $.each params, (i,o) ->
+        if data['id'].toString() == o['id']
+          $.each o['values'], (ii,oo) ->
+            if id.toString() == oo['id']
+              console.log oo
+
 
     ###########################
     ## JS start loading page ##

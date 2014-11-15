@@ -74,3 +74,49 @@ body.loading #loader-wraper{
   bottom: 0px;
   right: 0px;
 }
+
+
+
+
+.container {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-x: hidden;
+  padding-left: 115px;
+  width: 100%;
+}
+
+.sidebar {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;
+  background-color:#333;
+}
+
+.nav-small{
+  display: none;
+}
+
+@media only screen and (max-width: 640px) {
+
+  body { -webkit-text-size-adjust: none; }
+  
+  .container { padding-left: 0; }
+
+  .sidebar {
+    display:  none;
+  }
+
+  .nav-small{
+    display: inherit;
+  }
+
+
+}

@@ -19,5 +19,21 @@ module Oliva
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
+
+
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.yandex.ru",
+      :port                 => 465,
+      :enable_ssl           => false,
+      :user_name            => "r0b0t@0liva.ru",
+      :password             => "sznX8Db9HLpcZgrvBtXe",
+      :authentication       => "plain",
+      :enable_starttls_auto => true,
+      :ssl                  => true
+    }
   end
 end

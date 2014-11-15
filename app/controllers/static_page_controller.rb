@@ -8,4 +8,10 @@ class StaticPageController < ApplicationController
 
   def help
   end
+
+  def test
+    ad = [1,2,3,5,6]
+    Notification.mail_medium('hav0k@me.com', ad)
+    render :json => ""
+  end
 end

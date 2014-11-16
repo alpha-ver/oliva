@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks.all
     respond_with(@tasks)
   end
 
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params.delete_if(&swoop))
 
     @task.user = current_user
-    render :json => {:status=>@task.save, :result=>@task}  
+    render :json => {:status=>@task.save, :result=>@task}
   end
 
   def update
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   ###-_-_-_###
   private
     def set_task
-      @task = Task.find(params[:id])
+      @task = Task.find_by(:id => params[:id], :user_id => current_user.id)
     end
 
     def task_params

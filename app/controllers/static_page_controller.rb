@@ -1,6 +1,6 @@
 class StaticPageController < ApplicationController
   def main
-    render layout: 'main'
+    #render layout: 'main'
   end
 
   def about

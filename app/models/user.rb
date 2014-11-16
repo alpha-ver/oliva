@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   #devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  devise :database_authenticatable, :confirmable, :invitable, :invite_for => 2.weeks
-
+  devise :database_authenticatable, :registerable, :recoverable, :confirmable, :validatable, :invitable, :invite_for => 2.weeks
+  
   has_many :tasks
 
 end

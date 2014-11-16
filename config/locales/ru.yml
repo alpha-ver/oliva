@@ -2,3 +2,23 @@ ru:
   sign_in: Войти
   sign_up: Регистрация
   submit_button: Отправить
+
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: должна быть заполенна
+              taken: уже зарегистрированна
+            password:
+              blank: не может быть пустым
+              too_short: слишком которкий
+            password_confirmation:
+              confirmation: не совпадают
+
+  attributes:
+    email: Электронная почта
+    password: Пароль
+    password_confirmation: Введенные пароли

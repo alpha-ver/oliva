@@ -21,9 +21,8 @@
 
           %nav.sidebar.icon-bar.vertical
             //navf.five-up
-            %a.item{:href => "/"}
+            %a.item.logo-sm{:href => "/"}
               %img{:src => "/assets/logo-sm.svg"}/
-              %label Oliva
 
             -if user_signed_in?
               =link_to tasks_path, :class=>"item" do
@@ -32,14 +31,23 @@
               =link_to new_user_invitation_path, :class=>"item" do
                 %label Пригласить
 
-              =link_to destroy_user_session_path, :class=>"item", :method => :delete do
-                %label Выход
             -else
-              =link_to  new_user_session_path, :class => "item" do
+
+              =link_to new_user_session_path, :class => "item" do
                 %label Вход
 
-            =link_to "mailto:dev@0liva.ru", :class => "item buggg" do
-              %label Bug!!!
+              =link_to new_user_registration_path, :class => "item" do
+                %label Регистрация
+
+            =link_to "http://info.0liva.ru/faq", :class => "item" do
+              %label Справка
+
+            =link_to "http://info.0liva.ru/", :class => "item" do
+              %label Блог
+
+            -if user_signed_in?
+              =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+                %label Выход
 
           %aside.left-off-canvas-menu
             %ul.off-canvas-list
@@ -59,16 +67,21 @@
               -else
                 =link_to  new_user_session_path, :class => "item" do
                   Вход
+         
+          .row.top
+            .large-12.columns
+              -if notice    
+                .alert-box.info.radius{"data-alert" => ""}
+                  = notice
+                  %a.close{:href => "#"} &#215;
 
+              -if alert
+                .alert-box.alert.radius{"data-alert" => ""}
+                  = alert
+                  %a.close{:href => "#"} &#215;
 
           .row
             .large-12.columns
-              %p.notice= notice
-              %p.alert= alert
-
-          .row
-            .large-12.columns
-
               = yield
 
           //fixed
@@ -90,4 +103,4 @@
                   %animatetransform{:attributename => "transform", :attributetype => "xml", :dur => "0.6s", :from => "0 25 25", :repeatcount => "indefinite", :to => "360 25 25", :type => "rotate"}
 
 
-
+    = render "layouts/yam"

@@ -139,13 +139,37 @@ $ ->
                   $('body').removeClass('loading')
                 c "🌍 id:#{id}, name:#{k}, count:#{count}", "success", 2
 
-    $(document).on 'change', '#avito_sub_regions select', ->
+    $(document).on 'change', 'select#_location', ->
       ids  = $(this).attr('id').split('_')
       id   = $(this).find('option:selected').val()
       data = $(this).find('option:selected').data()
-      $.each data, (k,v) ->
-        c "🌍 parent:#{ids.join()}, id:#{id}, name:#{Object.keys(data).join(", ")}", "event"
+      c "🌍 parent:#{ids.join()}, id:#{id}, name:#{Object.keys(data).join(", ")}", "event", 3
+      
+      $.each data, (k,v) -> 
+        if k == "districts"
+          $.ajax
+            type: "POST"
+            url: '/api/avito'
+            data: 
+              path: "locations/#{id}/#{k}"
 
+            beforeSend: () -> 
+              $('body').addClass('loading')
+
+            success: (xhr) ->  
+              #html = "<label>#{v}</label><select multiple id=\"#{}_#{k}\" name=\"task[p][#{k}Id][]\"><option value=\"\"></option>"
+              html = "<label>#{v}</label>"
+              $.each xhr['result'], (i,e) -> 
+                #dp = DataParam(e)
+                #html  += "<option value=\"#{e['id']}\" #{dp}>#{e['name']}</option>"
+                html  += "<input type=\"checkbox\" name=\"task[p][districtId][#{i}]\" value=\"#{e['id']}\"> #{e['name']}<br />"
+
+              #html += "</select>"
+              $("#subl_location").html(html)
+              $('body').removeClass('loading')
+
+        else
+          $("#subl_location").html("")
 
     ##############################
     ## JS events for cagerories ##
@@ -201,7 +225,7 @@ $ ->
                 $.each o['values'], (ii,oo) -> 
                   html += "<option value=\"#{oo['id']}\">#{oo['title']}</option>"
 
-                html += "</select>"
+                html += "</select><span id=\"sub_#{o['id']}\" class='sub-params'></span>"
 
               $('#avito_search_params').html(html)
               $('body').removeClass('loading')
@@ -218,7 +242,19 @@ $ ->
         if data['id'].toString() == o['id']
           $.each o['values'], (ii,oo) ->
             if id.toString() == oo['id']
-              console.log oo
+              if oo['params']
+                console.log oo
+                html=""
+                $.each oo['params'], (iii,ooo) -> 
+                  html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
+                  $.each ooo['values'], (iiii,oooo) -> 
+                    html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
+                  html += "</select>"
+
+                $("#sub_#{data['id']}").html(html)
+            else
+              if id == ""
+                $("#sub_#{data['id']}").html("")
 
 
     ###########################
@@ -251,7 +287,7 @@ $ ->
               if 'images' of o
                 image = "<img src=\"#{o['images']['main']['100x75']}\">"
               else
-                image = "<img src=\"#\">"
+                image = "<img src=\"http://placehold.it/100x75\">"
 
 
               html += "
@@ -274,7 +310,8 @@ $ ->
               "
             html += "</div>"
             $('#avito_search_result').html(html)
-            $('#task_submit').prop('disabled', false)  
+            $('#task_submit').prop('disabled', false)
+            $('#agnid').html("")  
           else
             $('#agnid').html(
               '
@@ -318,10 +355,8 @@ $ ->
                 </div>
               ")
           
-
           $('body').removeClass('loading')
           $(document).foundation('reflow')
-
 
       return false
 

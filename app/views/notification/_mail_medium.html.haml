@@ -2,23 +2,25 @@
   %tr
     %td.panel
       %h1
-        %a{:href => "https://avito.ru/460863252"}
+        %a{:href => mail_medium['url'] }
           = mail_medium['title']
       %p
-        %a{:href => "https://avito.ru/460863252"}
-          %img{:src => "http://37.img.avito.st/100x75/1223715537.jpg"}/
+        %a{:href => mail_medium['url'] }
+          %img{:src => mail_medium['images'].blank? ? "http://placehold.it/140x105" : mail_medium['images'][0]['140x105'] }/
+        =raw mail_medium['description']
 
-      %hr/
       %table.container
         %tr
           %td
-            %table.block-grid.three-up
+            %table.block-grid.twelve-up
               %tr
                 %td
-                  %p.lead №: 460863252
-                %td
-                  %p.lead +7(911)501-12-41
-                %td
-                  %p.lead 899999999 Руб.
+                  %p.lead
+                    №: 
+                    = mail_medium['id']
+                    %br
+                    = mail_medium['phone']
+                    %br
+                    = mail_medium['price'].blank? ? "Цена не указанна" : "#{mail_medium['price']['value']} #{mail_medium['price']['metric']}"                
     %td.expander
 %br/

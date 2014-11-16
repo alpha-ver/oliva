@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+ul{
+  margin-bottom: 0px !important;
+}
 
 .beta{
   background-image: url('logo-bg.svg');
@@ -10,6 +13,24 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+.top{
+  padding-top: 30px;
+}
+
+.logo-sm img{
+  width: 70px !important;
+  height: 70px !important;  
+}
+
+.logo-sm{
+  background-color: #303030;
+}
+
+.logo-sm:hover{
+  background-color: #333
+}
+
 
 .main{
   height: 100%;
@@ -84,7 +105,7 @@ body.loading #loader-wraper{
   box-sizing: border-box;
   height: 100%;
   overflow-x: hidden;
-  padding-left: 115px;
+  padding-left: 125px;
   width: 100%;
 }
 
@@ -96,12 +117,17 @@ body.loading #loader-wraper{
   position: fixed;
   left: 0;
   top: 0;
-  width: 100px;
+  width: 125px !important;
   background-color:#333;
 }
 
 .nav-small{
   display: none;
+}
+
+.sub-params{
+  display: block;
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 640px) {

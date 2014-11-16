@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="50px" width="50px">
+<svg xmlns="http://www.w3.org/2000/svg" height="100px" width="100px">
     <g xmlns="http://www.w3.org/2000/svg" transform="translate(2 2)">
         <rect x="38%" y="38%" width="45%" height="45%" rx="45%" fill="#43AC6A" fill-opacity="0.5" ry="10%"></rect>
         <rect x="8%" y="50%" height="21%" width="21%" fill="#F08A24" ry="0" fill-opacity="0.5" rx="0"></rect>

@@ -1,5 +1,8 @@
 %p#notice= notice
 
+%h1 Подробная информация
+
+
 %p
   %b Название:
   = @task.name
@@ -29,3 +32,7 @@
 %p 
   %b Задача Обновленна
   = @task.updated_at
+
+
+= link_to tasks_path, :class => 'button secondary ' do  
+  Назад 

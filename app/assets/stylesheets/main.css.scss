@@ -14,6 +14,10 @@ ul{
   background-attachment: fixed;
 }
 
+.off-canvas-wrap, .inner-wrap{
+  height: 100%
+}
+
 .top{
   padding-top: 30px;
 }
@@ -43,7 +47,6 @@ ul{
 
 .navf{
   position: fixed;
-
 }
 
 .active{

@@ -27,9 +27,9 @@
           %span{:id=>"avito_interval"}
           Мин.
 
-        .range-slider{ :data => { :slider => "",  
+        .range-slider{ :data => { :slider => "#{@task.interval}",  
                                   :options=> "start: 10; end: 120; display_selector: #avito_interval;" } }
-          %span.range-slider-handle{:role => "slider", :tabindex => "0"}
+          %span.range-slider-handle{:role => "slider", :tabindex => "0",}
           %span.range-slider-active-segment
           = f.hidden_field :interval
 
@@ -37,7 +37,7 @@
         %label
           Включить задачу
         .switch
-          = f.check_box :active, {:checked => ""}
+          = f.check_box :active
           = f.label :active
 
   %ul.button-group.radius.stack

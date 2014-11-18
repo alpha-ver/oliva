@@ -42,13 +42,17 @@
                 %label Регистрация
 
             =link_to "http://info.0liva.ru/faq", :class => "item" do
+              %label FAQ
+
+            =link_to "http://info.0liva.ru/help", :class => "item" do
               %label Справка
 
             =link_to "http://info.0liva.ru/", :class => "item" do
               %label Блог
 
+
             -if user_signed_in?
-              =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+              =link_to destroy_user_session_path, :class=>"item exit", :method => :delete do
                 %label Выход
 
           %aside.left-off-canvas-menu
@@ -76,6 +80,9 @@
                     Регистрация
               %li  
                 =link_to "http://info.0liva.ru/faq", :class => "item" do
+                  FAQ
+              %li
+                =link_to "http://info.0liva.ru/help", :class => "item" do
                   Справка
               %li
                 =link_to "http://info.0liva.ru/", :class => "item" do
@@ -83,7 +90,7 @@
 
               -if user_signed_in?
                 %li
-                  =link_to destroy_user_session_path, :class=>"item", :method => :delete do
+                  =link_to destroy_user_session_path, :class=>"item exit", :method => :delete do
                     Выход
          
           .row.top

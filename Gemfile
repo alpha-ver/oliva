@@ -6,6 +6,8 @@ gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 
+gem 'thin'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 

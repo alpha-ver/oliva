@@ -45,6 +45,8 @@ gem 'haml-rails'
 gem 'devise'
 gem 'devise_invitable'
 
+gem 'mechanize'
+
 
 
 

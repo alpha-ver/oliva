@@ -1,0 +1,43 @@
+= form_for @admin_posting do |f|
+  - if @admin_posting.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_posting.errors.count, "error")} prohibited this admin_posting from being saved:"
+      %ul
+        - @admin_posting.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :manager
+    = f.text_field :manager
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :images
+    = f.text_field :images
+  .field
+    = f.label :p
+    = f.text_field :p
+  .field
+    = f.label :count
+    = f.number_field :count
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :active
+    = f.check_box :active
+  .field
+    = f.label :allow_mail
+    = f.check_box :allow_mail
+  .field
+    = f.label :next_at
+    = f.datetime_select :next_at
+  .actions
+    = f.submit 'Save'

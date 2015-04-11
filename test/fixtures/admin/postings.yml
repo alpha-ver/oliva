@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  manager: MyString
+  price: MyString
+  images: MyString
+  p: MyString
+  count: 1
+  user_id: 1
+  active: false
+  allow_mail: false
+  next_at: 2015-04-11 09:49:33
+
+two:
+  title: MyString
+  description: MyString
+  manager: MyString
+  price: MyString
+  images: MyString
+  p: MyString
+  count: 1
+  user_id: 1
+  active: false
+  allow_mail: false
+  next_at: 2015-04-11 09:49:33

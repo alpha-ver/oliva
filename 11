@@ -1,0 +1,12 @@
+page = agent.get "https://twitter.com/signup"
+
+page.forms[-1].field("user[name]").value = "Вячеслав носков"
+page.forms[-1].field("user[email]").value = "nosok-vvvv@aplahv.ru"
+page.forms[-1].field("user[user_password]").value = "rlfjrkjhfj3gefdhjegdhjegd"
+
+result = page.submit()
+
+
+
+
+https://twitter.com/users/username_available?&username=t

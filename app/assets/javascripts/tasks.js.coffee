@@ -206,7 +206,7 @@ $ ->
       if id == ""
         #
       else
-        c "🌳 subcategory:#{id}", "event"
+        c "🌳🌳 subcategory:#{id}", "event"
         $('body').addClass('loading')
         $.ajax
           type: "POST"
@@ -235,26 +235,37 @@ $ ->
     ## add params fo cat     ##
     ###########################
     $(document).on 'change', 'select.params', (e) ->
+
+      console.log e
       data = $(this).data()
       id = $(this).find('option:selected').val()
-      c "🌳 id:#{data['id']} ,sid:#{id}", "event", 3
+      c "🌳🌳🌳 id:#{data['id']} ,sid:#{id}", "event", 3
+      
       $.each params, (i,o) ->
-        if data['id'].toString() == o['id']
-          $.each o['values'], (ii,oo) ->
-            if id.toString() == oo['id']
-              if oo['params']
-                console.log oo
-                html=""
-                $.each oo['params'], (iii,ooo) -> 
-                  html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
-                  $.each ooo['values'], (iiii,oooo) -> 
-                    html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
-                  html += "</select>"
 
-                $("#sub_#{data['id']}").html(html)
-            else
-              if id == ""
-                $("#sub_#{data['id']}").html("")
+        console.log o
+
+        #if data['id'].toString() == o['id']
+        $.each o['values'], (ii,oo) ->
+          if id.toString() == oo['id']
+            if oo['params']
+              console.log oo
+              html=""
+              $.each oo['params'], (iii,ooo) -> 
+                html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
+                $.each ooo['values'], (iiii,oooo) -> 
+                  html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
+                html += "</select><span id=\"sub_#{ooo['id']}\" class=\"sub-params\">"
+
+              $("#sub_#{data['id']}").html(html)
+          else
+            if id == ""
+              $("#sub_#{data['id']}").html("")
+
+
+
+
+
 
 
     ###########################

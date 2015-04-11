@@ -18,7 +18,6 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime   :next_at, :default => "now()"
       t.timestamps
     end
-
     add_index :tasks, :user_id
   end
 end

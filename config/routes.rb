@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :postings
+  end
+
   resources :tasks
   devise_for :users
   

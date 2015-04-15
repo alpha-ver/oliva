@@ -1,0 +1,2 @@
+module Avito::PostingsHelper
+end

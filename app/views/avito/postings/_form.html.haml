@@ -1,10 +1,15 @@
-= form_for @admin_posting do |f|
-  - if @admin_posting.errors.any?
+= form_for @avito_posting do |f|
+  - if @avito_posting.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@admin_posting.errors.count, "error")} prohibited this admin_posting from being saved:"
+      %h2= "#{pluralize(@avito_posting.errors.count, "error")} prohibited this avito_posting from being saved:"
       %ul
-        - @admin_posting.errors.full_messages.each do |msg|
+        - @avito_posting.errors.full_messages.each do |msg|
           %li= msg
+
+
+  .field
+    = f.label :name
+    = f.text_field :name
 
   .field
     = f.label :title
@@ -25,6 +30,9 @@
     = f.label :p
     = f.text_field :p
   .field
+    = f.label :e
+    = f.text_field :e
+  .field
     = f.label :count
     = f.number_field :count
   .field
@@ -38,6 +46,6 @@
     = f.check_box :allow_mail
   .field
     = f.label :next_at
-    = f.datetime_select :next_at
+    //= f.datetime_select :next_at
   .actions
     = f.submit 'Save'

@@ -1,0 +1,150 @@
+/* Menu Active */
+/* Desktop */
+@media (min-width: 768px) {
+  .main-nav {
+    overflow: auto;
+  }
+  .main-nav + #content {
+    margin-left: 235px;
+  }
+  .main-nav + #content + #footer {
+    margin-left: 235px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .main-nav + #content {
+    position: relative;
+    left: 235px;
+  }
+  .main-nav + #content + #footer {
+    position: relative;
+    left: 235px;
+  }
+}
+
+@media (min-width: 640px) {
+  .left-off-canvas-menu{
+    display: none;
+  }
+
+  .move-right > .inner-wrap{
+    transform: none;
+  }
+}
+
+.main-nav {
+  width: 100%;
+}
+.main-nav #menu li i {
+  font-size: 14px;
+}
+.main-nav #menu > li > a > span {
+  display: inline;
+}
+.main-nav #menu > li > ul {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: auto;
+  visibility: visible;
+}
+
+.collapse {
+  display: none;
+}
+
+
+
+/* Menu */
+#menu, #menu ul, #menu li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#menu {
+  margin-bottom: 25px;
+}
+#menu > li {
+  position: relative;
+}
+#menu li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #515151;
+}
+#menu li a i {
+  font-size: 16px;
+}
+#menu > li > a {
+  color: #eee;
+  font-size: 14px;  
+  padding-left: 13px;
+  border-bottom: 1px solid #585858;
+}
+#menu > li > a:hover {
+  background-color: #444444;
+}
+#menu > li > a > span {
+  display: none;
+  margin-left: 8px;
+}
+#menu li li a {
+  color: #9d9d9d;
+}
+#menu li li a:hover {
+  color: #FFFFFF;
+  background-color: #373737;
+}
+
+
+
+#menu li li a:hover:before {
+  margin-right: 20px;
+}
+#menu > li.active > a {
+  color: #DDDDDD;
+  background: #373737;
+}
+#menu li.active li a {
+  color: #C4C4C4;
+}
+#menu li li.active > a:last-child {
+  color: #FFFFFF;
+}
+#menu li li.active a:last-child:before {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+#menu > li > ul {
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  width: 210px;
+  background-color: #444444;
+  visibility: hidden;
+}
+#menu li ul {
+  overflow: hidden;
+}
+#menu > li:hover > ul {
+  visibility: visible;
+}
+
+
+#menu li ul a {
+  padding-left: 20px;
+}
+#menu li li ul a {
+  padding-left: 40px;
+}
+#menu li li li ul a {
+  padding-left: 60px;
+}
+#menu li li li li ul a {
+  padding-left: 80px;
+}

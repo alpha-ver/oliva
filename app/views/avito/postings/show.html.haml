@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @avito_posting.title
+%p
+  %b Description:
+  = @avito_posting.description
+%p
+  %b Manager:
+  = @avito_posting.manager
+%p
+  %b Price:
+  = @avito_posting.price
+%p
+  %b Images:
+  = @avito_posting.images
+%p
+  %b P:
+  = @avito_posting.p
+%p
+  %b Count:
+  = @avito_posting.count
+%p
+  %b User:
+  = @avito_posting.user_id
+%p
+  %b Active:
+  = @avito_posting.active
+%p
+  %b Allow mail:
+  = @avito_posting.allow_mail
+%p
+  %b Next at:
+  = @avito_posting.next_at
+
+= link_to 'Edit', edit_avito_posting_path(@avito_posting)
+\|
+= link_to 'Back', avito_postings_path

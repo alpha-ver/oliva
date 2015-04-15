@@ -1,0 +1,44 @@
+%ul#menu
+  -if user_signed_in?
+    %li
+      =link_to "#" do
+        %span Avito
+      %ul.collapse
+        %li
+          =link_to tasks_path do
+            %span Мониторин
+        %li
+          =link_to avito_postings_path do
+            %span Постинг
+
+    %li
+      =link_to new_user_invitation_path do
+        %span Пригласить
+    %li
+      =link_to  edit_user_registration_path do
+        %span Аккаунт
+  -else
+    %li
+      =link_to new_user_session_path do
+        %span Вход
+    %li
+      =link_to new_user_registration_path do
+        %span Регистрация
+  %li
+    =link_to "#" do
+      %span Инфо
+    %ul.collapse
+      %li
+        =link_to "http://info.0liva.ru/faq" do
+          %span FAQ
+      %li
+        =link_to "http://info.0liva.ru/help" do
+          %span Справка
+      %li
+        =link_to "http://info.0liva.ru/" do
+          %span Блог
+
+  -if user_signed_in?
+    %li
+      =link_to destroy_user_session_path, :method => :delete do
+        %span Выход

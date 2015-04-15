@@ -217,5 +217,40 @@ seller_name=Alpha+V.&manager=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B9&email=al
 
 
 
-
+      invoke  active_record
+      create    db/migrate/20150411214529_create_avito_postings.rb
+      create    app/models/avito/posting.rb
+      create    app/models/avito.rb
+      invoke    test_unit
+      create      test/models/avito/posting_test.rb
+      create      test/fixtures/avito/postings.yml
+      invoke  resource_route
+      route    namespace :avito do
+    resources :postings
+  end
+      invoke  responders_controller
+      create    app/controllers/avito/postings_controller.rb
+      invoke    haml
+      create      app/views/avito/postings
+      create      app/views/avito/postings/index.html.haml
+      create      app/views/avito/postings/edit.html.haml
+      create      app/views/avito/postings/show.html.haml
+      create      app/views/avito/postings/new.html.haml
+      create      app/views/avito/postings/_form.html.haml
+      invoke    test_unit
+      create      test/controllers/avito/postings_controller_test.rb
+      invoke    helper
+      create      app/helpers/avito/postings_helper.rb
+      invoke      test_unit
+      create        test/helpers/avito/postings_helper_test.rb
+      invoke    jbuilder
+      create      app/views/avito/postings/index.json.jbuilder
+      create      app/views/avito/postings/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/avito/postings.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/avito/postings.css.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.css.scss
 

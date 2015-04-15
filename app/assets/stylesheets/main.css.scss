@@ -126,20 +126,6 @@ body.loading #loader-wraper{
   top: 0;
   width: 125px !important;
   background-color:#333;
-
-  ul{
-    margin-left: 0px;
-
-    li{
-      list-style: none;
-      display: block;
-
-      a{
-        padding: 8px 0px 8px 4px;
-        display: block;
-      }
-    }
-  }
 }
 
 .nav-small{

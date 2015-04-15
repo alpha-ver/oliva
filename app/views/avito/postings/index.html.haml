@@ -1,0 +1,43 @@
+%h1 Listing avito_postings
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Manager
+      %th Price
+      %th Images
+      %th P
+      %th E
+      %th Count
+      %th User
+      %th Active
+      %th Allow mail
+      %th Next at
+      %th
+      %th
+      %th
+
+  %tbody
+    - @avito_postings.each do |avito_posting|
+      %tr
+        %td= avito_posting.title
+        %td= avito_posting.description
+        %td= avito_posting.manager
+        %td= avito_posting.price
+        %td= avito_posting.images
+        %td= avito_posting.p
+        %td= avito_posting.e        
+        %td= avito_posting.count
+        %td= avito_posting.user_id
+        %td= avito_posting.active
+        %td= avito_posting.allow_mail
+        %td= avito_posting.next_at
+        %td= link_to 'Show', avito_posting
+        %td= link_to 'Edit', edit_avito_posting_path(avito_posting)
+        %td= link_to 'Destroy', avito_posting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Posting', new_avito_posting_path

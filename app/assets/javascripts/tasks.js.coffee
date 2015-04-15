@@ -234,8 +234,9 @@ $ ->
     ## JS events for params  ##
     ## add params fo cat     ##
     ###########################
+    sub2cat = {}
     $(document).on 'change', 'select.params', (e) ->
-
+      
       console.log e
       data = $(this).data()
       id = $(this).find('option:selected').val()
@@ -245,22 +246,49 @@ $ ->
 
         console.log o
 
-        #if data['id'].toString() == o['id']
-        $.each o['values'], (ii,oo) ->
-          if id.toString() == oo['id']
-            if oo['params']
-              console.log oo
-              html=""
-              $.each oo['params'], (iii,ooo) -> 
-                html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
-                $.each ooo['values'], (iiii,oooo) -> 
-                  html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
-                html += "</select><span id=\"sub_#{ooo['id']}\" class=\"sub-params\">"
+        if data['id'].toString() == o['id']
+          $.each o['values'], (ii,oo) ->
+            if id.toString() == oo['id']
+              if oo['params']
+                console.log oo
+                html=""
+                $.each oo['params'], (iii,ooo) -> 
+                  html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params-sub\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
+                  $.each ooo['values'], (iiii,oooo) -> 
+                    html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
+                    sub2cat[oooo['id']] = oooo
+                  html += "</select><span id=\"sub_#{ooo['id']}\" class=\"sub-params\"></span>"
+                $("#sub_#{data['id']}").html(html)
+              else
+                $("#sub_#{data['id']}").html("")
+            else
+              if id == ""
+                $("#sub_#{data['id']}").html("")
 
-              $("#sub_#{data['id']}").html(html)
-          else
-            if id == ""
-              $("#sub_#{data['id']}").html("")
+
+    ###########################
+    ## JS events for params  ##
+    ## add params fo cat     ##
+    ###########################
+    $(document).on 'change', 'select.params-sub', (e) ->
+      console.log e
+      data = $(this).data()
+      id = $(this).find('option:selected').val()
+      c "🌳🌳🌳🌳 id:#{data['id']} ,sid:#{id}", "event", 4
+
+      current2cat = sub2cat[id]
+      if current2cat['params']
+        console.log current2cat['params']
+        html = ""
+        $.each current2cat['params'], (iii,ooo) -> 
+          html  += "<label>#{ooo['title']}</label><select data-id=\"#{ooo['id']}\" class=\"params-sub2\" name=\"task[p][params][#{ooo['id']}]\"><option value=\"\"></option>"
+          $.each ooo['values'], (iiii,oooo) -> 
+            html += "<option value=\"#{oooo['id']}\">#{oooo['title']}</option>"
+            sub2cat[oooo['id']] = oooo
+          html += "</select>"
+        $("#sub_#{data['id']}").html(html)      
+      else
+        $("#sub_#{data['id']}").html("")
 
 
 

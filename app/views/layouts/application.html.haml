@@ -11,104 +11,28 @@
 
     .off-canvas-wrap{"data-offcanvas" => ""}
       .inner-wrap
-        .container
+        .container.main-container
+          .main-nav
 
-          %nav.tab-bar.nav-small
-            %a.left-off-canvas-toggle.menu-icon
-              %span  
-            .middle.tab-bar-section
-              Oliva mobile
+            %nav.tab-bar.nav-small
+              %a.left-off-canvas-toggle.menu-icon
+                %span  
+              .middle.tab-bar-section
+                Oliva mobile
 
-          %nav.sidebar.vertical
-            //navf.five-up
-            %a.item.logo-sm{:href => "/"}
-              %img{:src => "/assets/logo-sm.svg"}/
-
-            %ul
-              -if user_signed_in?
-                %li
-                  =link_to "#", :class=>"item" do
-                    %label Avito
-                  %ul
-                    %li
-                      =link_to tasks_path, :class=>"item" do
-                        %label Мониторин
-                    %li
-                      =link_to tasks_path, :class=>"item" do
-                        %label Постинг
-
-                %li
-                  =link_to new_user_invitation_path, :class=>"item" do
-                    %label Пригласить
-                %li
-                  =link_to  edit_user_registration_path, :class => "item" do
-                    %label Аккаунт
-              -else
-                %li
-                  =link_to new_user_session_path, :class => "item" do
-                    %label Вход
-                %li
-                  =link_to new_user_registration_path, :class => "item" do
-                    %label Регистрация
-              %li
-                =link_to "#", :class => "item" do
-                  %label Инфо
-                %ul
-                  %li
-                    =link_to "http://info.0liva.ru/faq", :class => "item" do
-                      %label FAQ
-                  %li
-                    =link_to "http://info.0liva.ru/help", :class => "item" do
-                      %label Справка
-                  %li
-                    =link_to "http://info.0liva.ru/", :class => "item" do
-                      %label Блог
+            %nav.sidebar.vertical
+              //navf.five-up
+              %a.item.logo-sm{:href => "/"}
+                %img{:src => "/assets/logo-sm.svg"}/
 
 
-              -if user_signed_in?
-                %li
-                  =link_to destroy_user_session_path, :class=>"item exit", :method => :delete do
-                    %label Выход
+              = render "layouts/menu"
 
 
+            %aside.left-off-canvas-menu
+              = render "layouts/menu"
 
-          %aside.left-off-canvas-menu
-            %ul.off-canvas-list
-              %li
-                %label Oliva 
 
-              -if user_signed_in?
-                %li
-                  =link_to tasks_path, :class=>"item" do
-                    Задачи
-                %li
-                  =link_to new_user_invitation_path, :class=>"item" do
-                    Пригласить
-                %li
-                  =link_to  edit_user_registration_path, :class => "item" do
-                    Аккаунт
-
-              -else
-                %li
-                  =link_to new_user_session_path, :class => "item" do
-                    Вход
-                %li
-                  =link_to new_user_registration_path, :class => "item" do
-                    Регистрация
-              %li  
-                =link_to "http://info.0liva.ru/faq", :class => "item" do
-                  FAQ
-              %li
-                =link_to "http://info.0liva.ru/help", :class => "item" do
-                  Справка
-              %li
-                =link_to "http://info.0liva.ru/", :class => "item" do
-                  Блог
-
-              -if user_signed_in?
-                %li
-                  =link_to destroy_user_session_path, :class=>"item exit", :method => :delete do
-                    Выход
          
           .row.top
             .large-12.columns

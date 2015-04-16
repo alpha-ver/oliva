@@ -37,6 +37,7 @@
         
     .row#avito_search_params
   
+
   /ajax add params
   %fieldset
     %legend Действие на новые сообщения
@@ -47,6 +48,22 @@
     
     %label{:for => "e_email"} Email
     %input#e_email{:name => "task[e][email]", :placeholder => "Укажите свою почту", :type => "text"}/
+
+    %label{:for => "e_growl_ip"} 
+      Growl 
+      %a{:href => "http://info.0liva.ru/growl"} ?
+    %input#e_growl_ip{:name => "task[e][growl][host]", :placeholder => "Публичный адрес:порт", :type => "text"}/
+    %input#e_growl_pw{:name => "task[e][growl][pass]", :placeholder => "Укажите пароль",       :type => "text"}/
+
+    %label{:for => "e_http"} 
+      HTTP запрос
+      %a{:href => "http://info.0liva.ru/http_post"} ?
+
+    %input#e_http{:name => "task[e][url]", :placeholder => "Укажите URL", :type => "text"}/
+
+
+
+
 
 
 

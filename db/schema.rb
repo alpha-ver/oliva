@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411214529) do
+ActiveRecord::Schema.define(version: 20150415204459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,20 +36,22 @@ ActiveRecord::Schema.define(version: 20150411214529) do
   add_index "admin_postings", ["user_id"], name: "index_admin_postings_on_user_id", using: :btree
 
   create_table "avito_postings", force: true do |t|
-    t.string   "title",       default: [],                    array: true
-    t.string   "description", default: [],                    array: true
-    t.string   "manager",     default: [],                    array: true
-    t.string   "price",       default: [],                    array: true
-    t.string   "images",      default: [],                    array: true
+    t.string   "name",                                        null: false
+    t.string   "title",       default: [],                                 array: true
+    t.string   "description", default: [],                                 array: true
+    t.string   "manager",     default: [],                                 array: true
+    t.string   "price",       default: [],                                 array: true
+    t.string   "images",      default: [],                                 array: true
     t.boolean  "active"
     t.boolean  "allow_mail"
     t.json     "p"
     t.json     "e"
     t.integer  "count"
     t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-04-11 21:51:33'
+    t.datetime "next_at",     default: '2015-04-15 19:27:36'
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.json     "s",           default: {},                    null: false
   end
 
   add_index "avito_postings", ["user_id"], name: "index_avito_postings_on_user_id", using: :btree

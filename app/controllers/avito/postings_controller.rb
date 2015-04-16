@@ -1,6 +1,7 @@
 class Avito::PostingsController < ApplicationController
-  respond_to :html
+  respond_to    :html
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
 
   def index
@@ -21,27 +22,27 @@ class Avito::PostingsController < ApplicationController
   end
 
   def create
-    @posting = Avito::Posting.new(posting_params)
+    @avito_posting = Avito::Posting.new(posting_params)
     @avito_posting.save
-    respond_with(@posting)
+    respond_with(@avito_posting)
   end
 
   def update
     @avito_posting.update(posting_params)
-    respond_with(@posting)
+    respond_with(@avito_posting)
   end
 
   def destroy
     @avito_posting.destroy
-    respond_with(@posting)
+    respond_with(@avito_posting)
   end
 
   private
     def set_posting
-      @posting = Avito::Posting.find(params[:id])
+      @avito_posting = Avito::Posting.find(params[:id])
     end
 
     def posting_params
-      params.require(:posting).permit(:title, :description, :manager, :price, :images, :p, :e, :count, :user_id, :active, :allow_mail, :next_at)
+      params.require(:avito_posting).permit(:name, :title, :description, :manager, :price, :images, :p, :e, :count, :user_id, :active, :allow_mail, :next_at)
     end
 end

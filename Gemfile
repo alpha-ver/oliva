@@ -47,7 +47,9 @@ gem 'devise_invitable'
 
 gem 'mechanize'
 
+gem 'dropzonejs-rails'
 
+gem 'ruby-growl'
 
 
 

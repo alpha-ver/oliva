@@ -1,6 +1,8 @@
 class CreateAvitoPostings < ActiveRecord::Migration
   def change
     create_table :avito_postings do |t|
+      t.string     :name,                      default: nil, null: false
+      #############
       t.string     :title,        array: true, default: []
       t.string     :description,  array: true, default: []
       t.string     :manager,      array: true, default: []

@@ -124,7 +124,14 @@ $ ->
               if xhr['status']
                 if k == 'children'
                   k = 'location'
-                html = "<label>#{v}</label><select id=\"#{}_#{k}\" name=\"task[p][#{k}Id]\"><option value=\"\"></option>"
+
+                if k == 'location'
+                  option = "<option value=\"#{id}\" style=\"font-weight: bold; padding: 2px;\">По области</option>"
+                else
+                  option = "<option value=\"\"></option>"
+
+
+                html = "<label>#{v}</label><select id=\"#{}_#{k}\" name=\"task[p][#{k}Id]\">#{option}"
                 count = 0
                 $.each xhr['result'], (i,e) -> 
                   count += 1
@@ -183,7 +190,7 @@ $ ->
 
       else
         
-        html = "<option value=\"0\"></option>"
+        html = "<option value=\"#{id}\" style=\"font-weight: bold; padding: 2px;\">По категории</option>"
         $.each data_cat, (i,e)->
           if e['parentId'] == id
             dp    = DataParam(e)

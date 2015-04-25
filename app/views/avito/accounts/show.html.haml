@@ -4,20 +4,20 @@
   %b Login:
   = @avito_account.login
 
-%p
-  %b Status:
-  = @avito_account.status
+-if @avito_account.status == 0
+  %b В стадии проверки
 
--if @avito_account.f.blank?
+-elsif @avito_account.status == 2
+  %b Неверный логи или пароль
 
--else
+
+-elsif @avito_account.status == 1
   %p
     %b Info-name:
     = @avito_account.f["info"]["name"]
   %p
     %b Info-status:
     = @avito_account.f["info"]["status"]
-
 
   - if @avito_account.f['posts'].blank?
     Опубликованных постов не найденно
@@ -26,8 +26,15 @@
     = @avito_account.f['posts'].each do |i|
       i
 
+-else
+  %b за вами уже выехали
 
-=link_to "Comment wall",  avito_account_path(@avito_account, :task => "post")
+
+%ul 
+  %li
+    =link_to "Проверить аккаунт",  avito_account_path(@avito_account, :task => "test")
+  %li
+    =link_to "Забрать записи",  avito_account_path(@avito_account, :task => "post")
 
 
 //= link_to 'Edit', edit_avito_account_path(@avito_account)

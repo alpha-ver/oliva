@@ -1,25 +1,37 @@
 %ul#menu
   -if user_signed_in?
     %li
-      =link_to "#" do
+      =link_to "#c-avito", :data => {:toggle=>"collapse"} do
         %span Avito
-      %ul.collapse
+      %ul.collapse#c-avito
         %li
-          =link_to tasks_path do
-            %span Мониторин
+          =link_to avito_tasks_path do
+            %span Мониторинг
         %li
           =link_to avito_postings_path do
             %span Постинг
         %li
           =link_to avito_accounts_path do
             %span Аккаунты
+        %li
+          =link_to "" do
+            %span Поиск
 
     %li
-      =link_to new_user_invitation_path do
-        %span Пригласить
-    %li
-      =link_to  edit_user_registration_path do
-        %span Аккаунт
+      =link_to "#c-vk", :data => {:toggle=>"collapse"} do
+        %span Vkontakte
+      %ul.collapse#c-vk
+        %li
+          =link_to "#" do
+            %span Мониторинг
+        %li
+          =link_to "#" do
+            %span Постинг
+        %li
+          =link_to "#" do
+            %span Аккаунты
+
+
   -else
     %li
       =link_to new_user_session_path do
@@ -28,9 +40,9 @@
       =link_to new_user_registration_path do
         %span Регистрация
   %li
-    =link_to "#" do
+    =link_to "#c-info", :data => {:toggle=>"collapse"} do
       %span Инфо
-    %ul.collapse
+    %ul.collapse#c-info
       %li
         =link_to "http://info.0liva.ru/faq" do
           %span FAQ
@@ -41,7 +53,19 @@
         =link_to "http://info.0liva.ru/" do
           %span Блог
 
+
   -if user_signed_in?
+
     %li
-      =link_to destroy_user_session_path, :method => :delete do
-        %span Выход
+      =link_to "#c-account", :data => {:toggle=>"collapse"} do
+        %span Аккаунт
+      %ul.collapse#c-account
+        %li
+          =link_to new_user_invitation_path do
+            %span Пригласить
+        %li
+          =link_to  edit_user_registration_path do
+            %span Основное
+        %li
+          =link_to destroy_user_session_path, :method => :delete do
+            %span Выход

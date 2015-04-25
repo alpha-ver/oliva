@@ -1,7 +1,7 @@
-class Task < ActiveRecord::Base
+class Avito::Task < ActiveRecord::Base
 
   belongs_to :user
-  has_many :tasklogs
+  has_many :avito_tasklogs
 
 
   validates :p, presence: true

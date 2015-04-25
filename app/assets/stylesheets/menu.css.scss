@@ -48,11 +48,22 @@
   left: auto;
   top: auto;
   width: auto;
+  background-color: #585858;
   visibility: visible;
 }
 
+
 .collapse {
-  //display: none;
+  display: none;
+  padding-left: 3px !important;
+
+  &.in      { display: block; }
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
 }
 
 
@@ -81,7 +92,7 @@
 }
 #menu > li > a {
   color: #eee;
-  font-size: 14px;  
+  font-size: 15px;  
   padding-left: 13px;
   border-bottom: 1px solid #585858;
 }
@@ -125,9 +136,16 @@
   left: 50px;
   top: 0px;
   width: 210px;
-  background-color: #444444;
   visibility: hidden;
 }
+
+#menu > li > ul > li {
+  background-color: #444444;
+}
+
+
+
+
 #menu li ul {
   overflow: hidden;
 }

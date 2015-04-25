@@ -16,25 +16,6 @@ ActiveRecord::Schema.define(version: 20150416211926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admin_postings", force: true do |t|
-    t.string   "title",       default: [],                    array: true
-    t.string   "description", default: [],                    array: true
-    t.string   "manager",     default: [],                    array: true
-    t.string   "price",       default: [],                    array: true
-    t.string   "images",      default: [],                    array: true
-    t.boolean  "active"
-    t.boolean  "allow_mail"
-    t.json     "p"
-    t.json     "e"
-    t.integer  "count"
-    t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-04-11 21:38:24'
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admin_postings", ["user_id"], name: "index_admin_postings_on_user_id", using: :btree
-
   create_table "avito_accounts", force: true do |t|
     t.string   "login"
     t.string   "pass"
@@ -60,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150416211926) do
     t.json     "e"
     t.integer  "count"
     t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-04-15 19:27:36'
+    t.datetime "next_at",     default: '2015-04-25 09:37:27'
     t.datetime "created_at"
     t.datetime "updated_at"
     t.json     "s",           default: {},                    null: false
@@ -87,7 +68,7 @@ ActiveRecord::Schema.define(version: 20150416211926) do
     t.json     "p"
     t.json     "e"
     t.integer  "user_id"
-    t.datetime "next_at",    default: '2014-11-08 21:57:12'
+    t.datetime "next_at",    default: '2015-04-25 09:37:27'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

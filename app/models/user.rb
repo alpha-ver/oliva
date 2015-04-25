@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :recoverable, :confirmable, :validatable, :invitable, :invite_for => 2.weeks
   
-  has_many :tasks
+  has_many :avito_tasks
   has_many :avito_postings
   has_many :avito_accounts
 

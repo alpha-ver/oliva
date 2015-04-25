@@ -2,15 +2,17 @@ Rails.application.routes.draw do
 
   namespace :avito do
     resources :accounts
+    resources :postings
+    resources :tasks
   end
 
-  namespace :avito do
-    resources :postings    
-  end
+  #namespace :vk do
+        
+  #end
 
 
 
-  resources :tasks
+  
   devise_for :users
   
   root 'static_page#main'

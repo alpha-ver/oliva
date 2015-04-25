@@ -1,10 +1,10 @@
-class TasksController < ApplicationController
+class Avito::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   respond_to    :html
   before_action :authenticate_user!
 
   def index
-    @tasks = current_user.tasks.all
+    @tasks = current_user.avito_tasks.all
     respond_with(@tasks)
   end
 
@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Avito::Task.new
     respond_with(@task)
   end
 
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   def create
     swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
-    @task = Task.new(task_params.delete_if(&swoop))
+    @task = Avito::Task.new(task_params.delete_if(&swoop))
 
     @task.user = current_user
     render :json => {:status=>@task.save, :result=>@task}
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   ###-_-_-_###
   private
     def set_task
-      @task = Task.find_by(:id => params[:id], :user_id => current_user.id)
+      @task = Avito::Task.find_by(:id => params[:id], :user_id => current_user.id)
     end
 
     def task_params

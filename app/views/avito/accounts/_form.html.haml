@@ -1,0 +1,16 @@
+= form_for @avito_account do |f|
+  - if @avito_account.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@avito_account.errors.count, "error")} prohibited this avito_account from being saved:"
+      %ul
+        - @avito_account.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :login
+    = f.text_field :login
+  .field
+    = f.label :pass
+    = f.text_field :pass
+  .actions
+    = f.submit 'Save'

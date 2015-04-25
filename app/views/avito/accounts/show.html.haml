@@ -1,0 +1,35 @@
+%p#notice= notice
+
+%p
+  %b Login:
+  = @avito_account.login
+
+%p
+  %b Status:
+  = @avito_account.status
+
+-if @avito_account.f.blank?
+
+-else
+  %p
+    %b Info-name:
+    = @avito_account.f["info"]["name"]
+  %p
+    %b Info-status:
+    = @avito_account.f["info"]["status"]
+
+
+  - if @avito_account.f['posts'].blank?
+    Опубликованных постов не найденно
+
+  -else  
+    = @avito_account.f['posts'].each do |i|
+      i
+
+
+=link_to "Comment wall",  avito_account_path(@avito_account, :task => "post")
+
+
+//= link_to 'Edit', edit_avito_account_path(@avito_account)
+//\|
+//= link_to 'Back', avito_accounts_path

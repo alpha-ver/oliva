@@ -68,5 +68,14 @@
                 %path{:d => "M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z", :fill => "#007095"}
                   %animatetransform{:attributename => "transform", :attributetype => "xml", :dur => "0.6s", :from => "0 25 25", :repeatcount => "indefinite", :to => "360 25 25", :type => "rotate"}
 
+    - if Rails.env.development?
+      .row
+        =t 'http_params'
+        .large-12.columns
+          = debug(params)
+      .row
+        =t 'ruby_run'
+        .large-12.columns
+          = debug(`ps -ax | grep 'ruby' | grep -v grep`)
 
     = render "layouts/yam"

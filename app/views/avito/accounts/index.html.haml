@@ -1,0 +1,27 @@
+%h1 Listing avito_accounts
+
+%table
+  %thead
+    %tr
+      %th Login
+      %th Pass
+      %th Status
+      %th F
+      %th
+      %th
+      %th
+
+  %tbody
+    - @avito_accounts.each do |avito_account|
+      %tr
+        %td= avito_account.login
+        %td ********
+        %td= t("avito_status_" + avito_account.status.to_s)
+        %td= avito_account.f
+        %td= link_to 'Test', avito_account
+        %td= link_to 'Edit', edit_avito_account_path(avito_account)
+        %td= link_to 'Destroy', avito_account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Account', new_avito_account_path

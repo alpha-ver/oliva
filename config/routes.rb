@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :avito do
+    resources :accounts
+  end
+
+  namespace :avito do
     resources :postings    
   end
 

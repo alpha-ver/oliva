@@ -1,3 +1,6 @@
+%form#my-awesome-dropzone.dropzone{:action => "/file-upload"}
+
+
 
 = form_for @avito_posting do |f|
   - if @avito_posting.errors.any?
@@ -6,6 +9,7 @@
       %ul
         - @avito_posting.errors.full_messages.each do |msg|
           %li= msg
+  
   %fieldset
     %legend Параметры задачи 
     .row
@@ -13,91 +17,72 @@
         .field
           = f.label :name
           = f.text_field :name
-      .row
-        .large-6.columns
-          .field
-            = f.label :active
-            = f.check_box :active
-        .large-6.columns
-          .field
-            = f.label :allow_mail
-            = f.check_box :allow_mail
+
+    антикапа
+    .row
+      .large-6.columns
+        .field      
+          = f.label :active
+          = f.check_box :active
+      .large-6.columns
+        .field
+          = f.label :allow_mail
+          = f.check_box :allow_mail
 
 
 
-      -if @avito_posting.id.nil?
-        %ul.tabs{"data-tab" => "", :role => "tablist"}
-          %li.tab-title.active{:role => "presentational"}
-            %a{"aria-selected" => "true",  :controls => "panel2-1", :href => "#panel2-1", :role => "tab", :tabindex => "0"} Tab 1
-          %li.tab-title{:role => "presentational"}
-            %a{"aria-selected" => "false", :controls => "panel2-2", :href => "#panel2-2", :role => "tab", :tabindex => "0"} Tab 2
-          %li.tab-title{:role => "presentational"}
-            %a{:href => "#add"} +
-      -else
-        aa
-
-      .tabs-content
-        %section#panel2-1.content.active{"aria-hidden" => "false", :role => "tabpanel"}
-          %fieldset
-            %legend Регион/категория 
-            .row
-              .large-6.columns
-                %label 
-                  Выберите регион
-                %select#avito_main_regions{:name => "taskq[p][locationId]"}
-                #avito_sub_regions
-              .large-6.columns
-                %label
-                  Категория
-                %select#avito_main_cs
-                %label
-                  Подкатегория
-                %select#avito_sub_cs{:disabled => "", :name => 'taskq[p][categoryId]'}
-            .row
-              .large-12.cloumns
-                %span{:class => "sub-params", :id => "subl_location"}      
-            .row#avito_search_params
-
-          %fieldset
-            .field
-              = f.label :title
-              = f.text_field :title
-            .field
-              = f.label :description
-              = f.text_area :description, :maxlength=>"3000"
-            .field
-              = f.label :manager
-              = f.text_field :manager
-            .field
-              = f.label :price
-              = f.text_field :price
-            .field
-              = f.label :images
-              = f.text_field :images
+  -if @avito_posting.id.nil?
+    %ul.tabs{"data-tab" => "", :role => "tablist"}
+      %li.tab-title.active{:role => "presentational"}
+        %a{"aria-selected" => "true",  :controls => "panel2-1", :href => "#panel2-1", :role => "tab", :tabindex => "0"} Tab 1
+      %li.tab-title{:role => "presentational"}
+        %a{"aria-selected" => "false", :controls => "panel2-2", :href => "#panel2-2", :role => "tab", :tabindex => "0"} Tab 2
+  -else
+    aa
 
 
-        %section#panel2-2.content{"aria-hidden" => "true", :role => "tabpanel"}
-          .field
-            = f.label :title
-            = f.text_field :title
-          .field
-            = f.label :description
-            = f.text_field :description
-          .field
-            = f.label :manager
-            = f.text_field :manager
-          .field
-            = f.label :price
-            = f.text_field :price
-          .field
-            = f.label :images
-            = f.text_field :images
-          .field
-            = f.label :active
-            = f.check_box :active
-          .field
-            = f.label :allow_mail
-            = f.check_box :allow_mail
+  .tabs-content
+
+    %section#panel2-1.content.active{"aria-hidden" => "false", :role => "tabpanel"}
+      %fieldset
+        %legend Регион/категория 
+        .row
+          .large-6.columns
+            %label 
+              Выберите регион
+            %select#avito_main_regions{:name => "taskq[p][locationId]"}
+            #avito_sub_regions
+          .large-6.columns
+            %label
+              Категория
+            %select#avito_main_cs
+            %label
+              Подкатегория
+            %select#avito_sub_cs{:disabled => "", :name => 'taskq[p][categoryId]'}
+        .row
+          .large-12.cloumns
+            %span{:class => "sub-params", :id => "subl_location"}      
+        .row#avito_search_params
+
+      %fieldset
+        .field
+          = f.label :title
+          = f.text_field :title
+        .field
+          = f.label :description
+          = f.text_area :description, :maxlength=>"3000"
+        .field
+          = f.label :manager
+          = f.text_field :manager
+        .field
+          = f.label :price
+          = f.text_field :price
+        .field
+          = f.label :images
+          = f.text_field :images
+
+
+    %section#panel2-2.content{"aria-hidden" => "true", :role => "tabpanel"}
 
   .actions
     = f.submit 'Save'

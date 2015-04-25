@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   
   has_many :tasks
   has_many :avito_postings
+  has_many :avito_accounts
 
 end

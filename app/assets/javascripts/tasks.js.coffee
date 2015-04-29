@@ -312,7 +312,7 @@ $ ->
         type: "POST"
         url: '/api/avito'
         data: 
-          $('form#new_task').serialize()
+          $('form#new_avito_task').serialize()
         success: (xhr) ->
           if xhr['status'] 
             html = "<p>Найденно – #{xhr['result']['count']} обьявлений.</p>
@@ -375,7 +375,8 @@ $ ->
       min = $(this).attr('data-slider')
       $('#avito_interval').html(min)
 
-    $('#new_task').submit -> 
+
+    $('#new_avito_task').submit -> 
       $('body').addClass('loading')
       $.ajax
         type: "POST"
@@ -387,7 +388,7 @@ $ ->
               "
                 <div data-alert class=\"alert-box success radius\">
                   Задача под номером #{xhr['result']['id']} сохранена.<br />
-                  Посмотреть памаметры можно <a href=\"/tasks/#{xhr['result']['id']}\">здесь</a>.
+                  Посмотреть памаметры можно <a href=\"/avito/tasks/#{xhr['result']['id']}\">здесь</a>.
 
                   <a href=\"#\" class=\"close\">&times;</a>
                 </div>

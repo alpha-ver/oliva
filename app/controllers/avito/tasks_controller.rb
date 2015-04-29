@@ -54,7 +54,7 @@ class Avito::TasksController < ApplicationController
     end
 
     def task_params_strong
-      params.require(:task).permit(:name, :interval, :active)
+      params.require(:avito_task).permit(:name, :interval, :active)
     end
 
 

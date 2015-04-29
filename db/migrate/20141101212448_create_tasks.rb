@@ -1,6 +1,6 @@
 class CreateTasks < ActiveRecord::Migration
   def change
-    create_table  :tasks do |t|
+    create_table  :avito_tasks do |t|
       t.string  :name
       t.string  :stat
 
@@ -18,6 +18,6 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime   :next_at, :default => "now()"
       t.timestamps
     end
-    add_index :tasks, :user_id
+    add_index :avito_tasks, :user_id
   end
 end

@@ -15,7 +15,7 @@ task :loop => :environment do
       time_start=Time.now
       ###################
       print "+"
-      tasks=Task.where(
+      tasks=Avito::Task.where(
         "next_at <= :time_start AND active=true",
         :time_start => time_start
       )
@@ -30,9 +30,9 @@ task :loop => :environment do
           if res[:status] && res[:result]["count"] != task.count
             out = []
             res[:result]["items"].each do |item|
-              db = task.tasklogs.where(:i => item['id'], :module_id => 1)
+              db = task.avito_tasklogs.where(:i => item['id'], :module_id => 1)
               if db.blank?
-                task.tasklogs.new(:i => item['id'], :module_id => 1)
+                task.avito_tasklogs.new(:i => item['id'], :module_id => 1)
                 o = ap.get("/items/#{item['id']}", {:includeRefs=>true, :reducedParams=>true} )
                 if o[:status]
                   out << o[:result]

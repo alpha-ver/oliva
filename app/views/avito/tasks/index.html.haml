@@ -23,8 +23,8 @@
       %td= task.updated_at
 
       //%td= link_to 'Детально', task
-      %td= link_to 'Править', edit_task_path(task)
-      %td= link_to 'Удалить', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Править', edit_avito_task_path(task)
+      %td= link_to 'Удалить', avito_task_path(task), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to new_task_path, :class => "button expand success" do
+= link_to new_avito_task_path, :class => "button expand success" do
   Новая задача

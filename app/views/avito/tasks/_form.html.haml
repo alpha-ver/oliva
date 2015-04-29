@@ -41,10 +41,6 @@
   /ajax add params
   %fieldset
     %legend Действие на новые сообщения
-    %span.label.warning
-      На данный момент доступны только уведомления на email.
-      %br
-      Скоро появится sms рассылка.
     
     %label{:for => "e_email"} Email
     %input#e_email{:name => "task[e][email]", :placeholder => "Укажите свою почту", :type => "text"}/
@@ -57,9 +53,14 @@
 
     %label{:for => "e_http"} 
       HTTP запрос
-      %a{:href => "http://info.0liva.ru/http_post"} ?
-
+      %a{:href => "http://info.0liva.ru/http_post"} ?   
     %input#e_http{:name => "task[e][url]", :placeholder => "Укажите URL", :type => "text"}/
+
+    %label{:for => "e_http"} 
+      SMS оповещения
+      %a{:href => "http://info.0liva.ru/sms_paid"} 
+        +
+    %input#e_http{:name => "task[e][phone]", :placeholder => "+7(911)511-11-11", :type => "text"}/
 
 
 
@@ -96,7 +97,7 @@
 
   %ul.button-group.radius.stack
     %li
-      = link_to tasks_path, :class => 'button secondary ' do  
+      = link_to avito_tasks_path, :class => 'button secondary ' do  
         Назад 
     %li
       = link_to "#", :class=>"button alert", :id => 'bnt-test-task' do 

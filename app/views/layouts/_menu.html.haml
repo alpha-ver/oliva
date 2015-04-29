@@ -3,7 +3,7 @@
     %li
       =link_to "#c-avito", :data => {:toggle=>"collapse"} do
         %span Avito
-      %ul.collapse#c-avito
+      %ul#c-avito{:class=> collapse("avito")}
         %li
           =link_to avito_tasks_path do
             %span Мониторинг
@@ -20,7 +20,7 @@
     %li
       =link_to "#c-vk", :data => {:toggle=>"collapse"} do
         %span Vkontakte
-      %ul.collapse#c-vk
+      %ul#c-vk{:class=> collapse("vk")}
         %li
           =link_to "#" do
             %span Мониторинг
@@ -59,7 +59,7 @@
     %li
       =link_to "#c-account", :data => {:toggle=>"collapse"} do
         %span Аккаунт
-      %ul.collapse#c-account
+      %ul#c-account{:class=> collapse("users")}
         %li
           =link_to new_user_invitation_path do
             %span Пригласить

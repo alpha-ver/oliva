@@ -19,7 +19,7 @@
 
 %p
   %b Обработанно:
-  = @task.tasklogs.count
+  = @task.avito_tasklogs.count
 
 %p 
   %b Время следующего запуска:
@@ -34,5 +34,5 @@
   = @task.updated_at
 
 
-= link_to tasks_path, :class => 'button secondary ' do  
+= link_to avito_tasks_path, :class => 'button secondary ' do  
   Назад 

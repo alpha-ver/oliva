@@ -30,3 +30,25 @@ $ ->
               $("#alert-form-work").addClass("alert")
             return
 
+    Dropzone.options.myAwesomeDropzone =
+      paramName: 'file'
+      maxFilesize: 2
+      accept: (file, done) ->
+        _this = this;
+        console.log done
+
+        if file.name == '123.jpg'
+          alert('Назовите Файл нормально :)')
+          _this.removeFile(file);
+        else
+          done()
+        return
+
+      init: ->
+        @on 'success', (file, responseText) ->
+          console.log(responseText)
+          # file.previewTemplate.appendChild "<div>" + document.createTextNode(responseText['id']) + "</div>"
+
+          
+          return
+        return

@@ -1,7 +1,8 @@
 class Avito::PostingsController < ApplicationController
   respond_to    :html
-  before_action :set_posting, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :work_account
 
 
   def index
@@ -40,6 +41,15 @@ class Avito::PostingsController < ApplicationController
   private
     def set_posting
       @avito_posting = Avito::Posting.find(params[:id])
+    end
+
+
+    def work_account
+      @work_account = current_user.avito_accounts.where(:status => 1)
+      if @work_account.blank?
+        flash[:notice] = 'В начале добавте хотя бы один рабочий аккаунт.'
+        redirect_to :controller=>'accounts', :action => 'index'
+      end
     end
 
     def posting_params

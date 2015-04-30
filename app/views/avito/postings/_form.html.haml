@@ -1,5 +1,7 @@
-%form#my-awesome-dropzone.dropzone{:action => "/file-upload"}
-
+%fieldset
+  %legend 
+    Фотографии
+  %form#my-awesome-dropzone.dropzone{:action => "/tst"}
 
 
 = form_for @avito_posting do |f|
@@ -13,21 +15,49 @@
   %fieldset
     %legend Параметры задачи 
     .row
-      .large-12.columns
+      .large-6.columns
         .field
-          = f.label :name
+          = f.label :name, "Имя задачи"
           = f.text_field :name
 
-    антикапа
-    .row
-      .large-6.columns
-        .field      
-          = f.label :active
-          = f.check_box :active
+        .row
+          .large-6.columns
+            %label
+              Включить задачу
+            .switch
+              = f.check_box :active, {:checked => "checked"}
+              = f.label :active
+          .large-6.columns
+            %label
+              Разрешить ответы на почту
+            .switch
+              = f.check_box :allow_mail, {:checked => ""}
+              = f.label :allow_mail
+
+
       .large-6.columns
         .field
-          = f.label :allow_mail
-          = f.check_box :allow_mail
+        = f.label :interval do 
+          Интервал дней: 
+          %span{:id=>"avito_interval"}
+
+        .range-slider{ :data => { :slider => "",  
+                                  :options=> "start: 1; end: 60; display_selector: #avito_interval; initial: 7;" } }
+          %span.range-slider-handle{:role => "slider", :tabindex => "7"}
+          %span.range-slider-active-segment
+          = hidden_field_tag :interval, :value => 7
+
+        .field
+          = f.label :interval, 'Тип уникализации текста'
+          = select_tag "interval", options_for_select([["Два варианта",1], ["Перестановка предложений",{:disabled => "disabled"}, 2], ["Синонимизация",{:disabled => "disabled"}, 3], ["Рандомный выбор", {:disabled => "disabled"}, 4]], 1)
+
+        .field
+          = f.label :accont, 'Аккаунт для постинга'
+          = select_tag "interval", options_from_collection_for_select(@work_account, "id", "login")
+
+
+
+
 
 
 
@@ -67,19 +97,16 @@
       %fieldset
         .field
           = f.label :title
-          = f.text_field :title
+          = text_field_tag :title
         .field
           = f.label :description
-          = f.text_area :description, :maxlength=>"3000"
-        .field
-          = f.label :manager
-          = f.text_field :manager
+          = text_area_tag :description, "", :maxlength=>"3000"
         .field
           = f.label :price
-          = f.text_field :price
+          = text_field_tag :price
         .field
           = f.label :images
-          = f.text_field :images
+          = text_field_tag :images
 
 
     %section#panel2-2.content{"aria-hidden" => "true", :role => "tabpanel"}

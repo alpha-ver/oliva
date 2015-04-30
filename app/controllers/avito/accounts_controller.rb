@@ -9,11 +9,12 @@ class Avito::AccountsController < ApplicationController
   end
 
   def show
-    respond_with(@avito_account)
     if @avito_account.status == 0 || params[:task] == 'test' 
       account_info
     elsif @avito_account.status == 1 && params[:task] == 'post'
       account_post
+    else
+      respond_with(@avito_account)
     end 
   end
 
@@ -41,7 +42,8 @@ class Avito::AccountsController < ApplicationController
 
   def destroy
     @avito_account.destroy
-    respond_with(@account)
+    flash[:notice] = 'Удаленно успешно.'
+    redirect_to :controller=>'accounts', :action => 'index'
   end
 
   private
@@ -102,6 +104,9 @@ class Avito::AccountsController < ApplicationController
           #no form
         end
         @avito_account.save
+       
+        flash[:notice] = 'Добавленно в очередь. Выполнится в течении неслькоих минут.'
+        redirect_to :controller=>'accounts', :action => 'show', :id => params[:id]
 
       #end
     end
@@ -124,6 +129,8 @@ class Avito::AccountsController < ApplicationController
         @avito_account.save
       end
 
+      flash[:notice] = 'Возможна задержка(1-2мин) при выполнении задания.'
+      redirect_to :controller=>'accounts', :action => 'show', :id => params[:id]
 
     end
 end

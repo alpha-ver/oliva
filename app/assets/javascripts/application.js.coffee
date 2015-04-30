@@ -4,6 +4,8 @@
 #= require foundation
 #= require dropzone
 #= require col
+#= require main
+
 
 $(document).foundation()
 

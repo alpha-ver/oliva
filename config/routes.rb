@@ -24,7 +24,13 @@ Rails.application.routes.draw do
   post  'api/test' => 'api#test'
   get   'api/test' => 'api#test'
 
+  post  'tst' => 'api#txt'
+  get   'tst' => 'api#txt'
+
+
   get 'test' => 'static_page#test'
+
+
 
 
   # get 'static_page/about'

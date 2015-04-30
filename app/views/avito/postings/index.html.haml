@@ -1,6 +1,6 @@
 %h1 Listing avito_postings
 
-%table
+%table{:width=>"100%"}
   %thead
     %tr
       %th Title
@@ -40,4 +40,5 @@
 
 %br
 
-= link_to 'New Posting', new_avito_posting_path
+= link_to new_avito_posting_path, :class=>"button success expand" do 
+  Новая задача постинга 

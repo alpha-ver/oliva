@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
   before_action :authenticate_user!
+  skip_before_filter :verify_authenticity_token, :only => [:txt]
 
   def avito
     swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
@@ -28,5 +29,11 @@ class ApiController < ApplicationController
     swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.empty? }
     render :json => params.delete_if(&swoop)
   end
+
+  def txt
+    render :json => { :message=> "File could not be saved." }, :status=>"200"
+  end
+
+
 
 end

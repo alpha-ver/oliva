@@ -1,8 +1,9 @@
-%p#notice= notice
-
 %p
   %b Login:
   = @avito_account.login
+%p 
+  %b Задача обновленна
+  = @avito_account.updated_at
 
 -if @avito_account.status == 0
   %b В стадии проверки
@@ -20,23 +21,37 @@
     = @avito_account.f["info"]["status"]
 
   - if @avito_account.f['posts'].blank?
-    Опубликованных постов не найденно
+    Проверка на наличие постов не проводилась
 
-  -else  
-    = @avito_account.f['posts'].each do |i|
-      i
+  -elsif @avito_account.f['posts']['active'].blank? && @avito_account.f['posts']['old'].blank?
+    Опубликованных постов не найденно 
+
+  -else
+    .row
+      -['active', 'old'].map do |t|
+        .large-6.columns
+          %h4= t(t)
+          %ul
+          -@avito_account.f['posts'][t].each do |l|
+            %li
+              =link_to "#{l['title']}[#{l['id']}]", "http://avito.ru/#{l['url']}", {:target=>"_blank"}
 
 -else
   %b за вами уже выехали
 
+%hr/
+%h4 
+  Типы проверок
+  %small
+    Выполняются не сразу
 
-%ul 
+%ul.button-group.radius.stack
   %li
-    =link_to "Проверить аккаунт",  avito_account_path(@avito_account, :task => "test")
+    =link_to avito_account_path(@avito_account, :task => "test"), :class=> "button expand success" do
+      Проверить аккаунт
   %li
-    =link_to "Забрать записи",  avito_account_path(@avito_account, :task => "post")
-
-
-//= link_to 'Edit', edit_avito_account_path(@avito_account)
-//\|
-//= link_to 'Back', avito_accounts_path
+    =link_to avito_account_path(@avito_account, :task => "post"), :class=> "button expand " do 
+      Забрать записи
+  %li
+    = link_to avito_accounts_path, :class=> "button expand secondary" do
+      Назад

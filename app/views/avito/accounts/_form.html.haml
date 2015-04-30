@@ -13,4 +13,10 @@
     = f.label :pass
     = f.text_field :pass
   .actions
-    = f.submit 'Save'
+    .button-group.radius.stack
+      %li
+        =f.button :type => 'submit', :class=>"button success expand", :id => 'account_submit' do 
+          Сохранить
+      %li
+        = link_to avito_accounts_path, :class=> "button expand secondary" do
+          Назад

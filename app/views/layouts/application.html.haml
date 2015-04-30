@@ -36,15 +36,6 @@
          
           .row.top
             .large-12.columns
-              -if notice    
-                .alert-box.info.radius{"data-alert" => ""}
-                  = notice
-                  %a.close{:href => "#"} &#215;
-
-              -if alert
-                .alert-box.alert.radius{"data-alert" => ""}
-                  = alert
-                  %a.close{:href => "#"} &#215;
 
           .row
             .large-12.columns
@@ -52,6 +43,16 @@
 
           //fixed
           #agnid
+            -if notice    
+              .alert-box.info.radius{"data-alert" => ""}
+                = notice
+                %a.close{:href => "#"} &#215;
+
+            -if alert
+              .alert-box.alert.radius{"data-alert" => ""}
+                = alert
+                %a.close{:href => "#"} &#215;
+
           #loader-wraper
             .loader
               %svg#loader-1{  :height => "40px", 

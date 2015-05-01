@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   namespace :avito do
     resources :accounts
     resources :postings
@@ -11,9 +13,11 @@ Rails.application.routes.draw do
   #end
 
 
-
-  
   devise_for :users
+  resources :images, :only => [:create]
+  
+
+
   
   root 'static_page#main'
   post 'beta' => 'feed_back#beta'

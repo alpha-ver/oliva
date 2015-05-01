@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @image.name
+%p
+  %b Hash:
+  = @image.hash
+%p
+  %b Class:
+  = @image.class
+%p
+  %b User:
+  = @image.user_id
+
+= link_to 'Edit', edit_image_path(@image)
+\|
+= link_to 'Back', images_path

@@ -104,7 +104,7 @@ body.loading #loader-wraper{
 #agnid{
   position: fixed;
   bottom: 0px;
-  right: 0px;
+  right: 10px;
 }
 
 
@@ -155,5 +155,28 @@ body.loading #loader-wraper{
     display: inherit;
   }
 
+}
 
+#ddev{
+  position: fixed;
+  color: green;
+  background-color: #333;
+  padding: 0 10px 20px 20px;
+  left: 0;
+  bottom: 0;
+  opacity: 0.8;
+  border: solid #111 1px;
+  width: 125px;
+  height: 125px;
+  overflow: hidden;
+
+
+  &:hover{
+    width: auto;
+    height: auto;
+  }
+
+  h3 {
+    color: #ddd;
+  }
 }

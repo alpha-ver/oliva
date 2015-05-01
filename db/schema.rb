@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.json     "e"
     t.integer  "count"
     t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-04-27 21:01:59'
+    t.datetime "next_at",     default: '2015-04-25 09:37:27'
     t.datetime "created_at"
     t.datetime "updated_at"
     t.json     "s",           default: {},                    null: false
@@ -49,16 +49,27 @@ ActiveRecord::Schema.define(version: 20150430062002) do
 
   add_index "avito_postings", ["user_id"], name: "index_avito_postings_on_user_id", using: :btree
 
-  create_table "avito_tasklogs", id: false, force: true do |t|
+  create_table "images", force: true do |t|
+    t.string   "name"
+    t.string   "img_hash"
+    t.string   "img_class"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["img_hash", "user_id"], name: "index_images_on_img_hash_and_user_id", unique: true, using: :btree
+
+  create_table "tasklogs", id: false, force: true do |t|
     t.integer "i"
     t.integer "task_id"
     t.integer "module_id"
   end
 
-  add_index "avito_tasklogs", ["i", "task_id", "module_id"], name: "index_avito_tasklogs_on_i_and_task_id_and_module_id", unique: true, using: :btree
-  add_index "avito_tasklogs", ["task_id"], name: "index_avito_tasklogs_on_task_id", using: :btree
+  add_index "tasklogs", ["i", "task_id", "module_id"], name: "index_tasklogs_on_i_and_task_id_and_module_id", unique: true, using: :btree
+  add_index "tasklogs", ["task_id"], name: "index_tasklogs_on_task_id", using: :btree
 
-  create_table "avito_tasks", force: true do |t|
+  create_table "tasks", force: true do |t|
     t.string   "name"
     t.string   "stat"
     t.integer  "count",      default: 0
@@ -68,21 +79,12 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.json     "p"
     t.json     "e"
     t.integer  "user_id"
-    t.datetime "next_at",    default: '2015-04-27 21:01:35'
+    t.datetime "next_at",    default: '2015-04-25 09:37:27'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "avito_tasks", ["user_id"], name: "index_avito_tasks_on_user_id", using: :btree
-
-  create_table "images", force: true do |t|
-    t.string   "name"
-    t.string   "hash"
-    t.string   "class"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

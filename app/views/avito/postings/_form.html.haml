@@ -1,7 +1,9 @@
 %fieldset
   %legend 
-    Фотографии
-  %form#my-awesome-dropzone.dropzone{:action => "/tst"}
+    Загрузка новых фотографий
+  %form#my-awesome-dropzone.dropzone{:action => "/images"}
+    =hidden_field_tag :authenticity_token, form_authenticity_token
+    =hidden_field_tag :img_class, "avito_posting"
 
 
 = form_for @avito_posting do |f|
@@ -48,68 +50,79 @@
           = hidden_field_tag :interval, :value => 7
 
         .field
-          = f.label :interval, 'Тип уникализации текста'
-          = select_tag "interval", options_for_select([["Два варианта",1], ["Перестановка предложений",{:disabled => "disabled"}, 2], ["Синонимизация",{:disabled => "disabled"}, 3], ["Рандомный выбор", {:disabled => "disabled"}, 4]], 1)
+          = f.label :uniq, 'Тип уникализации текста'
+          = select_tag "uniq", options_for_select([["Два варианта",1], 
+                                                   ["Без уникализации (опасненько)", 0], 
+                                                   ["Перестановка предложений",{:disabled => "disabled"}, 2], 
+                                                   ["Синонимизация",{:disabled => "disabled"}, 3], 
+                                                   ["Рандомный выбор", {:disabled => "disabled"}, 4]], 1)
 
         .field
           = f.label :accont, 'Аккаунт для постинга'
           = select_tag "interval", options_from_collection_for_select(@work_account, "id", "login")
 
 
+  %fieldset
+    %legend Регион/категория 
+    .row
+      .large-6.columns
+        %label 
+          Выберите регион
+        %select#avito_main_regions{:name => "taskq[p][locationId]"}
+        #avito_sub_regions
+      .large-6.columns
+        %label
+          Категория
+        %select#avito_main_cs
+        %label
+          Подкатегория
+        %select#avito_sub_cs{:disabled => "", :name => 'taskq[p][categoryId]'}
+    .row
+      .large-12.cloumns
+        %span{:class => "sub-params", :id => "subl_location"}      
+    .row#avito_search_params
 
+  //-if @avito_posting.id.nil?
+  %ul.tabs{"data-tab" => "", :role => "tablist"}
+    %li.tab-title.active{:role => "presentational"}
+      %a{"aria-selected" => "true",  :controls => "panel2-1", :href => "#panel2-1", :role => "tab", :tabindex => "0"} Вариант 1
+    %li.tab-title{:role => "presentational"}
+      %a{"aria-selected" => "false", :controls => "panel2-2", :href => "#panel2-2", :role => "tab", :tabindex => "0"} Вариант 2
+  //-else
+  //  aa
 
-
-
-
-  -if @avito_posting.id.nil?
-    %ul.tabs{"data-tab" => "", :role => "tablist"}
-      %li.tab-title.active{:role => "presentational"}
-        %a{"aria-selected" => "true",  :controls => "panel2-1", :href => "#panel2-1", :role => "tab", :tabindex => "0"} Tab 1
-      %li.tab-title{:role => "presentational"}
-        %a{"aria-selected" => "false", :controls => "panel2-2", :href => "#panel2-2", :role => "tab", :tabindex => "0"} Tab 2
-  -else
-    aa
 
 
   .tabs-content
-
     %section#panel2-1.content.active{"aria-hidden" => "false", :role => "tabpanel"}
-      %fieldset
-        %legend Регион/категория 
-        .row
-          .large-6.columns
-            %label 
-              Выберите регион
-            %select#avito_main_regions{:name => "taskq[p][locationId]"}
-            #avito_sub_regions
-          .large-6.columns
-            %label
-              Категория
-            %select#avito_main_cs
-            %label
-              Подкатегория
-            %select#avito_sub_cs{:disabled => "", :name => 'taskq[p][categoryId]'}
-        .row
-          .large-12.cloumns
-            %span{:class => "sub-params", :id => "subl_location"}      
-        .row#avito_search_params
-
-      %fieldset
-        .field
-          = f.label :title
-          = text_field_tag :title
-        .field
-          = f.label :description
-          = text_area_tag :description, "", :maxlength=>"3000"
-        .field
-          = f.label :price
-          = text_field_tag :price
-        .field
-          = f.label :images
-          = text_field_tag :images
-
+      .field
+        = f.label :title
+        = text_field_tag "title[0]"
+      .field
+        = f.label :description
+        = text_area_tag "description[0]", "1", :maxlength=>"3000"
+      .field
+        = f.label :price
+        = text_field_tag "price[0]"
+      .field
+        = f.label :images
+        = text_field_tag :images
 
     %section#panel2-2.content{"aria-hidden" => "true", :role => "tabpanel"}
+      .field
+        = f.label :title
+        = text_field_tag "title[1]"
+      .field
+        = f.label :description
+        = text_area_tag "description[1]", "2", :maxlength=>"3000"
+      .field
+        = f.label :price
+        = text_field_tag "price[1]"
+      .field
+        = f.label :images
+        = text_field_tag :images
+
+
 
   .actions
     = f.submit 'Save'

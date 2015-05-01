@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
   has_many :avito_tasks,    :class_name => Avito::Task
   has_many :avito_postings, :class_name => Avito::Posting
   has_many :avito_accounts, :class_name => Avito::Account
+  has_many :images
 
 end

@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   respond_to :html
 
   def index
-    @images = Image.all
+    @images = current_user.images
     respond_with(@images)
   end
 
@@ -21,9 +21,34 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @image = Image.new(image_params)
-    @image.save
-    respond_with(@image)
+    #@image = Image.new(image_params)
+    #@image.save
+    #respond_with(@image)
+
+    hash = Digest::SHA256.new
+    img  = {}
+    #########################
+    img[:name     ] = params[:file].original_filename.split(".")
+    img[:directory] = "public/image/#{current_user.id}"
+    unless  File.exist?(img[:directory])
+      Dir.mkdir img[:directory]
+    end
+    img_file = params[:file].read
+    img[:img_hash ] = hash.hexdigest img_file
+    img[:path     ] = File.join(img[:directory], img[:img_hash]+"."+img[:name][-1])
+    #########################
+    File.open(img[:path], "wb") { |f| f.write(img_file) }
+    image = Image.find_by(:img_hash => img[:img_hash], :user_id => current_user.id)
+
+    if image.blank?
+      image = Image.new( :name => img[:name][0], :img_hash => img[:img_hash], :user_id => current_user.id, :img_class => params[:img_class])
+      image.save
+      render :json => img
+    else
+      render :json => {:error => "Уже загруженно: #{image.name}"}, :status => "406"
+    end
+
+
   end
 
   def update
@@ -42,6 +67,6 @@ class ImagesController < ApplicationController
     end
 
     def image_params
-      params.require(:image).permit(:name, :hash, :class, :user_id)
+      params.require(:image).permit(:name)
     end
 end

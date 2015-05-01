@@ -1,27 +1,26 @@
-%h1 Listing images
+%h1 Загруженные изображения
 
-%table
+%table{:width=>"100%"}
   %thead
     %tr
       %th Name
-      %th Hash
+      %th Img
       %th Class
-      %th User
-      %th
-      %th
-      %th
+      //%th User
+      //%th
+      //%th
+      //%th
 
   %tbody
     - @images.each do |image|
       %tr
         %td= image.name
-        %td= image.hash
-        %td= image.class
-        %td= image.user_id
-        %td= link_to 'Show', image
-        %td= link_to 'Edit', edit_image_path(image)
-        %td= link_to 'Destroy', image, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.jpg", :width=> "240px"}
+        %td= image.img_class
+        //%td= image.user_id
+        //%td= link_to 'Show', image
+        //%td= link_to 'Edit', edit_image_path(image)
+        //%td= link_to 'Destroy', image, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
-
-= link_to 'New Image', new_image_path

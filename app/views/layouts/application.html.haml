@@ -71,10 +71,13 @@
     
     - if Rails.env.development?
       #ddev
+        %h1 YAY!
+
         %h3=t 'http_params'
         %pre= debug(params)
 
         %h3=t 'ruby_run'
         %pre= debug(`ps -ax | grep 'ruby' | grep -v grep`)
+
 
     = render "layouts/yam"

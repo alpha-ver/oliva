@@ -54,6 +54,9 @@ $ ->
 
 
     if $('#avito-dash').html() == "ok"
+
+      
+      
       $('body').addClass('loading')
       # get top categories
       $.ajax

@@ -1,44 +1,36 @@
-%h1 Listing avito_postings
 
-%table{:width=>"100%"}
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Manager
-      %th Price
-      %th Images
-      %th P
-      %th E
-      %th Count
-      %th User
-      %th Active
-      %th Allow mail
-      %th Next at
-      %th
-      %th
-      %th
 
-  %tbody
-    - @avito_postings.each do |avito_posting|
+-if @avito_postings.blank?
+  %h1 Задач не обнаруженно
+  %p Автоматическое отправление обьявлений на авито.  
+
+-else
+  %h1 Список задач авито постинга
+  %table{:width=>"100%"}
+    %thead
       %tr
-        %td= avito_posting.title
-        %td= avito_posting.description
-        %td= avito_posting.manager
-        %td= avito_posting.price
-        %td= avito_posting.images
-        %td= avito_posting.p
-        %td= avito_posting.e        
-        %td= avito_posting.count
-        %td= avito_posting.user_id
-        %td= avito_posting.active
-        %td= avito_posting.allow_mail
-        %td= avito_posting.next_at
-        %td= link_to 'Show', avito_posting
-        %td= link_to 'Edit', edit_avito_posting_path(avito_posting)
-        %td= link_to 'Destroy', avito_posting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Имя задачи
+        %th Автивность
+        %th Следующий запуск
+        %th Обновленна
+        %th Статус
+        %th
+        %th
+        %th
 
-%br
+
+    %tbody
+      - @avito_postings.each do |avito_posting|
+        %tr
+          %td= avito_posting.name
+          %td= avito_posting.active ? "Да" : "Нет"
+          %td= avito_posting.updated_at
+          %td= avito_posting.next_at
+          %td= avito_posting.response      
+          %td= link_to 'Инфо', avito_posting
+          %td= link_to 'Редакировать', edit_avito_posting_path(avito_posting)
+          %td= link_to 'Удалить', avito_posting, :method => :delete, :data => { :confirm => 'Вы уверенны?' }
+
 
 = link_to new_avito_posting_path, :class=>"button success expand" do 
   Новая задача постинга 

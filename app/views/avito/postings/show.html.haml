@@ -1,5 +1,9 @@
 %p#notice= notice
 
+
+%p
+  %b Name:
+  = @avito_posting.name
 %p
   %b Title:
   = @avito_posting.title
@@ -19,6 +23,9 @@
   %b P:
   = @avito_posting.p
 %p
+  %b E:
+  = @avito_posting.e
+%p
   %b Count:
   = @avito_posting.count
 %p
@@ -33,7 +40,10 @@
 %p
   %b Next at:
   = @avito_posting.next_at
+%p
+  %b Interval:
+  = @avito_posting.interval
 
-//= link_to 'Edit', edit_avito_posting_path(@avito_posting)
-//\|
-//= link_to 'Back', avito_postings_path
+
+= link_to avito_postings_path, :class=> "button expand secondary" do
+  Назад

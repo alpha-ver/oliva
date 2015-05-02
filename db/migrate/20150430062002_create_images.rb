@@ -4,6 +4,7 @@ class CreateImages < ActiveRecord::Migration
       
       t.string  :name
       t.string  :img_hash
+      t.string  :img_type  
       t.string  :img_class
       t.integer :user_id
 

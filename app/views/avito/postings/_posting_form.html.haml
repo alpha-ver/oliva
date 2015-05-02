@@ -1,0 +1,13 @@
+.row
+  .large-10.columns
+    .field
+    = label_tag "avito_posting[title][#{i}]", "Заголовок"
+    = text_field_tag "avito_posting[title][#{i}]", params[:action]=="edit" && !@avito_posting.title.nil? ? @avito_posting.title["#{i}"] : ""
+  .large-2.columns
+    .field
+    = label_tag "avito_posting[price][#{i}]", "Цена"
+    = number_field_tag "avito_posting[price][#{i}]", params[:action]=="edit" && !@avito_posting.price.nil? ?  @avito_posting.price["#{i}"] : ""
+
+.field
+  = label_tag "avito_posting[description][#{i}]", "Описание"
+  = text_area_tag "avito_posting[description][#{i}]", params[:action]=="edit" && !@avito_posting.description.nil? ? @avito_posting.description["#{i}"] : "", :maxlength=>"3000", :rows=>10

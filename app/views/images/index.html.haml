@@ -1,26 +1,30 @@
 %h1 Загруженные изображения
 
-%table{:width=>"100%"}
-  %thead
-    %tr
-      %th Name
-      %th Img
-      %th Class
-      //%th User
-      //%th
-      //%th
-      //%th
+-if @images.blank?
+  %p 
+    Не загружено ни одного изображения.
+    %a{:href=>"http://info.0liva.ru/images"} Что это за страница?
+-else
 
-  %tbody
-    - @images.each do |image|
+  %table{:width=>"100%"}
+    %thead
       %tr
-        %td= image.name
-        %td
-          %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.jpg", :width=> "240px"}
-        %td= image.img_class
-        //%td= image.user_id
-        //%td= link_to 'Show', image
-        //%td= link_to 'Edit', edit_image_path(image)
-        //%td= link_to 'Destroy', image, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th{:width=>"25%"} Имя
+        %th{:width=>"50%"} Изображение
+        %th Класс
+        //%th User
+        //%th
+        //%th
+        //%th
 
-%br
+    %tbody
+      - @images.each do |image|
+        %tr
+          %td= image.name
+          %td
+            %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.#{image.img_type}", :width=> "320px"}
+          %td= image.img_class
+          //%td= image.user_id
+          //%td= link_to 'Show', image
+          //%td= link_to 'Edit', edit_image_path(image)
+          //%td= link_to 'Destroy', image, :method => :delete, :data => { :confirm => 'Are you sure?' }

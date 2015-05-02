@@ -49,6 +49,18 @@ $ ->
           console.log(responseText)
           # file.previewTemplate.appendChild "<div>" + document.createTextNode(responseText['id']) + "</div>"
 
-          
           return
         return
+
+
+    $('#avito_posting_e_type_uniq').change (e) -> 
+      if $('#avito_posting_e_type_uniq:selected').val() == 0
+        console.log(0)
+
+
+    
+    $('.images-select').ajaxChosen {
+      dataType: 'json'
+      type: 'GET'
+      url: '/images.json'
+    }, loadingImg: 'loading.gif'

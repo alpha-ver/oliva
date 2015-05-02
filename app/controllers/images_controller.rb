@@ -5,7 +5,12 @@ class ImagesController < ApplicationController
 
   def index
     @images = current_user.images
-    respond_with(@images)
+    #respond_with(@images)
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => {:q=>params[:data][:q], :results=>@images.map{|i| {:id=>i.id, :text=>i.name} } } }
+    end
+
   end
 
   def show
@@ -41,7 +46,7 @@ class ImagesController < ApplicationController
     image = Image.find_by(:img_hash => img[:img_hash], :user_id => current_user.id)
 
     if image.blank?
-      image = Image.new( :name => img[:name][0], :img_hash => img[:img_hash], :user_id => current_user.id, :img_class => params[:img_class])
+      image = Image.new( :name => img[:name][0], :img_hash => img[:img_hash], :user_id => current_user.id, :img_class => params[:img_class], :img_type=>img[:name][-1])
       image.save
       render :json => img
     else

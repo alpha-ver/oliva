@@ -27,13 +27,13 @@
             %label
               Включить задачу
             .switch
-              = f.check_box :active, {:checked => "checked"}
+              = f.check_box :active
               = f.label :active
           .large-6.columns
             %label
               Разрешить ответы на почту
             .switch
-              = f.check_box :allow_mail, {:checked => ""}
+              = f.check_box :allow_mail
               = f.label :allow_mail
 
 
@@ -43,44 +43,60 @@
           Интервал дней: 
           %span{:id=>"avito_interval"}
 
-        .range-slider{ :data => { :slider => "",  
-                                  :options=> "start: 1; end: 60; display_selector: #avito_interval; initial: 7;" } }
-          %span.range-slider-handle{:role => "slider", :tabindex => "7"}
+        -if params[:action] == "new"
+          -@avito_posting.interval = 7
+
+        .range-slider{ :data => { :slider => "",  :options=> "start: 1; end: 60; display_selector: #avito_interval; initial: #{@avito_posting.interval};" } }
+          %span.range-slider-handle{:role => "slider", :tabindex => @avito_posting.interval}
           %span.range-slider-active-segment
-          = hidden_field_tag :interval, :value => 7
+          = f.hidden_field :interval
+
 
         .field
-          = f.label :uniq, 'Тип уникализации текста'
-          = select_tag "uniq", options_for_select([["Два варианта",1], 
-                                                   ["Без уникализации (опасненько)", 0], 
+          = label_tag "task[e][type_uniq]", 'Тип уникализации текста'
+          - select = @avito_posting.e.blank? || @avito_posting.e['type_uniq'].blank? ? "" : @avito_posting.e['type_uniq'] 
+          = select_tag "task[e][type_uniq]", options_for_select([["Два варианта",1], 
+                                                   ["Без уникализации (опасненько)",{:disabled => "disabled"}, 0], 
                                                    ["Перестановка предложений",{:disabled => "disabled"}, 2], 
                                                    ["Синонимизация",{:disabled => "disabled"}, 3], 
-                                                   ["Рандомный выбор", {:disabled => "disabled"}, 4]], 1)
+                                                   ["Рандомный выбор", {:disabled => "disabled"}, 4]], select)
 
         .field
-          = f.label :accont, 'Аккаунт для постинга'
-          = select_tag "interval", options_from_collection_for_select(@work_account, "id", "login")
-
-
-  %fieldset
-    %legend Регион/категория 
+          - select = @avito_posting.e.blank? || @avito_posting.e['account_id'].blank? ? "" : @avito_posting.e['account_id'] 
+          = f.label "task[e][account_id]", 'Аккаунт для постинга'
+          = select_tag "task[e][account_id]", options_from_collection_for_select(@work_account, "id", "login", select)
     .row
-      .large-6.columns
-        %label 
-          Выберите регион
-        %select#avito_main_regions{:name => "taskq[p][locationId]"}
-        #avito_sub_regions
-      .large-6.columns
-        %label
-          Категория
-        %select#avito_main_cs
-        %label
-          Подкатегория
-        %select#avito_sub_cs{:disabled => "", :name => 'taskq[p][categoryId]'}
-    .row
-      .large-12.cloumns
-        %span{:class => "sub-params", :id => "subl_location"}      
-    .row#avito_search_params
+      .large-12.columns
+        .field
+          -if @avito_posting.images.blank?
+            - option = ""
+          -else
+            - option = options_from_collection_for_select(Image.find(@avito_posting.images), "id", "name", @avito_posting.images)
+          
+          = label_tag "avito_posting[images][]", "Загруженные изображения"
+          = select_tag "avito_posting[images][]", option, :class => "images-select", :multiple=>""
+          
+
+  -if params[:action] == "new"
+    %fieldset
+      %legend Регион/категория 
+      .row
+        .large-6.columns
+          %label 
+            Выберите регион
+          %select#avito_main_regions{:name => "task[p][locationId]"}
+          #avito_sub_regions
+        .large-6.columns
+          %label
+            Категория
+          %select#avito_main_cs
+          %label
+            Подкатегория
+          %select#avito_sub_cs{:disabled => "", :name => 'task[p][categoryId]'}
+      .row
+        .large-12.cloumns
+          %span{:class => "sub-params", :id => "subl_location"}      
+      .row#avito_search_params
 
   //-if @avito_posting.id.nil?
   %ul.tabs{"data-tab" => "", :role => "tablist"}
@@ -92,37 +108,17 @@
   //  aa
 
 
-
   .tabs-content
     %section#panel2-1.content.active{"aria-hidden" => "false", :role => "tabpanel"}
-      .field
-        = f.label :title
-        = text_field_tag "title[0]"
-      .field
-        = f.label :description
-        = text_area_tag "description[0]", "1", :maxlength=>"3000"
-      .field
-        = f.label :price
-        = text_field_tag "price[0]"
-      .field
-        = f.label :images
-        = text_field_tag :images
-
+      =render :partial => "posting_form", :locals => {:i => 0}
     %section#panel2-2.content{"aria-hidden" => "true", :role => "tabpanel"}
-      .field
-        = f.label :title
-        = text_field_tag "title[1]"
-      .field
-        = f.label :description
-        = text_area_tag "description[1]", "2", :maxlength=>"3000"
-      .field
-        = f.label :price
-        = text_field_tag "price[1]"
-      .field
-        = f.label :images
-        = text_field_tag :images
-
-
+      =render :partial => "posting_form", :locals => {:i => 1}
 
   .actions
-    = f.submit 'Save'
+    .button-group.radius.stack
+      %li
+        =f.button :type => 'submit', :class=>"button success expand", :id => 'posting_submit' do 
+          Сохранить
+      %li
+        = link_to avito_postings_path, :class=> "button expand secondary" do
+          Назад

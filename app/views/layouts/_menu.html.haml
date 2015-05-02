@@ -59,7 +59,7 @@
     %li
       =link_to "#c-account", :data => {:toggle=>"collapse"} do
         %span Аккаунт
-      %ul#c-account{:class=> collapse("users") }
+      %ul#c-account{:class=> collapse("users") + collapse("images") }
         %li
           =link_to new_user_invitation_path do
             %span Пригласить

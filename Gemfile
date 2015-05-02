@@ -32,9 +32,8 @@ end
 group :development do
   gem 'rails_layout'
   gem 'spring'
+  gem 'railroady', :git => "https://github.com/preston/railroady.git"
 end
-
-
 
 gem 'foundation-rails'
 gem 'haml'
@@ -48,8 +47,6 @@ gem 'mechanize'
 gem 'dropzonejs-rails'
 
 gem 'ruby-growl'
-
-
 
 
 # Use ActiveModel has_secure_password

@@ -3,10 +3,10 @@
 #= require_tree .
 #= require foundation
 #= require dropzone
+#= require chosen.jquery
+#= require chosenajax.jquery
 #= require col
 #= require main
 
 
 $(document).foundation()
-
-

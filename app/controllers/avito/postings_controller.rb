@@ -23,9 +23,11 @@ class Avito::PostingsController < ApplicationController
   end
 
   def create
-    @avito_posting = Avito::Posting.new(posting_params)
-    @avito_posting.save
-    respond_with(@avito_posting)
+    swoop = Proc.new { |k, v| v.delete_if(&swoop) if v.kind_of?(Hash);  v.blank? }
+    @posting = Avito::Posting.new(posting_params.delete_if(&swoop))
+
+    @posting.user = current_user
+    render :json => {:status=>@posting.save, :result=>@posting}
   end
 
   def update
@@ -52,7 +54,26 @@ class Avito::PostingsController < ApplicationController
       end
     end
 
-    def posting_params
-      params.require(:avito_posting).permit(:name, :title, :description, :manager, :price, :images, :p, :e, :count, :user_id, :active, :allow_mail, :next_at)
+    def posting_params_strong
+      params.require(:avito_posting).permit(:name, :title, :description, :manager, :price, :images, :count, :user_id, :active, :allow_mail)
     end
+
+    def posting_params
+      params.require(:avito_posting).permit(:name, :count, :active, :allow_mail, :interval).tap do |while_listed|
+        if params[:action] == "create"
+          while_listed[:p] = params[:task][:p]
+        end 
+
+        while_listed[:e] = params[:task][:e]
+
+        while_listed[:title]       = params[:avito_posting][:title]
+        while_listed[:description] = params[:avito_posting][:description]
+        while_listed[:manager]     = params[:avito_posting][:manager]
+        while_listed[:price]       = params[:avito_posting][:price]
+        while_listed[:images]      = params[:avito_posting][:images]
+
+      end
+    end
+
+
 end

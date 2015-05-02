@@ -31,7 +31,9 @@ class ApiController < ApplicationController
   end
 
   def txt
-    render :json => { :message=> "File could not be saved." }, :status=>"200"
+    render :json => {:q=>'66', :results=>[{:id=>'7', :text=>'66'}]}
+
+
   end
 
 

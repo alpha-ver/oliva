@@ -162,21 +162,30 @@ body.loading #loader-wraper{
   color: green;
   background-color: #333;
   padding: 0 10px 20px 20px;
-  left: 0;
-  bottom: 0;
-  opacity: 0.8;
+  right: 0;
+  top: 0;
+  opacity: 0.6;
   border: solid #111 1px;
   width: 125px;
-  height: 125px;
+  height: 60px;
   overflow: hidden;
+
+
 
 
   &:hover{
     width: auto;
     height: auto;
+    opacity: 0.9;
+
+    h1{
+      display:none;
+    }
   }
 
   h3 {
     color: #ddd;
   }
+
+
 }

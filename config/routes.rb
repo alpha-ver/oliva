@@ -2,20 +2,23 @@ Rails.application.routes.draw do
 
   
 
+  namespace :vk do
+    resources :accounts
+    
+  end
+
+  
   namespace :avito do
     resources :accounts
     resources :postings
     resources :tasks
+    resources :finds
   end
-
-  #namespace :vk do
-        
-  #end
 
 
   devise_for :users
   resources :images, :only => [:index, :create]
-  
+  resources :roles
 
 
   

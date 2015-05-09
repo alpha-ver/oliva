@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Require:
+  = @avito_find.require
+%p
+  %b Response:
+  = @avito_find.response
+%p
+  %b User:
+  = @avito_find.user_id
+
+= link_to 'Edit', edit_avito_find_path(@avito_find)
+\|
+= link_to 'Back', avito_finds_path

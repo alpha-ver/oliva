@@ -1,6 +1,7 @@
 class AvitoApi
 
   def initialize()
+
   end
 
   def get(path='/items', params=false)

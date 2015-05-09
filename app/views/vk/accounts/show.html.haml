@@ -1,0 +1,56 @@
+%p#notice= notice
+
+%p
+  %b Login:
+  = @vk_account.login
+%p
+  %b Pass:
+  = @vk_account.pass
+%p
+  %b Phone:
+  = @vk_account.phone
+%p
+  %b Active:
+  = @vk_account.active
+%p
+  %b Status:
+  = @vk_account.status
+%p
+  %b Info:
+  = @vk_account.info
+%p
+  %b User:
+  = @vk_account.user_id
+%p
+  %b Proxy:
+  = @vk_account.proxy_id
+
+
+-if @vk_account.status == -14 
+  %img{:src=> @vk_account.info['captcha_img']}
+  =form_for @vk_account, :action => :update do |f|
+    = hidden_field_tag 'code_status', @vk_account.status
+    = text_field_tag 'captcha', '', :placeholder => "Ведите код капчи указанный на картинке"
+    = f.submit 'Save'
+
+-elsif  @vk_account.status == -1
+  =form_for @vk_account, :action => :update do |f|
+    = hidden_field_tag 'code_status', @vk_account.status
+    = text_field_tag 'sms', '', :placeholder => "Код подтверждения отправлен на номер #{@vk_account.phone}"
+    = f.submit 'Save'
+
+  =form_for @vk_account, :action => :update do |f|
+    = hidden_field_tag 'code_status', 'resend'
+    = f.submit 'Resend'
+
+-elsif  @vk_account.status == 1
+  ok
+
+
+
+
+
+
+= link_to 'Edit', edit_vk_account_path(@vk_account)
+\|
+= link_to 'Back', vk_accounts_path

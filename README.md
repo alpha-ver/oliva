@@ -254,3 +254,9 @@ seller_name=Alpha+V.&manager=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B9&email=al
       invoke  scss
    identical    app/assets/stylesheets/scaffolds.css.scss
 
+
+
+
+
+4902645  6rnU8DiPHBdWfd27hQdo -site
+4902646 la3G5IoNM4rGmD4y5EbN - app

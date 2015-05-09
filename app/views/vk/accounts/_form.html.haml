@@ -1,0 +1,25 @@
+= form_for @vk_account do |f|
+  - if @vk_account.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@vk_account.errors.count, "error")} prohibited this vk_account from being saved:"
+      %ul
+        - @vk_account.errors.full_messages.each do |msg|
+          %li= msg
+
+
+  .field
+    = label_tag "create_type", 'Тип регистрации'
+    = select_tag "create_type", options_for_select([["Существующий аккаунт", 'add'], ["Регистрация нового", 'new1']])
+
+
+  .field
+    = f.label :login
+    = f.text_field :login
+  .field
+    = f.label :pass
+    = f.text_field :pass
+  .field
+    = f.label :phone
+    = f.telephone_field :phone
+
+  = f.submit 'Save'

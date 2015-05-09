@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430062002) do
+ActiveRecord::Schema.define(version: 20150507180220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20150430062002) do
 
   add_index "avito_accounts", ["login"], name: "index_avito_accounts_on_login", unique: true, using: :btree
 
+  create_table "avito_finds", force: true do |t|
+    t.json     "req"
+    t.json     "res"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "avito_postings", force: true do |t|
     t.string   "name",                                        null: false
     t.integer  "interval"
@@ -42,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.json     "e"
     t.integer  "count"
     t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-05-02 17:31:02'
+    t.datetime "next_at",     default: '2015-05-03 09:16:07'
     t.json     "response"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -70,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.json     "p"
     t.json     "e"
     t.integer  "user_id"
-    t.datetime "next_at",    default: '2015-05-02 17:31:02'
+    t.datetime "next_at",    default: '2015-05-03 09:16:07'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,6 +97,13 @@ ActiveRecord::Schema.define(version: 20150430062002) do
 
   add_index "images", ["img_hash", "user_id"], name: "index_images_on_img_hash_and_user_id", unique: true, using: :btree
 
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: ""
@@ -104,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.integer  "role_id",                default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "invitation_token"
@@ -114,6 +130,8 @@ ActiveRecord::Schema.define(version: 20150430062002) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.string   "antigate_key"
+    t.integer  "antigate_money",         default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -121,5 +139,19 @@ ActiveRecord::Schema.define(version: 20150430062002) do
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vk_accounts", force: true do |t|
+    t.string   "login"
+    t.string   "pass"
+    t.string   "phone"
+    t.boolean  "active"
+    t.integer  "status"
+    t.json     "info"
+    t.integer  "user_id"
+    t.integer  "proxy_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

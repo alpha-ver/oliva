@@ -3,6 +3,7 @@ class Avito::PostingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
   before_action :work_account
+  before_action :chek_antigate
 
 
   def index
@@ -51,6 +52,14 @@ class Avito::PostingsController < ApplicationController
       if @work_account.blank?
         flash[:notice] = 'В начале добавте хотя бы один рабочий аккаунт.'
         redirect_to :controller=>'accounts', :action => 'index'
+      end
+    end
+
+    def chek_antigate
+      @antigate_key = current_user.antigate_key
+      if @antigate_key.blank?
+        flash[:notice] = 'А кто будет гадать капчу? Требуется при перепосте.'
+        redirect_to :controller=>'devise_invitable/registrations', :action => 'edit'
       end
     end
 

@@ -1,0 +1,2 @@
+module Vk::AccountsHelper
+end

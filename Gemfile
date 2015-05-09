@@ -47,6 +47,9 @@ gem 'mechanize'
 gem 'dropzonejs-rails'
 
 gem 'ruby-growl'
+gem 'vkontakte_api'
+gem 'antigate'
+gem 'rmagick'
 
 
 # Use ActiveModel has_secure_password

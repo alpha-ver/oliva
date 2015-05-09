@@ -11,6 +11,12 @@
       <% end %>
     </div>
     <fieldset>
+
+      <div class="form-group">
+        <%= f.label :antigate_key %>
+        <%= f.text_field :antigate_key, :autocomplete => 'off', class: 'form-control' %>
+      </div>
+
       <p>Оставьте эти поля пустыми, если вы не хотите, менять пароль.</p>
       <div class="form-group">
         <%= f.label :password %>

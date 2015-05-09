@@ -12,7 +12,6 @@
         %th Логин 
         %th Пароль
         %th Статус
-        //%th F
         %th
         %th
         %th
@@ -23,7 +22,6 @@
           %td= avito_account.login
           %td ********
           %td= t("avito_status_" + avito_account.status.to_s)
-          //%td= avito_account.f
           %td= link_to 'Информация', avito_account
           %td= link_to 'Редактировать', edit_avito_account_path(avito_account)
           %td= link_to 'Удалить', avito_account, :method => :delete, :data => { :confirm => 'Вы уверенны?' }

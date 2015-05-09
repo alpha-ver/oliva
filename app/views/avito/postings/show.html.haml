@@ -1,49 +1,69 @@
 %p#notice= notice
 
+%h1= @avito_posting.name
+
+%b Заголовки обьявлений:
+%ul
+  - @avito_posting.title.each do |k,v|
+    %li 
+      =v
+
+%b Заголовки обьявлений:
+%ul
+  - @avito_posting.description.each do |k,v|
+    %li 
+      =v
+
+%b Цены:
+%ul
+  - @avito_posting.price.each do |k,v|
+    %li 
+      =v
+%p
+  %b Интервал повторения в днях:
+  = @avito_posting.interval   
 
 %p
-  %b Name:
-  = @avito_posting.name
-%p
-  %b Title:
-  = @avito_posting.title
-%p
-  %b Description:
-  = @avito_posting.description
-%p
-  %b Manager:
-  = @avito_posting.manager
-%p
-  %b Price:
-  = @avito_posting.price
-%p
-  %b Images:
-  = @avito_posting.images
-%p
-  %b P:
-  = @avito_posting.p
-%p
-  %b E:
-  = @avito_posting.e
-%p
-  %b Count:
-  = @avito_posting.count
-%p
-  %b User:
-  = @avito_posting.user_id
-%p
-  %b Active:
-  = @avito_posting.active
-%p
-  %b Allow mail:
-  = @avito_posting.allow_mail
-%p
-  %b Next at:
-  = @avito_posting.next_at
-%p
-  %b Interval:
-  = @avito_posting.interval
+  %b Активность:
+  = @avito_posting.active ? "Да" : "Нет"
+
+-if User.last.role_id >= 1024
+
+  %p
+    %b P:
+    = @avito_posting.p
+  %p
+    %b E:
+    = @avito_posting.e
+  %p
+    %b S:
+    = @avito_posting.s
+  %p
+    %b Count:
+    = @avito_posting.count
+
+  %p
+    %b Allow mail:
+    = @avito_posting.allow_mail
+  %p
+    %b Next at:
+    = @avito_posting.next_at
 
 
-= link_to avito_postings_path, :class=> "button expand secondary" do
-  Назад
+
+%h2 Изображения
+-Image.find(@avito_posting.images).each do |image|
+  %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.#{image.img_type}", :width=> "100px"}
+
+%hr
+%ul.button-group.radius.stack
+  %li
+    = link_to avito_postings_path, :class=> "button expand secondary" do
+      Назад
+  %li
+    = link_to edit_avito_posting_path(@avito_posting), :class=>"button success" do 
+      Редактировать
+
+
+
+

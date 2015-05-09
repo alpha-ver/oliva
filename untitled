@@ -1,0 +1,45 @@
+
+
+      vk_signup = nil
+      vk_users  = []
+      sex       = rand(2)+1
+      @vk       = VkontakteApi::Client.new(Vk::Account.find_by(:status => 1024).token)
+      vk_city   = @vk.database.getCities(country_id:1, need_all:1, count:0)
+      vk_city   = @vk.database.getCities(country_id:1, need_all:1, count:100, offset:rand(vk_city['count']))
+      password  = pass_gen
+
+      count = 0
+      i=0
+
+      while count < 5 && i < 99
+        vku = @vk.users.search(sort:0, city: vk_city.items[i]['id'], country: 1, sex: sex, count:3)
+        if vku.items.count > 0 
+          vk_users = vk_users + vku.items
+        end
+        i=i+1
+        count = count + vku.items.count
+        sleep 0.4
+      end
+      sleep 0.3
+
+
+      if vk_signup.nil?
+        #err
+        render :json => vk_signup_ex
+
+
+
+      else 
+        #ok
+        @vk_acc = vk_signup
+        @vk_account = Vk::Account.new(phone: vk_account_params[:phone], status: 3, user_id: current_user.id, token: vk_signup[:sid], pass: password)
+        @vk_account.save
+
+        #redirect_to 'show', :id => @vk_account.id
+        render :json => @vk_account
+      end
+
+      #if count >= 5
+      #  ids = @vk_users.map{|i| i.id}
+      #  @vk_users_det = @vk.users.get(user_ids: ids, fields: "sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, photo_id, online, online_mobile, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters, screen_name, maiden_name, timezone, occupation,activities, interests, music, movies, tv, books, games, about, quotes, personal, friends_status")
+      #end

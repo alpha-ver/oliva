@@ -1,0 +1,25 @@
+%h1 Listing avito_finds
+
+%table
+  %thead
+    %tr
+      %th Require
+      %th Response
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @avito_finds.each do |avito_find|
+      %tr
+        %td= avito_find.req
+        %td= avito_find.res
+        %td= avito_find.user_id
+        %td= link_to 'Show', avito_find
+        %td= link_to 'Edit', edit_avito_find_path(avito_find)
+        %td= link_to 'Destroy', avito_find, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Find', new_avito_find_path

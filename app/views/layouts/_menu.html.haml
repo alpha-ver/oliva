@@ -1,7 +1,7 @@
 %ul#menu
   -if user_signed_in?
     %li
-      =link_to "#c-avito", :data => {:toggle=>"collapse"} do
+      =link_to "#c-avito", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
         %span Avito
       %ul#c-avito{:class=> collapse("avito")}
         %li
@@ -14,11 +14,11 @@
           =link_to avito_accounts_path do
             %span Аккаунты
         %li
-          =link_to "" do
+          =link_to avito_finds_path do
             %span Поиск
 
     %li
-      =link_to "#c-vk", :data => {:toggle=>"collapse"} do
+      =link_to "#c-vk", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
         %span Vkontakte
       %ul#c-vk{:class=> collapse("vk")}
         %li
@@ -28,7 +28,7 @@
           =link_to "#" do
             %span Постинг
         %li
-          =link_to "#" do
+          =link_to vk_accounts_path do
             %span Аккаунты
 
 
@@ -40,7 +40,7 @@
       =link_to new_user_registration_path do
         %span Регистрация
   %li
-    =link_to "#c-info", :data => {:toggle=>"collapse"} do
+    =link_to "#c-info", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
       %span Инфо
     %ul.collapse#c-info
       %li
@@ -57,21 +57,33 @@
   -if user_signed_in?
 
     %li
-      =link_to "#c-account", :data => {:toggle=>"collapse"} do
+      =link_to "#c-account", :data => {:toggle=>"collapse", :parent=>"#menu" } do
         %span Аккаунт
-      %ul#c-account{:class=> collapse("users") + collapse("images") }
+      %ul#c-account{:class=> collapse(["devise", "devise_invitable", "images", "roles"]) }
         %li
           =link_to new_user_invitation_path do
             %span Пригласить
         %li
           =link_to images_path do
             %span Картинки
+        
+        - if current_user.role_id >= 1024
+          %li
+            =link_to roles_path do
+              %span Групы
+
         %li
           =link_to  edit_user_registration_path do
             %span Основное
+
+
         %li
           =link_to destroy_user_session_path, :method => :delete do
             %span Выход
+
+
+
+
 
 
 

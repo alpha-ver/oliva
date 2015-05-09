@@ -11,9 +11,9 @@
       %tr
         %th Имя задачи
         %th Автивность
-        %th Следующий запуск
         %th Обновленна
-        %th Статус
+        %th Следующий запуск        
+        %th Id
         %th
         %th
         %th
@@ -26,7 +26,11 @@
           %td= avito_posting.active ? "Да" : "Нет"
           %td= avito_posting.updated_at
           %td= avito_posting.next_at
-          %td= avito_posting.response      
+          %td
+            -if avito_posting.s['item_id'].nil?
+
+            -else
+              = link_to avito_posting.s['item_id'], "https://avito.ru/#{avito_posting.s['item_id']}", :target => "_blank"
           %td= link_to 'Инфо', avito_posting
           %td= link_to 'Редакировать', edit_avito_posting_path(avito_posting)
           %td= link_to 'Удалить', avito_posting, :method => :delete, :data => { :confirm => 'Вы уверенны?' }

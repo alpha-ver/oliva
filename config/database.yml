@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: oliva
+  database: oliva_v1
   username: h0
   host: localhost
   port: 5432
@@ -24,8 +24,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: oliva
+  database: oliva_v1
 
 production:
   <<: *default
-  database: oliva
+  database: oliva_v1

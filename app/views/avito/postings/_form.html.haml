@@ -7,12 +7,12 @@
 
 
 = form_for @avito_posting do |f|
+
   - if @avito_posting.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@avito_posting.errors.count, "error")} prohibited this avito_posting from being saved:"
-      %ul
-        - @avito_posting.errors.full_messages.each do |msg|
-          %li= msg
+    -flash[:alert] = "<ul>"
+    -@avito_posting.errors.full_messages.each do |msg|
+      -flash[:alert] += '<li>'+msg+'</li>'
+    -flash[:alert] += "</ul>"
   
   %fieldset
     %legend Параметры задачи 
@@ -69,7 +69,7 @@
       .large-12.columns
         .field
           -if @avito_posting.images.blank?
-            - option = ""
+            - option = options_from_collection_for_select(Image.where(:user_id => current_user.id), "id", "name", [])
           -else
             - option = options_from_collection_for_select(Image.where(:user_id => current_user.id), "id", "name", @avito_posting.images)
           

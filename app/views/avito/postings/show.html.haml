@@ -55,9 +55,11 @@
 
 
 
-%h2 Изображения
--Image.find(@avito_posting.images).each do |image|
-  %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.#{image.img_type}", :width=> "100px"}
+
+-unless @avito_posting.images.blank? 
+  %h2 Изображения
+  -Image.find(@avito_posting.images).each do |image|
+    %img{:src=>"/image/#{current_user.id}/#{image.img_hash}.#{image.img_type}", :width=> "100px"}
 
 %hr
 %ul.button-group.radius.stack

@@ -391,7 +391,7 @@ $ ->
               "
                 <div data-alert class=\"alert-box success radius\">
                   Задача под номером #{xhr['result']['id']} сохранена.<br />
-                  Посмотреть памаметры можно <a href=\"/avito/tasks/#{xhr['result']['id']}\">здесь</a>.
+                  Посмотреть параметры можно <a href=\"/avito/tasks/#{xhr['result']['id']}\">здесь</a>.
 
                   <a href=\"#\" class=\"close\">&times;</a>
                 </div>
@@ -413,5 +413,35 @@ $ ->
       return false
 
 
+    $('#new_avito_posting').submit -> 
+      $('body').addClass('loading')
+      $.ajax
+        type: "POST"
+        url: $(this).attr('action')
+        data: $(this).serialize()
+        success: (xhr) ->
+          if xhr['status']
+            $('#agnid').html(
+              "
+                <div data-alert class=\"alert-box success radius\">
+                  Задача под номером #{xhr['result']['id']} сохранена.<br />
+                  Можно <a href=\"/avito/postings/#{xhr['result']['id']}\">Посмотреть</a> или
+                  <a href=\"/avito/postings/#{xhr['result']['id']}/edit\">отредактировать</a>.
+                  <a href=\"#\" class=\"close\">&times;</a>
+                </div>
+              ")
+          else
+            $('#agnid').html(
+              "
+                <div data-alert class=\"alert-box alert radius\">
+                  <b>Проверьте имя задачи и параметры.</b><br />
+                  Внимание постинг только ещё тестируется.<br />
+                  <a href=\"#\" class=\"close\">&times;</a>
+                </div>
+              ")
+          
+          $('body').removeClass('loading')
+          $(document).foundation('reflow')
 
+      return false
 

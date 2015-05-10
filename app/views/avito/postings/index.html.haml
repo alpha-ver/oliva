@@ -1,11 +1,14 @@
-
-
 -if @avito_postings.blank?
   %h1 Задач не обнаруженно
   %p Автоматическое отправление обьявлений на авито.  
 
 -else
-  %h1 Список задач авито постинга
+  %h1 
+    Список задач постинга
+    %small 
+      %a{:href=>"http://info.0liva.ru/avito_posting"} [?]
+
+
   %table{:width=>"100%"}
     %thead
       %tr
@@ -37,4 +40,4 @@
 
 
 = link_to new_avito_posting_path, :class=>"button success expand" do 
-  Новая задача постинга 
+  Новая задача 

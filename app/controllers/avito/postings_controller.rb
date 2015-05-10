@@ -7,7 +7,7 @@ class Avito::PostingsController < ApplicationController
 
 
   def index
-    @avito_postings = Avito::Posting.all
+    @avito_postings = Avito::Posting.where(:user_id => current_user.id)
     respond_with(@avito_postings)
   end
 
@@ -43,7 +43,7 @@ class Avito::PostingsController < ApplicationController
 
   private
     def set_posting
-      @avito_posting = Avito::Posting.find(params[:id])
+      @avito_posting = Avito::Posting.find_by(:id => params[:id], :user_id => current_user.id)
     end
 
 

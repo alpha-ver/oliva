@@ -20,8 +20,19 @@ ru:
               confirmation: не совпадают
             current_password:
               blank: не может быть пустым
+        avito/posting:
+          attributes:
+            name:
+              blank: не может быть пустым
+            images:
+              blank: должно быть выбранно
+
+
+
 
   attributes:
+    name:  Имя
+    images: Изображения 
     email: Электронная почта
     password: Пароль
     password_confirmation: Введенные пароли

@@ -30,8 +30,13 @@ class Avito::AccountsController < ApplicationController
   def create
     @avito_account = Avito::Account.new(account_params)
     @avito_account.user = current_user
-    @avito_account.save
-    respond_with(@avito_account)
+    if Avito::Account.find_by(:login => account_params[:login]).blank?
+      @avito_account.save
+      respond_with(@avito_account)
+    else
+      flash[:notice] = "Укажите другой логин"
+      render 'new'
+    end
   end
 
   def update

@@ -1,10 +1,10 @@
 = form_for @avito_account do |f|
+
   - if @avito_account.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@avito_account.errors.count, "error")} prohibited this avito_account from being saved:"
-      %ul
-        - @avito_account.errors.full_messages.each do |msg|
-          %li= msg
+    -flash[:alert] = "<ul>"
+    -@avito_account.errors.full_messages.each do |msg|
+      -flash[:alert] += '<li>'+msg+'</li>'
+    -flash[:alert] += "</ul>"
 
   .field
     = f.label :login, "Логин или почта"

@@ -45,12 +45,12 @@
           #agnid
             -if notice    
               .alert-box.info.radius{"data-alert" => ""}
-                = notice
+                = raw notice
                 %a.close{:href => "#"} &#215;
 
             -if alert
               .alert-box.alert.radius{"data-alert" => ""}
-                = alert
+                = raw alert
                 %a.close{:href => "#"} &#215;
 
           #loader-wraper

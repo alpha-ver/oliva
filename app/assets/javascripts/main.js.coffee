@@ -32,7 +32,15 @@ $ ->
 
     Dropzone.options.myAwesomeDropzone =
       paramName: 'file'
-      maxFilesize: 2
+      maxFilesize:  3
+      acceptedFiles: "image/*"
+      dictDefaultMessage:  
+        "Перетащите файлы для загрузки. 
+        Они будут доступны во всем сервисе, а не только в текущей задаче. 
+        Поэтому указывайте нормальные имена файлам для лучшего поиска."
+      dictFallbackMessage: "Установите нормальный браузер."
+      dictInvalidFileType: "Загружать можно только картинки"
+      dictFileTooBig:      "Фото должно быть не более 3Мб"
       accept: (file, done) ->
         _this = this;
         console.log done
@@ -42,13 +50,15 @@ $ ->
           _this.removeFile(file);
         else
           done()
+
         return
 
       init: ->
         @on 'success', (file, responseText) ->
           console.log(responseText)
           # file.previewTemplate.appendChild "<div>" + document.createTextNode(responseText['id']) + "</div>"
-
+          $(".images-select").append("<option value=\"#{responseText['id']}\" selected=\"selected\">#{responseText['name']}</options");
+          $(".images-select").trigger("chosen:updated");
           return
         return
 
@@ -58,9 +68,8 @@ $ ->
         console.log(0)
 
 
-    
-    $('.images-select').ajaxChosen {
-      dataType: 'json'
-      type: 'GET'
-      url: '/images.json'
-    }, loadingImg: 'loading.gif'
+  
+    $('.images-select').chosen {
+      no_results_text: "Изображенния не найденны - "
+      loadingImg: 'loading.gif'
+    }

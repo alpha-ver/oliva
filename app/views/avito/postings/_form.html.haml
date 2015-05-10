@@ -71,10 +71,10 @@
           -if @avito_posting.images.blank?
             - option = ""
           -else
-            - option = options_from_collection_for_select(Image.find(@avito_posting.images), "id", "name", @avito_posting.images)
+            - option = options_from_collection_for_select(Image.where(:user_id => current_user.id), "id", "name", @avito_posting.images)
           
           = label_tag "avito_posting[images][]", "Загруженные изображения"
-          = select_tag "avito_posting[images][]", option, :class => "images-select", :multiple=>""
+          = select_tag "avito_posting[images][]", option, :class => "images-select", :multiple=>"",  :data => {:placeholder => "Выберите загруженную фотографию"}
           
 
   -if params[:action] == "new"

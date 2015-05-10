@@ -13,23 +13,28 @@
         %li
           =link_to avito_accounts_path do
             %span Аккаунты
-        %li
-          =link_to avito_finds_path do
-            %span Поиск
+        
+        - if current_user.role_id >= 1024
 
-    %li
-      =link_to "#c-vk", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
-        %span Vkontakte
-      %ul#c-vk{:class=> collapse("vk")}
-        %li
-          =link_to "#" do
-            %span Мониторинг
-        %li
-          =link_to "#" do
-            %span Постинг
-        %li
-          =link_to vk_accounts_path do
-            %span Аккаунты
+          %li
+            =link_to avito_finds_path do
+              %span Поиск
+
+    - if current_user.role_id >= 1024
+
+      %li
+        =link_to "#c-vk", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
+          %span Vkontakte
+        %ul#c-vk{:class=> collapse("vk")}
+          %li
+            =link_to "#" do
+              %span Мониторинг
+          %li
+            =link_to "#" do
+              %span Постинг
+          %li
+            =link_to vk_accounts_path do
+              %span Аккаунты
 
 
   -else

@@ -48,7 +48,7 @@ class ImagesController < ApplicationController
     if image.blank?
       image = Image.new( :name => img[:name][0], :img_hash => img[:img_hash], :user_id => current_user.id, :img_class => params[:img_class], :img_type=>img[:name][-1])
       image.save
-      render :json => img
+      render :json => img.merge({:id => image.id, :name => image.name})
     else
       render :json => {:error => "Уже загруженно: #{image.name}"}, :status => "406"
     end

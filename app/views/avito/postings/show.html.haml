@@ -27,6 +27,20 @@
   %b Активность:
   = @avito_posting.active ? "Да" : "Нет"
 
+%p
+  %b Сработок задания:
+  = @avito_posting.count
+
+%p
+  %b Принимать ответы на почту:
+  = @avito_posting.active ? "Да" : "Нет"
+
+%p
+  %b Запланированно на:
+  = @avito_posting.next_at
+
+
+
 -if User.last.role_id >= 1024
 
   %p
@@ -38,16 +52,6 @@
   %p
     %b S:
     = @avito_posting.s
-  %p
-    %b Count:
-    = @avito_posting.count
-
-  %p
-    %b Allow mail:
-    = @avito_posting.allow_mail
-  %p
-    %b Next at:
-    = @avito_posting.next_at
 
 
 

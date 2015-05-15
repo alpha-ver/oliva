@@ -10,6 +10,12 @@ class User < ActiveRecord::Base
   has_many :avito_accounts, :class_name => Avito::Account
   has_many :avito_finds,    :class_name => Avito::Find
 
+  #
+
+  has_many :vk_account,  :class_name => Vk::Account
+  
+
+
   has_many :images
 
   belongs_to :role

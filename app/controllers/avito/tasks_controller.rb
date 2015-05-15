@@ -47,7 +47,7 @@ class Avito::TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :interval, :active).tap do |while_listed|
+      params.require(:avito_task).permit(:name, :interval, :active).tap do |while_listed|
         while_listed[:p] = params[:task][:p]
         while_listed[:e] = params[:task][:e]
       end

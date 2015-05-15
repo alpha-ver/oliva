@@ -5,12 +5,12 @@ class AvitoApi
   end
 
   def get(path='/items', params=false)
-
     begin
       p gen_link(path, params)
       res  = open(gen_link(path, params)).read
+      p res
       hash = JSON.parse(res)
-
+      p hash
       r true, hash
     rescue Exception => e
       r false, e

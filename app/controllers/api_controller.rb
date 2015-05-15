@@ -20,8 +20,8 @@ class ApiController < ApplicationController
       params[:path]="items"
     end
 
-
     json = AvitoApi.new().get("/#{params[:path]}", p)    
+    p json
     render :json => json
   end
 

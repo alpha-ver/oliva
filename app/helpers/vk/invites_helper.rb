@@ -1,0 +1,2 @@
+module Vk::InvitesHelper
+end

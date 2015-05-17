@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @vk_user.first_name
+%p
+  %b Last name:
+  = @vk_user.last_name
+%p
+  %b Sex:
+  = @vk_user.sex
+%p
+  %b Status:
+  = @vk_user.status
+%p
+  %b City:
+  = @vk_user.city_id
+%p
+  %b Country:
+  = @vk_user.country_id
+%p
+  %b Friend ids:
+  = @vk_user.friend_ids
+%p
+  %b Friend count:
+  = @vk_user.friend_count
+%p
+  %b Private message:
+  = @vk_user.private_message
+
+= link_to 'Edit', edit_vk_user_path(@vk_user)
+\|
+= link_to 'Back', vk_users_path

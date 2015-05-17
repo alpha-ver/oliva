@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @vk_invite.name
+%p
+  %b Interval:
+  = @vk_invite.interval
+%p
+  %b Invite ids:
+  = @vk_invite.invite_ids
+%p
+  %b Invited ids:
+  = @vk_invite.invited_ids
+%p
+  %b Find ids:
+  = @vk_invite.find_ids
+%p
+  %b Active:
+  = @vk_invite.active
+%p
+  %b E:
+  = @vk_invite.e
+%p
+  %b Next at:
+  = @vk_invite.next_at
+
+= link_to 'Edit', edit_vk_invite_path(@vk_invite)
+\|
+= link_to 'Back', vk_invites_path

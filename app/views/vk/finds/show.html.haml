@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @vk_find.name
+%p
+  %b P:
+  = @vk_find.p
+%p
+  %b User:
+  = @vk_find.user_id
+%p
+  %b Count:
+  = @vk_find.count
+%p
+  %b Find count:
+  = @vk_find.find_count
+%p
+  %b Step count:
+  = @vk_find.step_count
+%p
+  %b Map find:
+  = @vk_find.map_find
+%p
+  %b Error code:
+  = @vk_find.error_code
+%p
+  %b Interval:
+  = @vk_find.interval
+%p
+  %b Next at:
+  = @vk_find.next_at
+%p
+  %b Find ids:
+  = @vk_find.find_ids
+%p
+  %b Active:
+  = @vk_find.active
+
+= link_to 'Edit', edit_vk_find_path(@vk_find)
+\|
+= link_to 'Back', vk_finds_path

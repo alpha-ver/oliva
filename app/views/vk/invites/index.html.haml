@@ -1,0 +1,36 @@
+%h1 Listing vk_invites
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Interval
+      %th Invite ids
+      %th Invited ids
+      %th Find ids
+      %th Active
+      %th E
+      %th Next at
+      %th
+      %th
+      %th
+
+  %tbody
+    - @vk_invites.each do |vk_invite|
+      %tr{:class => color_status(vk_invite.status)}
+        %td= vk_invite.name
+        %td= vk_invite.interval
+
+        %td= vk_invite.invite_ids.count
+        %td= vk_invite.invited_ids.count
+        %td= vk_invite.find_ids
+        %td= vk_invite.active
+        %td= vk_invite.e
+        %td= vk_invite.next_at
+        %td= link_to 'Show', vk_invite
+        %td= link_to 'Edit', edit_vk_invite_path(vk_invite)
+        %td= link_to 'Destroy', vk_invite, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Invite', new_vk_invite_path

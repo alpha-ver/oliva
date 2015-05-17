@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
 
   #
 
-  has_many :vk_account,  :class_name => Vk::Account
-  
+  has_many :vk_accounts,    :class_name => Vk::Account
+  has_many :vk_finds,       :class_name => Vk::Find
 
 
   has_many :images

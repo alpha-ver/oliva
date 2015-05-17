@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507180220) do
+ActiveRecord::Schema.define(version: 20150517141114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,55 @@ ActiveRecord::Schema.define(version: 20150507180220) do
     t.integer  "user_id"
     t.integer  "proxy_id"
     t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vk_finds", force: true do |t|
+    t.string   "name"
+    t.json     "p"
+    t.integer  "user_id"
+    t.integer  "vk_account_ids", default: [],                    array: true
+    t.integer  "count"
+    t.integer  "find_count"
+    t.integer  "step_count"
+    t.json     "map_find"
+    t.integer  "error_code"
+    t.integer  "interval"
+    t.boolean  "active"
+    t.integer  "find_ids",       default: [],                    array: true
+    t.datetime "next_at",        default: '2015-05-17 08:37:24'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vk_finds", ["user_id"], name: "index_vk_finds_on_user_id", using: :btree
+
+  create_table "vk_invites", force: true do |t|
+    t.string   "name"
+    t.integer  "interval"
+    t.integer  "vk_account_id"
+    t.integer  "invite_ids",    default: [],                    array: true
+    t.integer  "invited_ids",   default: [],                    array: true
+    t.integer  "find_ids",      default: [],                    array: true
+    t.boolean  "active"
+    t.integer  "status"
+    t.json     "e"
+    t.datetime "next_at",       default: '2015-05-17 18:44:28'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vk_users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "sex"
+    t.integer  "status"
+    t.integer  "city_id"
+    t.integer  "country_id"
+    t.integer  "friend_ids",      default: [], array: true
+    t.integer  "friend_count"
+    t.boolean  "private_message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

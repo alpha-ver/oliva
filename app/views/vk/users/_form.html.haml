@@ -1,0 +1,37 @@
+= form_for @vk_user do |f|
+  - if @vk_user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@vk_user.errors.count, "error")} prohibited this vk_user from being saved:"
+      %ul
+        - @vk_user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :first_name
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .field
+    = f.label :sex
+    = f.number_field :sex
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :city_id
+    = f.number_field :city_id
+  .field
+    = f.label :country_id
+    = f.number_field :country_id
+  .field
+    = f.label :friend_ids
+    = f.number_field :friend_ids
+  .field
+    = f.label :friend_count
+    = f.number_field :friend_count
+  .field
+    = f.label :private_message
+    = f.check_box :private_message
+  .actions
+    = f.submit 'Save'

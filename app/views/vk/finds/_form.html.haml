@@ -1,0 +1,57 @@
+= form_for @vk_find do |f|
+  - if @vk_find.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@vk_find.errors.count, "error")} prohibited this vk_find from being saved:"
+      %ul
+        - @vk_find.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .large-6.columns
+      =fields_for "vk_find[p]" do |fe|
+
+        .field
+          = fe.label :group_id
+          = fe.text_field :group_id
+        .field
+          = fe.label :country
+          = fe.text_field :country
+        .field
+          = fe.label :city
+          = fe.text_field :city
+        .field
+          = fe.label :sex
+          = fe.text_field :sex
+        .field
+          = fe.label :has_photo
+          = fe.text_field :has_photo
+
+    .large-6.columns
+      .field
+        = f.label :name
+        = f.text_field :name
+      .field
+        = f.label :user_id
+        = f.text_field :user_id
+      .field
+        = f.label :count
+        = f.text_field :count
+      .field
+        = f.label :find_count
+        = f.text_field :find_count
+      .field
+        = f.label :step_count
+        = f.text_field :step_count
+      .field
+        = f.label :interval
+        = f.text_field :interval
+      .field
+        = f.label :active
+        = f.check_box :active
+
+  //.field
+  //= f.label :next_at
+  //= f.datetime_select :next_at, :order => [:month, :day, :year, :hour, :minute]
+
+  .actions
+    = f.submit 'Save'

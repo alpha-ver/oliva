@@ -1,0 +1,43 @@
+%h1 Listing vk_finds
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th P
+      %th User
+      %th Count
+      %th Find count
+      %th Step count
+      %th Map find
+      %th Error code
+      %th Interval
+      %th Next at
+      %th Find ids
+      %th Active
+      %th
+      %th
+      %th
+
+  %tbody
+    - @vk_finds.each do |vk_find|
+      %tr
+        %td= vk_find.name
+        %td= vk_find.p
+        %td= vk_find.user_id
+        %td= vk_find.count
+        %td= vk_find.find_count
+        %td= vk_find.step_count
+        %td= vk_find.map_find
+        %td= vk_find.error_code
+        %td= vk_find.interval
+        %td= vk_find.next_at
+        %td= vk_find.find_ids.count
+        %td= vk_find.active
+        %td= link_to 'Show', vk_find
+        %td= link_to 'Edit', edit_vk_find_path(vk_find)
+        %td= link_to 'Destroy', vk_find, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Find', new_vk_find_path

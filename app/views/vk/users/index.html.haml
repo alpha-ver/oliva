@@ -1,0 +1,37 @@
+%h1 Listing vk_users
+
+%table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Sex
+      %th Status
+      %th City
+      %th Country
+      %th Friend ids
+      %th Friend count
+      %th Private message
+      %th
+      %th
+      %th
+
+  %tbody
+    - @vk_users.each do |vk_user|
+      %tr
+        %td= vk_user.first_name
+        %td= vk_user.last_name
+        %td= vk_user.sex
+        %td= vk_user.status
+        %td= vk_user.city_id
+        %td= vk_user.country_id
+        %td= vk_user.friend_ids
+        %td= vk_user.friend_count
+        %td= vk_user.private_message
+        %td= link_to 'Show', vk_user
+        %td= link_to 'Edit', edit_vk_user_path(vk_user)
+        %td= link_to 'Destroy', vk_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User', new_vk_user_path

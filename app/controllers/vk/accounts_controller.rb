@@ -3,11 +3,10 @@ class Vk::AccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :vk_init
 
-
   respond_to :html
 
   def index
-    @vk_accounts = Vk::Account.all
+    @vk_accounts = Vk::Account.where(:user_id => current_user.id).all
     respond_with(@vk_accounts)
   end
 
@@ -16,8 +15,8 @@ class Vk::AccountsController < ApplicationController
   end
 
   def new
-      @vk_account = Vk::Account.new
-      respond_with(@vk_account)
+    @vk_account = Vk::Account.new(:user_id => current_user.id)
+    respond_with(@vk_account)
   end
 
   def edit
@@ -97,7 +96,7 @@ class Vk::AccountsController < ApplicationController
 
       
     else
-      @vk_account = Vk::Account.new(vk_account_params)
+      @vk_account = Vk::Account.new(vk_account_params.merge({:user_id => current_user.id}))
       access = get_access_token
       if access
         @vk_account.id    = access['user_id']
@@ -110,16 +109,8 @@ class Vk::AccountsController < ApplicationController
 
         redirect_to :back
       end
-      
-
-
-
-
-      
+        
     end
-
-    
-
   end
 
   def update

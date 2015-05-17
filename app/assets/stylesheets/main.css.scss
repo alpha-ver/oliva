@@ -157,6 +157,20 @@ body.loading #loader-wraper{
 
 }
 
+tr{
+  &.warning{
+     background-color: rgba(145, 94, 43,0.2);
+  }
+
+  &.error{
+    background-color: rgba(145, 58, 43, 0.2);
+  }
+
+  &.progress{
+    background-color: rgba(59, 111, 78, 0.2);  
+  }
+}
+
 #ddev{
   position: fixed;
   color: green;
@@ -187,5 +201,5 @@ body.loading #loader-wraper{
     color: #ddd;
   }
 
-
 }
+

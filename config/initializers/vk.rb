@@ -10,10 +10,10 @@ VkontakteApi.configure do |config|
 
   # логгер
   #config.logger        = Rails.logger
-  config.log_requests  = true  # URL-ы запросов
+  #config.log_requests  = true  # URL-ы запросов
   config.log_errors    = true  # ошибки
-  config.log_responses = true # удачные ответы
+  #config.log_responses = true # удачные ответы
 
   # используемая версия API
-  config.api_version = '5.21'
+  config.api_version = '5.32'
 end

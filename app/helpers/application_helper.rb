@@ -25,4 +25,19 @@ module ApplicationHelper
 
   end
 
+
+
+
+  def  color_status(status)
+    if status.nil?
+      "warning"
+    elsif status < 0
+      "error"
+    elsif status == 1
+      "progress"
+    else
+      ""
+    end
+  end
+
 end

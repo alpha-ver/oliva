@@ -2,9 +2,7 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-
 Rails.application.load_tasks
-
 require 'RMagick'
 
 
@@ -33,6 +31,9 @@ def antigate_init(current_user)
     current_user.save
   end 
 end
+
+
+
 
 
 #############################
@@ -125,8 +126,6 @@ task :loop_m => :environment do
   }
 end
 
-
-
 desc "### daemon service ###"
 task :loop_p => :environment do
   time_loop = 60
@@ -147,7 +146,7 @@ task :loop_p => :environment do
           print "init = #{agent_init} | login = #{agent_login} | imgs = "
           avito_additem = @agent.get "https://www.avito.ru/additem"
           
-	  #images
+	        #images
           images_id = []
           task.images.each do |img|
             image=Image.find(img)
@@ -173,7 +172,7 @@ task :loop_p => :environment do
             avito_additem.form.add_field!("rotate[#{image_id}]", 0)
           end
 
-	  p images_id
+	        p images_id
 
           #type avtomatization
           if task.e['type_uniq'] == "1"
@@ -195,7 +194,7 @@ task :loop_p => :environment do
           avito_additem.form.field('location_id').value = task.p['locationId']
           avito_additem.form.field('category_id').value = task.p['categoryId'] 
           #avito_additem.form.field('manager').value = ""
-	  unless task.p["districtId"].blank?
+	        unless task.p["districtId"].blank?
             avito_additem.form.field('district_id').value = task.p["districtId"].first[1]
           end
           task.p["params"].map { |k,v| avito_additem.form.add_field!("params[#{k}]", v) }
@@ -204,7 +203,7 @@ task :loop_p => :environment do
 
           #post
           avito_confirm = avito_additem.form.submit()
-	  p avito_additem.form
+	        p avito_additem.form
           if  avito_confirm.uri.path  == "/additem/confirm"
             current_user = User.find(task.user_id)
             antigate_init(current_user)
@@ -216,7 +215,7 @@ task :loop_p => :environment do
 
             recognized = @antigate.recognize("http://0liva.ru/captcha/#{timestamp}.jpg", 'jpg')
             p recognized
-	    if recognized[1].nil?
+	          if recognized[1].nil?
               recognized = @antigate.recognize("http://0liva.ru/captcha/#{timestamp}.jpg", 'jpg')
             end
 
@@ -231,7 +230,7 @@ task :loop_p => :environment do
               @agent.redirect_ok = false
               avito_pub          = avito_confirm.form.submit()
               @agent.redirect_ok = true
-	      p avito_pub.header["location"]
+	           p avito_pub.header["location"]
               uri_avito_pub =  URI.parse(avito_pub.header["location"])
 
               if uri_avito_pub.path == "/additem/pay_service"
@@ -247,11 +246,11 @@ task :loop_p => :environment do
             end
             task.save
           else
-	    File.open("task_false", "w") { |f| f.write( avito_confirm.body.force_encoding("utf-8")  ) } 
-	    print 'task_false'
-	    task.active = false
-	    task.save
-	  end
+      	    File.open("task_false", "w") { |f| f.write( avito_confirm.body.force_encoding("utf-8")  ) } 
+      	    print 'task_false'
+      	    task.active = false
+      	    task.save
+	        end
         end
       end
       #################################################
@@ -271,5 +270,4 @@ task :loop_p => :environment do
       #File.open("tmp/exp", "a") { |f| f.write(e.to_s + "\n") }
     #end
   }
-
 end

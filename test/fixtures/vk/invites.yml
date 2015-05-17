@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  interval: 1
+  vk_vkontakte_id: 1
+  invite_ids: 
+  invited_ids: 
+  find_ids: 
+  active: false
+  e: 
+  next_at: 2015-05-17 17:11:14
+
+two:
+  name: MyString
+  interval: 1
+  vk_vkontakte_id: 1
+  invite_ids: 
+  invited_ids: 
+  find_ids: 
+  active: false
+  e: 
+  next_at: 2015-05-17 17:11:14

@@ -3,6 +3,18 @@ Rails.application.routes.draw do
   
 
   namespace :vk do
+    resources :invites
+  end
+
+  namespace :vk do
+    resources :users
+  end
+
+  namespace :vk do
+    resources :finds
+  end
+
+  namespace :vk do
     resources :accounts
     
   end

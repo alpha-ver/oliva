@@ -52,6 +52,7 @@ gem 'antigate'
 gem 'rmagick'
 gem 'colorize'
 gem 'sigma-rails'
+gem 'x-editable-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

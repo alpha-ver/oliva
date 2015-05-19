@@ -6,7 +6,9 @@ class Vk::AccountsController < ApplicationController
   respond_to :html
 
   def index
-    @vk_accounts = Vk::Account.where(:user_id => current_user.id).all
+    @vk_account_groups = Vk::AccountGroup.where(:user_id => current_user.id).all
+
+    #@vk_accounts = Vk::Account.where(:user_id => current_user.id).all
     respond_with(@vk_accounts)
   end
 

@@ -29,7 +29,7 @@
     = f.text_field :e
   .field 
     = f.label :vk_account_id
-    = f.select :vk_account_id, options_from_collection_for_select(Vk::Account.all, "id", "login",  @vk_invite.vk_account_id)
+    = f.select :vk_account_id, options_for_select(@vk_new_acc, @vk_invite.vk_account_id)
 
   .actions
     = f.submit 'Save'

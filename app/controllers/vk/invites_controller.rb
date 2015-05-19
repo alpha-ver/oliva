@@ -22,7 +22,7 @@ class Vk::InvitesController < ApplicationController
 
   def create
     #render :json => vk_invite_params
-  @vk_invite = Vk::Invite.new(vk_invite_params)
+    @vk_invite = Vk::Invite.new(vk_invite_params)
     @vk_invite.save
     respond_with(@vk_invite)
   end
@@ -39,7 +39,17 @@ class Vk::InvitesController < ApplicationController
 
   private
     def set_vk_invite
-      @vk_invite = Vk::Invite.find(params[:id])
+      @vk_invite  = Vk::Invite.find(params[:id])
+      @vk_new_acc = current_user.vk_accounts.all.map{|i|
+        if @vk_invite.vk_account_id == i.id || Vk::Invite.find_by(:vk_account_id => i.id).nil? 
+          [i.login, i.id]
+        else
+          nil
+        end
+      }.compact
+
+
+
     end
 
     def vk_invite_params

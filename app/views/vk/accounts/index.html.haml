@@ -16,19 +16,26 @@
       %th
 
   %tbody
-    - @vk_accounts.each do |vk_account|
+    - @vk_account_groups.each do |vk_account_group|
       %tr
-        %td= vk_account.login
-        %td= vk_account.pass
-        %td= vk_account.phone
-        %td= vk_account.active
-        %td= vk_account.status
-        %td= vk_account.info
-        %td= vk_account.user_id
-        %td= vk_account.proxy_id
-        %td= link_to 'Show', vk_account
-        %td= link_to 'Edit', edit_vk_account_path(vk_account)
-        %td= link_to 'Destroy', vk_account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th{:colspan => 8, :class=>"title-group" }= vk_account_group.name
+        %th
+        %th= link_to "Edit",  edit_vk_account_group_path(vk_account_group)
+        %th
+
+      -vk_account_group.vk_accounts.each do |vk_account|
+        %tr
+          %td= vk_account.login
+          %td= vk_account.pass
+          %td= vk_account.phone
+          %td= vk_account.active
+          %td= vk_account.status
+          %td= vk_account.info
+          %td= vk_account.user_id
+          %td= vk_account.proxy_id
+          %td= link_to 'Show', vk_account
+          %td= link_to 'Edit', edit_vk_account_path(vk_account)
+          %td= link_to 'Destroy', vk_account, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

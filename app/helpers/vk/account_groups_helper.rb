@@ -1,0 +1,2 @@
+module Vk::AccountGroupsHelper
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517141114) do
+ActiveRecord::Schema.define(version: 20150519180841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,17 @@ ActiveRecord::Schema.define(version: 20150517141114) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "vk_account_groups", force: true do |t|
+    t.string   "name"
+    t.boolean  "cross"
+    t.integer  "cross_ids",  default: [], array: true
+    t.integer  "find_id"
+    t.integer  "user_id"
+    t.boolean  "actove"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "vk_accounts", force: true do |t|
     t.string   "login"
     t.string   "pass"
@@ -152,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150517141114) do
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vk_account_group_id"
   end
 
   create_table "vk_finds", force: true do |t|

@@ -1,0 +1,31 @@
+%h1 Listing vk_account_groups
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Cross
+      %th Cross ids
+      %th Find
+      %th User
+      %th Actove
+      %th
+      %th
+      %th
+
+  %tbody
+    - @vk_account_groups.each do |vk_account_group|
+      %tr
+        %td= vk_account_group.name
+        %td= vk_account_group.cross
+        %td= vk_account_group.cross_ids
+        %td= vk_account_group.find_id
+        %td= vk_account_group.user_id
+        %td= vk_account_group.actove
+        %td= link_to 'Show', vk_account_group
+        %td= link_to 'Edit', edit_vk_account_group_path(vk_account_group)
+        %td= link_to 'Destroy', vk_account_group, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Account group', new_vk_account_group_path

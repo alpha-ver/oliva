@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @vk_account_group.name
+%p
+  %b Cross:
+  = @vk_account_group.cross
+%p
+  %b Cross ids:
+  = @vk_account_group.cross_ids
+%p
+  %b Find:
+  = @vk_account_group.find_id
+%p
+  %b User:
+  = @vk_account_group.user_id
+%p
+  %b Actove:
+  = @vk_account_group.actove
+
+= link_to 'Edit', edit_vk_account_group_path(@vk_account_group)
+\|
+= link_to 'Back', vk_account_groups_path

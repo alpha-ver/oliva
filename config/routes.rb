@@ -4,19 +4,10 @@ Rails.application.routes.draw do
 
   namespace :vk do
     resources :invites
-  end
-
-  namespace :vk do
     resources :users
-  end
-
-  namespace :vk do
     resources :finds
-  end
-
-  namespace :vk do
     resources :accounts
-    
+    resources :account_groups, :only => [:create, :edit, :new, :update]
   end
 
   

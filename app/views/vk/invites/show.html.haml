@@ -8,13 +8,13 @@
   = @vk_invite.interval
 %p
   %b Invite ids:
-  = @vk_invite.invite_ids
+  = @vk_invite.invite_ids.count
 %p
   %b Invited ids:
-  = @vk_invite.invited_ids
+  = @vk_invite.invited_ids.count
 %p
   %b Find ids:
-  = @vk_invite.find_ids
+  = @vk_invite.find_ids.count
 %p
   %b Active:
   = @vk_invite.active

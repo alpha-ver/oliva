@@ -51,6 +51,7 @@ gem 'vkontakte_api'
 gem 'antigate'
 gem 'rmagick'
 gem 'colorize'
+gem 'sigma-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

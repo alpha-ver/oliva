@@ -161,7 +161,7 @@ namespace :vk  do
           File.open("tmp/sleep", "a") { |f| f.write(time_sleep.to_s + "\n") }
         end
       rescue Exception => e
-        отслеживание ошибок
+        #отслеживание ошибок
         File.open("tmp/vk_user_err", "a") { |f| f.write(e.to_s + "\n") }
       end
     }

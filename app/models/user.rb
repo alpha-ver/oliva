@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :vk_finds,           :class_name => Vk::Find
 
   has_many :images
+  
   belongs_to :role
 
 end

@@ -40,6 +40,8 @@ class Vk::AccountGroupsController < ApplicationController
   # PATCH/PUT /vk/account_groups/1
   # PATCH/PUT /vk/account_groups/1.json
   def update
+    generate
+
     respond_to do |format|
       if @vk_account_group.update(vk_account_group_params)
         format.html { redirect_to @vk_account_group, notice: 'Account group was successfully updated.' }
@@ -72,8 +74,48 @@ class Vk::AccountGroupsController < ApplicationController
       params.require(:vk_account_group).permit(:name, :cross, :cross_ids, :find_id, :active)
     end
 
-
     def generate
-      
+      #@vk_account_group = Vk::AccountGroup.last
+      vk_find            = @vk_account_group.vk_find
+      #vk_account        = @vk_account_group.vk_accounts[1]
+      vk_all_invited_ids    = []
+      account_count = @vk_account_group.vk_accounts.count
+      @vk_account_group.vk_accounts.each do |vk_account|
+        #vk_account.vk_invite
+        if !vk_account.vk_invite.nil?
+          vk_all_invited_ids = vk_all_invited_ids + vk_account.vk_invite.invited_ids
+        end
+      end
+
+      vk_all_invited_ids.uniq!
+      vk_all_user_ids    = Vk::User.where(:id => vk_find.find_ids, :status=>1).order(:friend_count => :desc).map{|i| i.id}
+      vk_invite_user_ids = vk_all_user_ids - vk_all_invited_ids
+      vk_all_user_ids.clear
+      vk_all_invited_ids.clear
+
+      i = 0
+      vk_invite_ids = []
+      0.upto(account_count){ |n| vk_invite_ids[n] = []} 
+
+      0.upto(9999){ |n|
+        0.upto(account_count){ |nn|
+          vk_invite_ids[nn] << vk_invite_user_ids[i]
+          i=i+1
+        } 
+      }
+
+      vk_invite_user_ids.clear
+
+      i = 0
+      @vk_account_group.vk_accounts.each do |vk_account|
+        #vk_account.vk_invite
+        if !vk_account.vk_invite.nil?
+          vk_account.vk_invite.invite_ids = vk_invite_ids[i]
+          vk_account.vk_invite.save
+        end
+        i=i+1
+      end
+
     end
+
 end

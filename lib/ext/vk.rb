@@ -62,6 +62,8 @@ class VKA
         else
           invite(id, e.captcha_sid, e.captcha_img, step+1)
         end
+      elsif e.error_code == 17
+        {:success => false, :result=> {:code => e.error_code, :url => e.redirect_uri}}
       else
         {:success => false, :result=> {:code => e.error_code }}
       end

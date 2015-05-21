@@ -186,7 +186,27 @@ class Vk::AccountsController < ApplicationController
         flash[:notice] = t('vk.error_code_'+ resend[:result][:code].to_s)
         respond_with(@vk_account)
       end
+
+
+    else
+      @vk_account.update(vk_account_params.merge({:user_id => current_user.id}))
+      access = get_access_token
+      if access
+        @vk_account.id    = access['user_id']
+        @vk_account.token = access['access_token']
+        @vk_account.save
+
+        redirect_to vk_account_path(@vk_account.id)
+      else
+        flash[:notice] = t('Ошибка обновления акаунта. Проверьте логин и пароль.')
+
+        redirect_to :back
+      end
     end
+
+
+
+
   end
 
   def destroy

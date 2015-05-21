@@ -1,3 +1,5 @@
+
+
 namespace :vk  do
   desc "Задачи поиска людишек"
   task :find  => :environment do
@@ -201,22 +203,68 @@ namespace :vk  do
               inv_id  = inv_ids.first
               inv     = vka.invite(inv_id)
 
+              task.e = inv
               if inv[:success]
                 puts "#{vk_account.id} -> #{inv_id}".green
                 task.invite_ids  = inv_ids - [inv_id]
                 task.invited_ids = task.invited_ids + [inv_id]
                 task.next_at = time_start + task.interval.seconds
-                task.save
-
               elsif inv[:result][:code] == 1
+                # обычно лимит инвайтов превышен 
                 puts "#{vk_account.id} -> #{inv_id}".red 
+                task.next_at = time_start + 300.minutes
+              elsif inv[:result][:code] == 17
+                #подрверди ка номерок 
+                phone = task.vk_account.phone[-10, 10]
+                agent = Mechanize.new
+                page  = agent.get inv[:result][:url]
+                page.form.code = phone[0,8] #без 2х
+                res = page.form.submit()
+                if res.uri.path == "/blank.html"
+                  task.next_at = time_start + 10.minutes
+                  puts "17=AUT #{vk_account.id} -> #{inv_id} ".yellow
+                else
+                  puts "17=AUT #{vk_account.id} -> #{inv_id} ".red
+                  task.next_at = time_start + 300.minutes
+                end
+                agent=nil; page=nil; phone=nil #чистенько
+	            elsif inv[:result][:code] == 5 
+                #скорее всего забанен
+                url   = VkontakteApi.authorization_url(type: :client, scope: [:groups,:friends,:photos,:video,:audio,:wall,:offline,:email,:docs]) #many ?
+                agent = Mechanize.new()
+                vk_login_page = agent.get url
+                vk_login_page.form.email = task.vk_account.login
+                vk_login_page.form.pass  = task.vk_account.pass
+                vk_grant_page            = vk_login_page.form.submit()
+                if vk_grant_page.form.nil? && vk_grant_page.uri.path = '/blank.html'
+                  r = Hash[vk_grant_page.uri.fragment.split('&').map{|i| i.split("=")}]
+                elsif !vk_grant_page.form.field('email').nil? || !vk_grant_page.form.field('pass').nil?
+                  r = false
+                else
+                  vk_success_page = vk_grant_page.form.submit()
+                  r = Hash[vk_success_page.uri.fragment.split('&').map{|i| i.split("=")}]
+                end
+                url=nil; agent=nil; vk_login_page=nil; vk_grant_page=nil; vk_success_page=nil #чистенько
+                
+                if r 
+                  task.vk_account.token = r[:token]
+                  task.vk_account.save
+                  task.next_at = time_start + 5.minutes
+                else
+                  puts "BAN #{vk_account.id} -> #{inv_id} ".red
+                  task.next_at = time_start + 24.hours
+                  p inv
+                  p r
+                end
+                
+                r=nil                
+	            else
+                puts "? > #{vk_account.id} -> #{inv_id} ".red
+                p inv
                 task.next_at = time_start + 600.minutes
-                task.save
-              end
-
-
+	            end
+              task.save
             end
-
           #end main each
           end
         end

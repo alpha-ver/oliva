@@ -1,0 +1,44 @@
+%h1 Listing parse_tasks
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th User
+      %th Interval
+      %th Base url
+      %th X link
+      %th R link
+      %th X title
+      %th X body
+      %th X img
+      %th X date
+      %th X additional
+      %th Active
+      %th Trigger
+      %th
+      %th
+      %th
+
+  %tbody
+    - @parse_tasks.each do |parse_task|
+      %tr
+        %td= parse_task.name
+        %td= parse_task.user_id
+        %td= parse_task.interval
+        %td= parse_task.base_url
+        %td= parse_task.x_link
+        %td= parse_task.r_link
+        %td= parse_task.x_title
+        %td= parse_task.x_body
+        %td= parse_task.x_img
+        %td= parse_task.x_date
+        %td= parse_task.x_additional
+        %td= parse_task.active
+        %td= link_to 'Show', parse_task
+        %td= link_to 'Edit', edit_parse_task_path(parse_task)
+        %td= link_to 'Destroy', parse_task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Task', new_parse_task_path

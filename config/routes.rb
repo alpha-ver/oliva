@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  
+  namespace :parse do
+    resources :dbs
+    resources :tasks
+  end
 
   namespace :vk do
     resources :invites
@@ -25,8 +28,8 @@ Rails.application.routes.draw do
 
 
   
-  root 'static_page#main'
-  post 'beta' => 'feed_back#beta'
+  root  'static_page#main'
+  post  'beta' => 'feed_back#beta'
 
   post  'api/avito' => 'api#avito'
   get   'api/avito' => 'api#avito'
@@ -37,8 +40,7 @@ Rails.application.routes.draw do
   post  'tst' => 'api#txt'
   get   'tst' => 'api#txt'
 
-
-  get 'test' => 'static_page#test'
+  get   'test' => 'static_page#test'
 
 
 

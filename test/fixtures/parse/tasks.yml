@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_id: 1
+  interval: MyString
+  base_url: MyString
+  x_link: MyString
+  r_link: MyString
+  x_title: MyString
+  x_body: MyString
+  x_img: MyString
+  x_date: MyString
+  x_additional: MyString
+  active: false
+  trigger: MyString
+
+two:
+  name: MyString
+  user_id: 1
+  interval: MyString
+  base_url: MyString
+  x_link: MyString
+  r_link: MyString
+  x_title: MyString
+  x_body: MyString
+  x_img: MyString
+  x_date: MyString
+  x_additional: MyString
+  active: false
+  trigger: MyString

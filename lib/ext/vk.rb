@@ -71,6 +71,43 @@ class VKA
   end
 
 
+  def post(param, captcha_sid=false, captcha_img=false, step=0)
+    begin
+      if captcha_sid
+        r = @captcha.recognize(captcha_img, 'jpg')
+        if r[1] == "R"
+          step = 5
+        else         
+          v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group], captcha_sid: captcha_sid, captcha_key: r[1])
+        end
+      else  
+        v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group])
+      end
+      if step==5
+        {:success => false, :result=> {:code => 14, :captcha => "R" }}
+      else
+        {:success => true,  :result=> v}
+      end
+    rescue VkontakteApi::Error => e
+      if e.error_code == 14
+        if @captcha.nil? || step > 3
+          {:success => false, :result=> {:code => e.error_code, captcha_sid: e.captcha_sid, captcha_img: e.captcha_img}}
+        else
+          post(param, e.captcha_sid, e.captcha_img, step+1)
+        end
+      elsif e.error_code == 17
+        {:success => false, :result=> {:code => e.error_code, :url => e.redirect_uri}}
+      else
+        {:success => false, :result=> {:code => e.error_code }}
+      end
+    end
+  end
+
+  def upload_photo(param)
+    @vk.photos.getWallUploadServer(param[:group_id])
+  end
+
+
 
   private
 

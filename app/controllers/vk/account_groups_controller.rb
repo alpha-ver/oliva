@@ -1,6 +1,8 @@
 class Vk::AccountGroupsController < ApplicationController
   before_action :set_vk_account_group, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
+  
   # GET /vk/account_groups
   # GET /vk/account_groups.json
   def index

@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Task:
+  = @parse_db.task_id
+%p
+  %b Url:
+  = @parse_db.url
+%p
+  %b Title:
+  = @parse_db.title
+%p
+  %b Body:
+  = @parse_db.body
+%p
+  %b Img:
+  = @parse_db.img
+%p
+  %b Date:
+  = @parse_db.date
+%p
+  %b Additional:
+  = @parse_db.additional
+
+= link_to 'Edit', edit_parse_db_path(@parse_db)
+\|
+= link_to 'Back', parse_dbs_path

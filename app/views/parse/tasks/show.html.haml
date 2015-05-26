@@ -1,0 +1,45 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @parse_task.name
+%p
+  %b User:
+  = @parse_task.user_id
+%p
+  %b Interval:
+  = @parse_task.interval
+%p
+  %b Base url:
+  = @parse_task.base_url
+%p
+  %b X link:
+  = @parse_task.x_link
+%p
+  %b R link:
+  = @parse_task.r_link
+%p
+  %b X title:
+  = @parse_task.x_title
+%p
+  %b X body:
+  = @parse_task.x_body
+%p
+  %b X img:
+  = @parse_task.x_img
+%p
+  %b X date:
+  = @parse_task.x_date
+%p
+  %b X additional:
+  = @parse_task.x_additional
+%p
+  %b Active:
+  = @parse_task.active
+%p
+  %b Trigger:
+  = @parse_task.trigger
+
+= link_to 'Edit', edit_parse_task_path(@parse_task)
+\|
+= link_to 'Back', parse_tasks_path

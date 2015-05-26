@@ -1,0 +1,33 @@
+%h1 Listing parse_dbs
+
+%table
+  %thead
+    %tr
+      %th Task
+      %th Url
+      %th Title
+      %th Body
+      %th Img
+      %th Date
+      %th Additional
+      %th
+      %th
+      %th
+
+  %tbody
+    - @parse_dbs.each do |parse_db|
+      %tr
+        %td= parse_db.task_id
+        %td= parse_db.url
+        %td= parse_db.title
+        %td= parse_db.body
+        %td= parse_db.img
+        %td= parse_db.date
+        %td= parse_db.additional
+        %td= link_to 'Show', parse_db
+        %td= link_to 'Edit', edit_parse_db_path(parse_db)
+        %td= link_to 'Destroy', parse_db, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Db', new_parse_db_path

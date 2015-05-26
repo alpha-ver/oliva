@@ -188,8 +188,8 @@ task :loop_p => :environment do
           end
           p task.p
           #post
-          avito_additem.form.field('title'      ).value = task.title["#{v}"]
-          avito_additem.form.field('description').value = task.description["#{v}"]
+          avito_additem.form.field('title'      ).value = "#{task.count}." + task.title["#{v}"]
+          avito_additem.form.field('description').value = "#{task.count}." + task.description["#{v}"]
           avito_additem.form.field('price'      ).value = task.price["#{v}"]
           avito_additem.form.field('location_id').value = task.p['locationId']
           avito_additem.form.field('category_id').value = task.p['categoryId'] 
@@ -230,19 +230,21 @@ task :loop_p => :environment do
               @agent.redirect_ok = false
               avito_pub          = avito_confirm.form.submit()
               @agent.redirect_ok = true
-	           p avito_pub.header["location"]
-              uri_avito_pub =  URI.parse(avito_pub.header["location"])
 
-              if uri_avito_pub.path == "/additem/pay_service"
-                query_avito_pub = Hash[ uri_avito_pub.query.split("&").map{ |i| ii=i.split("=");[ii[0],ii[1]]} ]
-                task.s    = {"item_id" => query_avito_pub['item_id'], "last_v"=>v, :pub=>true}
-                task.count= task.count.nil? ? 0 : 1 + 1
-                
-                puts "OK!" 
-                task.next_at = time_start + task.interval.day
+              unless avito_pub.header["location"].nil?
+                uri_avito_pub =  URI.parse(avito_pub.header["location"])
+                if uri_avito_pub.path == "/additem/pay_service"
+                  query_avito_pub = Hash[ uri_avito_pub.query.split("&").map{ |i| ii=i.split("=");[ii[0],ii[1]]} ]#айай
+                  task.s     = {"item_id" => query_avito_pub['item_id'], "last_v"=>v, :pub=>true}
+                  task.count = task.count.nil? ? 1 : task.count + 1
+                  puts "+".green
+                  task.next_at = time_start + task.interval.day
+                else
+                  task.s = task.s.merge({:pub=>false, :error=>'wrong captha 2'})
+                end
               else
-                task.s    =  task.s.merge({:pub=>false, :error=>'wrong captha'})
-              end
+                task.s = task.s.merge({:pub=>false, :error=>'wrong captha 1'})
+              end 
             end
             task.save
           else

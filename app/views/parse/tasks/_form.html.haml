@@ -1,0 +1,74 @@
+= form_for @parse_task do |f|
+  - if @parse_task.errors.any?
+    -flash[:alert] = "<ul>"
+    -@avito_find.errors.full_messages.each do |msg|
+      -flash[:alert] += '<li>'+msg+'</li>'
+    -flash[:alert] += "</ul>"
+ 
+  .row 
+    .large-6.column
+      %ul.accordion{"data-accordion" => "", :role => "tablist"}
+        %li.accordion-navigation
+          %a#panel0d-heading{"aria-controls" => "panel0d", :href => "#panel0d", :role => "tab"} Основное
+          #panel0d.content{"aria-labelledby" => "panel0d-heading", :role => "tabpanel", :class=> "#{@parse_task.step == 0 ? 'active' : ''}"}
+            .field
+              = f.label :name
+              = f.text_field :name
+            .field
+              = f.label :interval
+              = f.text_field :interval
+            .field
+              = f.label :base_url
+              = f.text_field :base_url
+            .actions
+              = f.button type:"submit", value:'1', name:'step', class: "button success expand" do
+                Следующий шаг ->
+
+        %li.accordion-navigation
+          %a#panel1d-heading{:aria => { :controls => "#{@parse_task.step >= 1 ? 'panel1d' : ''}" }, 
+                             :href => "#{@parse_task.step >= 1 ? '#panel1d' : ''}", 
+                             :role => "tab"} Поиск ссылок
+          #panel1d.content{:aria => {:labelledby => "panel1d-heading"}, 
+                           :role => "tabpanel", 
+                           :class=> "#{@parse_task.step == 1 ? 'active' : ''}"}
+            .field
+              = f.label :x_link
+              = f.text_field :x_link
+            .field
+              = f.label :r_link
+              = f.text_field :r_link
+
+            %a{:href=> "", :class => "button expand alert"} Проверка
+            = f.button type:"submit", value:'2', name:'step', class: "button success expand" do
+              Следующий шаг ->
+
+        %li.accordion-navigation
+          %a#panel2d-heading{"aria-controls" => "#{@parse_task.step >= 2 ? 'panel2d' : ''}", :href => "#{@parse_task.step >= 2 ? '#panel2d' : ''}", :role => "tab"} Поиск контента
+          #panel2d.content{"aria-labelledby" => "panel2d-heading", :role => "tabpanel", :class=> "#{@parse_task.step == 2 ? 'active' : ''}"}
+            .field
+              = f.label :x_title
+              = f.text_field :x_title
+            .field
+              = f.label :x_body
+              = f.text_field :x_body
+            .field
+              = f.label :x_img
+              = f.text_field :x_img
+            .field
+              = f.label :x_date
+              = f.text_field :x_date
+            .field
+              = f.label :x_additional
+              = f.text_field :x_additional
+
+        %li.accordion-navigation
+          %a#panel3d-heading{"aria-controls" => "#{@parse_task.step >= 3 ? 'panel3d' : ''}", :href => "#{@parse_task.step >= 3 ? '#panel3d' : ''}", :role => "tab"} Выгрузка данных
+          #panel3d.content{"aria-labelledby" => "panel3d-heading", :role => "tabpanel", :class=> "#{@parse_task.step == 3 ? 'active' : ''}"}
+            .field
+              = f.label :active
+              = f.check_box :active
+            .field
+              = f.label :trigger
+              = f.text_field :trigger
+            .actions
+              = f.submit 'Save'

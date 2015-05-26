@@ -36,6 +36,15 @@
             =link_to vk_accounts_path do
               %span Аккаунты
 
+    - if current_user.role_id >= 1024
+
+      %li
+        =link_to "#c-parse", :data =>  {:toggle=>"collapse", :parent=>"#menu" } do
+          %span Парсинг
+        %ul#c-parse{:class=> collapse("parse")}
+          %li
+            =link_to parse_tasks_path do
+              %span Задачи 
 
   -else
     %li

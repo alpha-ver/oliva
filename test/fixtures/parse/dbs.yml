@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task_id: 1
+  url: MyString
+  title: MyString
+  body: MyString
+  img: MyString
+  date: MyString
+  additional: MyString
+
+two:
+  task_id: 1
+  url: MyString
+  title: MyString
+  body: MyString
+  img: MyString
+  date: MyString
+  additional: MyString

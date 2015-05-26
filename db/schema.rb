@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519180841) do
+ActiveRecord::Schema.define(version: 20150522050409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,42 @@ ActiveRecord::Schema.define(version: 20150519180841) do
   end
 
   add_index "images", ["img_hash", "user_id"], name: "index_images_on_img_hash_and_user_id", unique: true, using: :btree
+
+  create_table "parse_dbs", force: true do |t|
+    t.integer  "task_id"
+    t.string   "url"
+    t.string   "title"
+    t.text     "body"
+    t.string   "img"
+    t.string   "date"
+    t.string   "additional"
+    t.json     "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parse_dbs", ["url", "task_id"], name: "index_parse_dbs_on_url_and_task_id", unique: true, using: :btree
+
+  create_table "parse_tasks", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "interval"
+    t.string   "base_url"
+    t.string   "x_link"
+    t.string   "r_link"
+    t.string   "g_link"
+    t.string   "x_title"
+    t.string   "x_body"
+    t.string   "x_img"
+    t.string   "x_date"
+    t.json     "x_additional"
+    t.boolean  "active"
+    t.json     "out"
+    t.integer  "step"
+    t.datetime "next_at",      default: '2015-05-25 21:38:58'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

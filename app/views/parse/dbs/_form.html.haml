@@ -1,0 +1,31 @@
+= form_for @parse_db do |f|
+  - if @parse_db.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@parse_db.errors.count, "error")} prohibited this parse_db from being saved:"
+      %ul
+        - @parse_db.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :task_id
+    = f.number_field :task_id
+  .field
+    = f.label :url
+    = f.text_field :url
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :body
+    = f.text_field :body
+  .field
+    = f.label :img
+    = f.text_field :img
+  .field
+    = f.label :date
+    = f.text_field :date
+  .field
+    = f.label :additional
+    = f.text_field :additional
+  .actions
+    = f.submit 'Save'

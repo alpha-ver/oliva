@@ -34,6 +34,15 @@ class Parser
     
     unless page_post.search(@task.x_img).blank?
       h[:img]  = page_post.search(@task.x_img)[0].attr("src")
+
+      uri = URI.parse(h[:img])
+      if uri.host.nil?
+        base_uri   = URI.parse(@task.base_url)
+        uri.host   = base_uri.host
+        uri.scheme = base_uri.scheme
+        h[:img]    = uri.to_s
+      end
+
     end
     h
   end 

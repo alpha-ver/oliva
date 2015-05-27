@@ -77,11 +77,23 @@ class VKA
         r = @captcha.recognize(captcha_img, 'jpg')
         if r[1] == "R"
           step = 5
-        else         
-          v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group], captcha_sid: captcha_sid, captcha_key: r[1])
+        else
+          if param[:img].blank?        
+            v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group], captcha_sid: captcha_sid, captcha_key: r[1])
+          else
+            v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group], captcha_sid: captcha_sid, captcha_key: r[1], 
+              attachments: wall_upload_photo(owner_id: param[:owner_id], img: param[:img] )
+            )
+          end
         end
-      else  
-        v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group])
+      else
+        if param[:img].blank?
+          v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group])
+        else
+          v = @vk.wall.post(owner_id: param[:owner_id], message: param[:message], from_group: param[:from_group], 
+            attachments: wall_upload_photo(owner_id: param[:owner_id], img: param[:img] )
+          )
+        end
       end
       if step==5
         {:success => false, :result=> {:code => 14, :captcha => "R" }}
@@ -103,8 +115,13 @@ class VKA
     end
   end
 
-  def upload_photo(param)
-    @vk.photos.getWallUploadServer(param[:group_id])
+  def wall_upload_photo(param) #{:owner_id => , :img =>  }
+    server  = @vk.photos.getWallUploadServer(:owner_id => param[:owner_id])
+    img     = open param[:img]
+    photo   = VkontakteApi.upload(url: server.upload_url, photo: [img, 'image/jpeg', '1.jpg'])
+    d       = @vk.photos.saveWallPhoto(photo)
+
+    "photo#{d[0][:owner_id]}_#{d[0][:id]}"
   end
 
 

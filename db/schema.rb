@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
   create_table "parse_tasks", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.string   "interval"
+    t.integer  "interval"
     t.string   "base_url"
     t.string   "x_link"
     t.string   "r_link"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.boolean  "active"
     t.json     "out"
     t.integer  "step"
-    t.datetime "next_at",      default: '2015-05-25 21:38:58'
+    t.datetime "next_at",      default: '2015-05-26 21:33:07'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

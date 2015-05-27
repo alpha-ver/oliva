@@ -42,7 +42,8 @@ namespace :parse  do
                     vka_res=vka.post({
                       :owner_id=> task.out["owner_id"], 
                       :from_group=>task.out["from_group"], 
-                      :message => "#{db.title}\n\n#{db.body}"
+                      :message => "#{db.title}\n\n#{db.body}",
+                      :img     => db.img
                     })
 
 

@@ -33,10 +33,33 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    airbrussh (1.1.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     antigate (0.0.2)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10)
     builder (3.2.2)
+    capistrano (3.6.1)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.3)
+    capistrano-rails (1.1.7)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rails-collection (0.0.3)
+      capistrano-rails (~> 1.1.0)
+    capistrano-rbenv (2.0.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capistrano-secrets-yml (1.0.0)
+      capistrano (>= 3.1)
+      sshkit (>= 1.2.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -124,6 +147,9 @@ GEM
     multipart-post (2.0.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     ntlm-http (0.1.1)
@@ -186,6 +212,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.11.2)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     systemu (2.6.5)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
@@ -224,6 +253,10 @@ PLATFORMS
 
 DEPENDENCIES
   antigate
+  capistrano-rails
+  capistrano-rails-collection
+  capistrano-rbenv (~> 2.0)
+  capistrano-secrets-yml
   coffee-rails (~> 4.0.0)
   colorize
   devise
@@ -250,3 +283,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   vkontakte_api
   x-editable-rails
+
+BUNDLED WITH
+   1.12.5

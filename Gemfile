@@ -33,6 +33,10 @@ group :development do
   gem 'rails_layout'
   gem 'spring'
   gem 'railroady', :git => "https://github.com/preston/railroady.git"
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv', '~> 2.0', require: false
+  gem 'capistrano-secrets-yml'
+  gem 'capistrano-rails-collection'
 end
 
 gem 'foundation-rails'

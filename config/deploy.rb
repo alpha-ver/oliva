@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.4'
+lock '3.6.1'
 
 set :application, '0liva'
 set :repo_url, 'git@bitbucket.org:alphav/oliva.git'
@@ -8,10 +8,10 @@ set :repo_url, 'git@bitbucket.org:alphav/oliva.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/web/0liva'
+set :deploy_to, '/app/0liva'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -24,6 +24,7 @@ set :deploy_to, '/web/0liva'
 
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
+set :linked_dirs, 'public/pf', 'tmp/pids'
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -32,27 +33,30 @@ set :deploy_to, '/web/0liva'
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
+
+namespace :monit do 
+  desc "Task description"
+  task :stop do
+    on roles(:app) do
+      sudo 'monit unmonitor rake-oliva'
+      sudo 'monit stop thin-oliva'
+      sudo '/app/oliva/current/rake_oliva.sh stop'
+    end
+  end
+
+  desc "Task description"
+  task :start do
+    on roles(:app) do
+      sudo 'monit monitor rake-oliva'
+      sudo 'monit monitor thin-oliva'
+      sudo 'monit start rake-oliva'
+      sudo 'monit start thin-oliva'
+    end    
+  end
+end
 
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  before :deploy, "monit:stop"
+  after :deploy, "monit:start"
 end

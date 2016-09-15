@@ -85,4 +85,3 @@ production:
   <<: *default
   database: oliva
   username: h0
-  password: TtB4XEPkBdmZ3nffxkN9

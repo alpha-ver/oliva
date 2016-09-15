@@ -3,7 +3,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 Rails.application.load_tasks
-require 'RMagick'
+require 'rmagick'
 
 
 def agent_init
@@ -41,6 +41,11 @@ end
 #############################
 desc "### daemon service ###"
 task :loop_m => :environment do
+
+  `echo "#{Process.pid}" > #{Rails.root}/tmp/pids/loop_m.pid`
+  `echo "#{Process.ppid}" > #{Rails.root}/tmp/pids/loop_m.ppid`
+
+
   time_loop = 30
   loop{
 

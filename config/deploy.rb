@@ -24,7 +24,7 @@ set :scm, :git
 
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
-set :linked_dirs, 'public/pf', 'tmp/pids'
+append :linked_dirs, 'public/pf', 'tmp/pids'
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -33,7 +33,7 @@ set :linked_dirs, 'public/pf', 'tmp/pids'
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 5
+set :keep_releases, 2
 
 namespace :monit do 
   desc "Task description"

@@ -1,45 +1,35 @@
+Новый апи
+
+регион
+/api/2/locations/top?checksum=4f0e7fc6b22fa55c2540b1a70564acae&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr
+
+https://www.avito.ru/api/2/locations/621540?checksum=0b235a4abdb21d71072e981163f7586e&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr
+
+магазины
+/api/2/shops?checksum=550b530b89fa15f86fb32946344abc42&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&locationId=621540&offset=0
+
+Поиск
+поисовые запроссы
+/api/2/suggest?checksum=5429c48057bee844b30fcaf22dd3454b&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&query=112
+
+сам поиск
+/api/6/items?checksum=d87786540620dd2b3b57d44973d66bee&deviceId=6717c02820a4f3c4&includeRefs=1&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&limit=30&limitVip=2&locationId=621540&page=1&query=112
+
+/api/6/items?categoryId=9&checksum=137345e88b0d89cff6ccfdf1bf3c200d&deviceId=6717c02820a4f3c4&includeRefs=1&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&limit=30&limitVip=2&locationId=621540&page=1&params%5B1283%5D=14756
 
 
-      vk_signup = nil
-      vk_users  = []
-      sex       = rand(2)+1
-      @vk       = VkontakteApi::Client.new(Vk::Account.find_by(:status => 1024).token)
-      vk_city   = @vk.database.getCities(country_id:1, need_all:1, count:0)
-      vk_city   = @vk.database.getCities(country_id:1, need_all:1, count:100, offset:rand(vk_city['count']))
-      password  = pass_gen
+само обьявление
+/api/6/items/746947922?checksum=71f6df54f07f4bed691536d8c5d9c5ba&deviceId=6717c02820a4f3c4&includeRefs=1&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr
 
-      count = 0
-      i=0
+Похожие на 
+/api/2/items/746947922/similars?checksum=69e6eae488bc6715b76856d9522ec143&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&limit=4&page=1
 
-      while count < 5 && i < 99
-        vku = @vk.users.search(sort:0, city: vk_city.items[i]['id'], country: 1, sex: sex, count:3)
-        if vku.items.count > 0 
-          vk_users = vk_users + vku.items
-        end
-        i=i+1
-        count = count + vku.items.count
-        sleep 0.4
-      end
-      sleep 0.3
+категории 
+https://www.avito.ru/api/2/search/main?checksum=7533f662eb99b6987baa2ac0975b632c&deviceId=6717c02820a4f3c4&key=XcyLEIoAuUgGSJUDFAs4xWTnV2TKEmvZTZuTtPFr&locationId=621540
 
 
-      if vk_signup.nil?
-        #err
-        render :json => vk_signup_ex
+login
+POST /api/2/auth
+POST /api/3/recover
 
 
-
-      else 
-        #ok
-        @vk_acc = vk_signup
-        @vk_account = Vk::Account.new(phone: vk_account_params[:phone], status: 3, user_id: current_user.id, token: vk_signup[:sid], pass: password)
-        @vk_account.save
-
-        #redirect_to 'show', :id => @vk_account.id
-        render :json => @vk_account
-      end
-
-      #if count >= 5
-      #  ids = @vk_users.map{|i| i.id}
-      #  @vk_users_det = @vk.users.get(user_ids: ids, fields: "sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, photo_id, online, online_mobile, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters, screen_name, maiden_name, timezone, occupation,activities, interests, music, movies, tv, books, games, about, quotes, personal, friends_status")
-      #end

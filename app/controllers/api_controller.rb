@@ -14,13 +14,21 @@ class ApiController < ApplicationController
       end
     end
 
-    p p 
+    p p
 
     if params[:path].nil?
       params[:path]="items"
+      v=6
+      if p.nil?
+        p={}
+      end
+      p[:limitVip] = 0
+      p[:deviceId] = '1122334455667788'
+    else
+      v=2
     end
 
-    json = AvitoApi.new().get("/#{params[:path]}", p)    
+    json = AvitoApi.new().get("/#{params[:path]}", p, v)    
     p json
     render :json => json
   end

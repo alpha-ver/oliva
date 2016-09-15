@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.json     "e"
     t.integer  "count"
     t.integer  "user_id"
-    t.datetime "next_at",     default: '2015-05-03 09:16:07'
+    t.datetime "next_at",     default: '2016-09-12 06:20:28'
     t.json     "response"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.json     "p"
     t.json     "e"
     t.integer  "user_id"
-    t.datetime "next_at",    default: '2015-05-03 09:16:07'
+    t.datetime "next_at",    default: '2016-09-12 06:20:28'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.boolean  "active"
     t.json     "out"
     t.integer  "step"
-    t.datetime "next_at",      default: '2015-05-26 21:33:07'
+    t.datetime "next_at",      default: '2016-09-12 06:20:28'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.integer  "cross_ids",  default: [], array: true
     t.integer  "find_id"
     t.integer  "user_id"
-    t.boolean  "actove"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.integer  "interval"
     t.boolean  "active"
     t.integer  "find_ids",       default: [],                    array: true
-    t.datetime "next_at",        default: '2015-05-17 08:37:24'
+    t.datetime "next_at",        default: '2016-09-12 06:20:28'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.boolean  "active"
     t.integer  "status"
     t.json     "e"
-    t.datetime "next_at",       default: '2015-05-17 18:44:28'
+    t.datetime "next_at",       default: '2016-09-12 06:20:28'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
 
     else
-      role = current_user.role
-      if role.id < 0
-        render :text => "Ban!"
-      end
+      #role = current_user.role
+      #if role.id < 0
+      #  render :text => "Ban!"
+      #end
     end
   end
 

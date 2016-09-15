@@ -82,13 +82,13 @@ $ ->
         type: "POST"
         url: '/api/avito'
         data: 
-          path: 'categories'
+          path: 'search/main'
         success: (xhr) ->
-
           if xhr['status']
             data_cat = xhr['result']
             html = "<option value=\"\"></option>"
-            $.each xhr['result'], (i,e)-> 
+
+            $.each xhr['result']['categories'], (i,e)-> 
               #bugaga in => of  []+""
               unless 'parentId' of e
                 dp = DataParam(e)
@@ -192,14 +192,16 @@ $ ->
         $('#avito_sub_cs').prop('disabled', true)
 
       else
-        
-        html = "<option value=\"#{id}\" style=\"font-weight: bold; padding: 2px;\">По категории</option>"
-        $.each data_cat, (i,e)->
-          if e['parentId'] == id
-            dp    = DataParam(e)
-            html +=  "<option value=\"#{e['id']}\" #{dp}>
-                        #{e['name']}
-                      </option>"
+        html = "<option value=\"#{id}\" style=\"font-weight: bold; padding: 2px;\">Под категории</option>"
+        console.log data_cat
+        $.each data_cat['categories'], (i,e)->
+          if e['id'] == id
+            console.log e
+            $.each e['children'], (ii,ee) ->
+              dp    = DataParam(ee)
+              html +=  "<option value=\"#{ee['id']}\" #{dp}>
+                          #{ee['name']}
+                        </option>"
 
         $('#avito_sub_cs').html(html)
         $('#avito_sub_cs').prop('disabled', false)
@@ -320,43 +322,47 @@ $ ->
           if xhr['status'] 
             html = "<p>Найденно – #{xhr['result']['count']} обьявлений.</p>
                     <div class=\"row\" data-equalizer=\"\">"
-            $.each xhr['result']['items'], (i,o) ->
+            $.each xhr['result']['items'], (i,oo) ->
+              #loop list result
+              if oo['type'] == 'item'
+                o = oo['item']
+                if 'price' of o
+                  if typeof o['price']['title'] == "object"
+                    title = "#{o['price']['title']['full']}"
+                  else 
+                    title = "#{o['price']['title']}"
 
-              if 'price' of o
+                  price = "#{title}: #{o['price']['value']} #{o['price']['metric']}"
+                else
+                  price = "не указанна"
 
-                if typeof o['price']['title'] == "object"
-                  title = "#{o['price']['title']['full']}"
-                else 
-                  title = "#{o['price']['title']}"
-
-                price = "#{title}: #{o['price']['value']} #{o['price']['metric']}"
-              else
-                price = "не указанна"
-
-              if 'images' of o
-                image = "<img src=\"#{o['images']['main']['100x75']}\">"
-              else
-                image = "<img src=\"http://placehold.it/100x75\">"
+                if 'images' of o
+                  image = "<img src=\"#{o['images']['main']['100x75']}\">"
+                else
+                  image = "<img src=\"http://placehold.it/100x75\">"
 
 
-              html += "
-                <div class=\"large-12 columns panel\" data-equalizer-watch=\"\">
-                  <div class=\"row\">
-                    <div class=\"large-3 columns\">
-                      <a class=\"th radius\" href=\"http://avito.ru/#{o['id']}\" target=\"_blank\">
-                        #{image}
-                      </a>
-                    </div>
-                    <div class=\"large-9 columns\">
-                      #{o['title']}
-                      <br />
-                      <b>
-                        #{price}
-                      </b>
+                html += "
+                  <div class=\"large-12 columns panel\" data-equalizer-watch=\"\">
+                    <div class=\"row\">
+                      <div class=\"large-3 columns\">
+                        <a class=\"th radius\" href=\"http://avito.ru/#{o['id']}\" target=\"_blank\">
+                          #{image}
+                        </a>
+                      </div>
+                      <div class=\"large-9 columns\">
+                        #{o['title']}
+                        <br />
+                        <b>
+                          #{price}
+                        </b>
+                      </div>
                     </div>
                   </div>
-                </div>
-              "
+                "
+                #type baner
+              #end
+
             html += "</div>"
             $('#avito_search_result').html(html)
             $('#task_submit').prop('disabled', false)

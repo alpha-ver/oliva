@@ -60,21 +60,28 @@ task :loop_m => :environment do
         tasks.each do |task|
           task.next_at = time_start + task.interval.minutes
           ###
-          res = ap.get('/items', task.p)
+          res = ap.get('/items', task.p, 6)
           if res[:status] && res[:result]["count"] != task.count
             out = []
-            res[:result]["items"].each do |item|
-              db = task.avito_tasklogs.where(:i => item['id'], :module_id => 1)
-              if db.blank?
-                task.avito_tasklogs.new(:i => item['id'], :module_id => 1)
-                o = ap.get("/items/#{item['id']}", {:includeRefs=>true, :reducedParams=>true} )
-                if o[:status]
-                  out << o[:result]
-                else
-                  sleep 0.3
+
+            res[:result]["items"].each do |ritem|
+              if ritem['type'] == 'item'
+                item = ritem['item']
+
+                db = task.avito_tasklogs.where(:i => item['id'], :module_id => 1)
+                if db.blank?
+                  task.avito_tasklogs.new(:i => item['id'], :module_id => 1)
+                  p item['id']
+                  o = ap.get("/items/#{item['id']}", {'includeRefs'=>true, 'reducedParams'=>true}, 6 )
+                  p o
+                  if o[:status]
+                    out << o[:result]
+                  else
+                    sleep 0.3
+                  end
                 end
+                task.save
               end
-              task.save
             end
 
             #p out
@@ -82,6 +89,8 @@ task :loop_m => :environment do
             if !out.blank?
 
               if !task.e["email"].nil?
+                p "---"
+                p out
                 Notification.mail_medium(task.e["email"], out)
               end
 

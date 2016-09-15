@@ -23,6 +23,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
+
 # set :linked_files, %w{config/database.yml}
 append :linked_dirs, 'public/pf', 'tmp/pids'
 
@@ -39,9 +40,9 @@ namespace :monit do
   desc "Task description"
   task :stop do
     on roles(:app) do
-      sudo 'monit unmonitor rake-oliva'
-      sudo 'monit stop thin-oliva'
-      sudo '/app/oliva/current/rake_oliva.sh stop'
+      #sudo 'monit unmonitor rake-oliva'
+      #sudo 'monit stop thin-oliva'
+      #sudo '/app/oliva/current/rake_oliva.sh stop'
     end
   end
 

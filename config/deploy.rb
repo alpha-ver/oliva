@@ -40,19 +40,19 @@ namespace :monit do
   desc "Task description"
   task :stop do
     on roles(:app) do
-      #sudo 'monit unmonitor rake-oliva'
-      #sudo 'monit stop thin-oliva'
-      #sudo '/app/oliva/current/rake_oliva.sh stop'
+      sudo 'monit unmonitor rake-oliva'
+      sudo 'monit stop thin-oliva'
+      sudo '/app/oliva/current/rake_oliva.sh stop'
     end
   end
 
   desc "Task description"
   task :start do
     on roles(:app) do
-      #sudo 'monit monitor rake-oliva'
-      #sudo 'monit monitor thin-oliva'
-      #sudo 'monit start rake-oliva'
-      #sudo 'monit start thin-oliva'
+      sudo 'monit monitor rake-oliva'
+      sudo 'monit monitor thin-oliva'
+      sudo 'monit start rake-oliva'
+      sudo 'monit start thin-oliva'
     end    
   end
 end

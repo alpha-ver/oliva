@@ -9,4 +9,5 @@
 #= require col
 #= require main
 
-$(document).foundation()
+() ->
+  $(document).foundation()

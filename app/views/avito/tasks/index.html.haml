@@ -2,15 +2,15 @@
   %caption
     Задачи для 
     = current_user.email
+  %thead 
+    %tr
+      %th Название
+      %th Интервал
+      %th Активность
+      %th Прошло
 
-  %tr
-    %th Название
-    %th Интервал
-    %th Активность
-    %th Обновлен
-
-    %th
-    %th
+      %th
+      %th
 
   - @tasks.each do |task|
     %tr
@@ -20,9 +20,8 @@
     
       %td= task.interval
       %td= task.active ? "Вкл" : "Выкл"
-      %td= task.updated_at
+      %td= time_ago_in_words(I18n.l task.updated_at) 
 
-      //%td= link_to 'Детально', task
       %td= link_to 'Править', edit_avito_task_path(task)
       %td= link_to 'Удалить', avito_task_path(task), :method => :delete, :data => { :confirm => 'Are you sure?' }
 

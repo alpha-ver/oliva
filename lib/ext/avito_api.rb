@@ -21,7 +21,7 @@ class AvitoApi
     def gen_link(path='/items', params=false, v=2)
       prefix_path = "/api/#{v}"
 
-      if params['deviceId'].blank?
+      if params && params.blank? && params['deviceId'].blank?
         params['deviceId'] = '1122334455667788'
       end
 

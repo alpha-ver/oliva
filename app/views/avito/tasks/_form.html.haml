@@ -45,25 +45,17 @@
     %label{:for => "e_email"} Email
     %input#e_email{:name => "task[e][email]", :placeholder => "Укажите свою почту", :type => "text"}/
 
-    %label{:for => "e_growl_ip"} 
-      Growl 
-      %a{:href => "http://info.0liva.ru/growl"} ?
-    %input#e_growl_ip{:name => "task[e][growl][host]", :placeholder => "Публичный адрес:порт", :type => "text"}/
-    %input#e_growl_pw{:name => "task[e][growl][pass]", :placeholder => "Укажите пароль",       :type => "text"}/
+    /%label{:for => "e_growl_ip"} 
+    /  Growl 
+    /  %a{:href => "http://info.0liva.ru/growl"} ?
+    /%input#e_growl_ip{:name => "task[e][growl][host]", :placeholder => "Публичный адрес:порт", :type => "text"}/
+    /%input#e_growl_pw{:name => "task[e][growl][pass]", :placeholder => "Укажите пароль",       :type => "text"}/
 
-    %label{:for => "e_http"} 
-      HTTP запрос
-      %a{:href => "http://info.0liva.ru/http_post"} ?   
-    %input#e_http{:name => "task[e][url]", :placeholder => "Укажите URL", :type => "text"}/
+    /%label{:for => "e_http"} 
+    /  HTTP запрос
+    /  %a{:href => "http://info.0liva.ru/http_post"} ?   
+    /%input#e_http{:name => "task[e][url]", :placeholder => "Укажите URL", :type => "text"}/
 
-
-
-
-
-
-
-
-    
   %fieldset
     %legend Переодичность
 
@@ -74,28 +66,26 @@
           %span{:id=>"avito_interval"}
           Мин.
 
-        .range-slider{ :data => { :slider => "",  
-                                  :options=> "start: 10; end: 120; display_selector: #avito_interval;" } }
-          %span.range-slider-handle{:role => "slider", :tabindex => "0"}
-          %span.range-slider-active-segment
-          = f.hidden_field :interval
+        =f.range_field :interval, in:10..120
+
 
       .large-6.columns
         %label
           Включить задачу
         .switch
-          = f.check_box :active, {:checked => ""}
-          = f.label :active
+          = f.check_box :active, {:checked => "", :class => 'switch-input'}
+          = f.label :active, {:class => 'switch-paddle'} do
+            %span{:class=>"show-for-sr"}
+              Активно
 
   %hr
 
-  %ul.button-group.radius.stack
-    %li
-      = link_to avito_tasks_path, :class => 'button secondary ' do  
-        Назад 
-    %li
-      = link_to "#", :class=>"button alert", :id => 'bnt-test-task' do 
-        Проверка
-    %li
-      =f.button :class=>"button success", :id => 'task_submit', :disabled=>"" do 
-        Сохранить
+  %ul.stack.button-group
+    = link_to avito_tasks_path, :class => 'button secondary' do  
+      Назад 
+
+    = link_to "#", :class=>"button alert", :id => 'bnt-test-task' do 
+      Проверка
+
+    =f.button :class=>"button success", :id => 'task_submit', :disabled=>"" do 
+      Сохранить

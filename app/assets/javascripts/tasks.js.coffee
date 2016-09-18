@@ -50,14 +50,12 @@ $ ->
   ## JS start loading page ##
   ###########################
   $(document).ready ->
-    $(this).foundation('reflow')
-
-
+    $(this).foundation()
     if $('#avito-dash').html() == "ok"
-
-      
-      
       $('body').addClass('loading')
+      #slider def
+      min = $('#avito_task_interval').val()
+      $('#avito_interval').html(min)
       # get top categories
       $.ajax
         type: "POST"
@@ -101,7 +99,7 @@ $ ->
             c "Get main categories", "error"
 
           $('body').removeClass('loading')
-          $(document).foundation('reflow')
+          $(document).foundation()
 
     ############################
     ## JS events for location ##
@@ -345,10 +343,12 @@ $ ->
                 html += "
                   <div class=\"large-12 columns panel\" data-equalizer-watch=\"\">
                     <div class=\"row\">
-                      <div class=\"large-3 columns\">
-                        <a class=\"th radius\" href=\"http://avito.ru/#{o['id']}\" target=\"_blank\">
-                          #{image}
-                        </a>
+                      <div class=\"large-3 columns av-image\">
+                        <div class=\"thumbnail\">
+                          <a class=\"th radius\" href=\"http://avito.ru/#{o['id']}\" target=\"_blank\">
+                            #{image}
+                          </a>
+                        </div>
                       </div>
                       <div class=\"large-9 columns\">
                         #{o['title']}
@@ -376,12 +376,12 @@ $ ->
                 </div>
               ')
           $('body').removeClass('loading')
-          $(document).foundation('reflow')
+          $(document).foundation()
       return false
 
     #hask for data-slider 
-    $('.range-slider').on 'change.fndtn.slider', (e)-> 
-      min = $(this).attr('data-slider')
+    $("#avito_task_interval").on "input change", (e)->
+      min = $('#avito_task_interval').val()
       $('#avito_interval').html(min)
 
 
@@ -414,7 +414,7 @@ $ ->
               ")
           
           $('body').removeClass('loading')
-          $(document).foundation('reflow')
+          $(document).foundation()
 
       return false
 
@@ -447,7 +447,7 @@ $ ->
               ")
           
           $('body').removeClass('loading')
-          $(document).foundation('reflow')
+          $(document).foundation()
 
       return false
 

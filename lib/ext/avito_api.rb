@@ -8,7 +8,7 @@ class AvitoApi
   def get(path='/items', params=false, v=2)
     #begin
       p gen_link(path, params, v)
-      res  = open(gen_link(path, params, v), @proxy).read
+      res  = open(gen_link(path, params, v), proxy: @proxy).read
       p res
       hash = JSON.parse(res)
       p hash

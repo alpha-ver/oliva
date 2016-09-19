@@ -3,13 +3,12 @@ class AvitoApi
   def initialize(proxy=false)
     
     @proxy = URI.parse("http://10.10.20.1:8888")
-
   end
 
   def get(path='/items', params=false, v=2)
     #begin
       p gen_link(path, params, v)
-      res  = open(gen_link(path, params, v), proxy).read
+      res  = open(gen_link(path, params, v), @proxy).read
       p res
       hash = JSON.parse(res)
       p hash

@@ -8,7 +8,7 @@ class AvitoApi
   def get(path='/items', params=false, v=2)
     #begin
       p gen_link(path, params, v)
-      res  = open(gen_link(path, params, v), proxy: @proxy).read
+      res  = open( gen_link(path, params, v), proxy: @proxy).read
       p res
       hash = JSON.parse(res)
       p hash
@@ -22,7 +22,7 @@ class AvitoApi
     def gen_link(path='/items', params=false, v=2)
       prefix_path = "/api/#{v}"
 
-      if params && params.blank? && params['deviceId'].blank?
+      if params.nil? || params.blank? && params['deviceId'].blank?
         params['deviceId'] = '1122334455667788'
       end
 

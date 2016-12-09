@@ -15,4 +15,4 @@ no-epoll: false
 daemonize: true
 port: 3344
 chdir: /app/oliva/current
-tag: bender-thin aux
+tag: oliva-thin

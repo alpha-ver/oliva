@@ -45,7 +45,6 @@ task :loop_m => :environment do
   `echo "#{Process.pid}" > #{Rails.root}/tmp/pids/loop_m.pid`
   `echo "#{Process.ppid}" > #{Rails.root}/tmp/pids/loop_m.ppid`
 
-
   time_loop = 30
   loop{
 

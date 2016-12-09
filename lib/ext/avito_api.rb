@@ -1,17 +1,15 @@
 class AvitoApi
 
   def initialize(proxy=false)
-    
     @proxy = URI.parse("http://10.10.20.1:8888")
   end
 
   def get(path='/items', params=false, v=2)
     #begin
-      p gen_link(path, params, v)
-      res  = open( gen_link(path, params, v), proxy: @proxy).read
-      p res
+      link = gen_link(path, params, v)
+      p link
+      res  = open( link ).read
       hash = JSON.parse(res)
-      p hash
       r true, hash
     #rescue Exception => e
     #  r false, e
@@ -22,11 +20,10 @@ class AvitoApi
     def gen_link(path='/items', params=false, v=2)
       prefix_path = "/api/#{v}"
 
-      if params || params.blank? && params['deviceId'].blank?
-        params['deviceId'] = '1122334455667788'
-      end
-
       if params
+        if params.blank? && params['deviceId'].blank?
+          params['deviceId'] = '1122334455667788'
+        end
         query = Hash[params.sort]
       else
         query = {}

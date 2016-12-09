@@ -8,7 +8,11 @@ class AvitoApi
     #begin
       link = gen_link(path, params, v)
       p link
-      res  = open( link ).read
+      if Rails.env.production?
+        res  = open( link, proxy: @proxy).read
+      else
+        res  = open( link ).read
+      end
       hash = JSON.parse(res)
       r true, hash
     #rescue Exception => e

@@ -62,61 +62,61 @@ task :loop_m => :environment do
 
       unless tasks.blank?
         tasks.each do |task|
+          puts "Найденна задача id-#{task.id} name:#{task.name}".colorize(:green)
           task.next_at = time_start + task.interval.minutes
           ###
-          res = ap.get('/items', task.p, 6)
-          if res[:status] && res[:result]["count"] != task.count
-            out = []
+          res_arr = []
 
-            res[:result]["items"].each do |ritem|
-              if ritem['type'] == 'item'
-                item = ritem['item']
+          qp = task.p
+          qp['limit']   = 100
+          qp['deviceId']= '0707c22820a4f3c4'
+          qp['byTitle'] = 1
 
-                db = task.avito_tasklogs.where(:i => item['id'], :module_id => 1)
-                if db.blank?
-                  task.avito_tasklogs.new(:i => item['id'], :module_id => 1)
-                  p item['id']
-                  o = ap.get("/items/#{item['id']}", {'includeRefs'=>true, 'reducedParams'=>true}, 6 )
-                  p o
-                  if o[:status]
-                    out << o[:result]
-                  else
-                    sleep 0.3
-                  end
-                end
-                task.save
-              end
+          if task.q.blank?
+            res_arr << ap.get('/items', qp, 6)
+          else
+            q = task.q.split("\r\n")
+            q.each do |query|
+              qp['query'] = query
+              res_arr << ap.get('/items', qp, 6)
+              sleep 3
             end
-
-            #p out
-
-            if !out.blank?
-
-              if !task.e["email"].nil?
-                p "---"
-                p out
-                Notification.mail_medium(task.e["email"], out)
-              end
-
-              if !task.e["sms"].nil?
-
-              end
-
-              if !task.e["jabber"].nil?
-
-              end
-
-              if !task.e["skype"].nil?
-
-              end
-
-            end
-
-            task.count = res[:result]["count"]
-            task.stat  = ""
-            task.save
-
           end
+
+          ids = []
+          out = []
+          res_arr.each do |res|
+
+            if res[:status] && res[:result]["count"] != 0
+              res[:result]["items"].each do |ritem|
+                if ritem['type'] == 'item' # ony ads, no banner
+                  item = ritem['item']        
+
+                  db = task.avito_tasklogs.where(:i => item['id'], :module_id => 1)
+                  if db.blank?
+                    db = task.avito_tasklogs.new(:i => item['id'], :module_id => 1)
+                    db.save
+                    out << item
+                  end
+                  ids << item['id'].to_i
+                end
+              end
+            end
+          end
+
+          #p out
+          if !out.blank?
+            p out.count
+            if task.e.nil? || task.e["email"].nil?
+            else
+              p "---"
+              Notification.mail_medium(task.e["email"], out)
+            end
+          end
+
+          task.count = out.count
+          task.stat  = ""
+          task.save          
         end
       end
       #################################################

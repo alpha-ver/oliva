@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522050409) do
+ActiveRecord::Schema.define(version: 20161209173652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150522050409) do
     t.datetime "next_at",    default: '2016-09-12 06:20:28'
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "q"
   end
 
   add_index "avito_tasks", ["user_id"], name: "index_avito_tasks_on_user_id", using: :btree

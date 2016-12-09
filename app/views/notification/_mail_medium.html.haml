@@ -1,26 +1,26 @@
 %table.twelve.columns
   %tr
     %td.panel
-      %h1
-        %a{:href => mail_medium['url'] }
-          = mail_medium['title']
       %p
         %a{:href => mail_medium['url'] }
-          %img{:src => mail_medium['images'].blank? ? "http://placehold.it/140x105" : mail_medium['images'][0]['140x105'] }/
-        =raw mail_medium['description']
+          %img{:src => mail_medium['images'].blank? ? "http://placehold.it/140x105" : mail_medium['images']['main']['140x105'] }/
+      
+    %td.panel{:valign=>"top"}    
+      %p.lead
+        %a{:href => "https://avito.ru/#{mail_medium['id']}" }
+          = mail_medium['title']
+          \(
+          = mail_medium['userType']
+          \)
+        №: 
+        = mail_medium['id']
+        %br
+        = mail_medium['phone']
+        %br
+        = mail_medium['price'].blank? ? "Цена не указанна" : "#{mail_medium['price']['value']} #{mail_medium['price']['metric']}"
 
-      %table.container
-        %tr
-          %td
-            %table.block-grid.twelve-up
-              %tr
-                %td
-                  %p.lead
-                    №: 
-                    = mail_medium['id']
-                    %br
-                    = mail_medium['phone']
-                    %br
-                    = mail_medium['price'].blank? ? "Цена не указанна" : "#{mail_medium['price']['value']} #{mail_medium['price']['metric']}"                
+      %p.qwery 
+        = mail_medium['q']
+                        
     %td.expander
 %br/
